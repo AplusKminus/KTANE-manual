@@ -5,3 +5,5 @@
 
 \RequirePackage{fontspec}
 \setmainfont{[SpecialElite-Regular.ttf]}
+
+\LoadClass[a4paper]{article}

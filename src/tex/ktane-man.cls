@@ -18,5 +18,8 @@
 
 \LoadClass[a4paper]{article}
 
-%% Remove all page numbering
+%% Page Setup
+\raggedright
+\RequirePackage[margin=2cm]{geometry}
+% Remove all page numbering
 \pagenumbering{gobble}

@@ -9,14 +9,27 @@
 \setmainfont{[SpecialElite-Regular.ttf]}
 
 %% Color Setup
-\RequirePackage{xcolor}
+\RequirePackage[table]{xcolor}
 \definecolor{red}{HTML}{DE8A74}
 \definecolor{green}{HTML}{A0AF84}
 \definecolor{yellow}{HTML}{EEC584}
 \definecolor{blue}{HTML}{808A9F}
 \definecolor{gray}{HTML}{B4AEA3}
 
-\LoadClass[a4paper,twoside]{article}
+%% Used for table alignment
+\RequirePackage{array}
+\RequirePackage{adjustbox}
+
+\LoadClass[a4paper, twoside]{article}
+
+%% Extended captions
+\RequirePackage{caption}
+
+%% Graphic support
+\RequirePackage{graphicx}
+
+%% Wraping figures and tables to the left or right
+\RequirePackage{wrapfig2}
 
 %% Page Setup
 \raggedright

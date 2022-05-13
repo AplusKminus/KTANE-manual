@@ -1,0 +1,127 @@
+%! Author = Jan
+%! Date = 13.05.2022
+
+\section*{Defusing Bombs}
+A bomb will explode when its countdown timer reaches 0:00 or when too
+many strikes have been recorded. The only way to defuse a bomb is to disarm
+all of its modules before its countdown timer expires.
+
+\begin{figure}[h]
+  \centering
+  \caption*{Example Bomb}
+  \begin{minipage}{.4\textwidth}
+    \centering
+    \includegraphics[height=4.5cm]{modules/0_explanation/bomb_front}
+    \caption*{Front}
+    \label{fig:sub1}
+  \end{minipage}%
+  \begin{minipage}{.3\textwidth}
+    \centering
+    \includegraphics[height=4.5cm]{modules/0_explanation/bomb_side}
+    \caption*{Side}
+    \label{fig:sub2}
+  \end{minipage}
+  \label{fig:example_bomb}
+\end{figure}
+
+\subsection*{Modules}
+Each bomb will include one or several modules that must be disarmed. Each
+module is discrete, but some modules require to be solved before others.
+
+
+Instructions for disarming modules can be found in Section 1.
+"Needy" modules present a special case and are described in Section 2.
+
+%\begin{wrapfigure}{r}{50mm} %this figure will be at the right
+%  Strike Indicator
+%  \centering
+%  \includegraphics[height=3.5cm]{modules/0_explanation/strike}
+%  \label{fig:Strikes}
+%\end{wrapfigure}
+\subsection*{Strikes}
+
+\begin{wrapfigure}{r}{50mm}*
+\centering\unitlength=1mm
+\begin{picture}(40,30)
+\polygon(0,0)(40,0)(40,30)(0,30)
+\Line(0,0)(40,30)\Line(0,30)(40,0)
+\end{picture}
+\caption{A rectangle with its diagonals}\label{fig:figure}
+\end{wrapfigure}
+When the Defuser makes a mistake the bomb will record a strike
+which will be displayed on the indicator above the countdown
+timer. Bombs with a strike indicator will explode upon the
+third strike. The timer will begin to count down faster after
+a strike has been recorded.
+
+If no strike indicator is present above the countdown timer,
+the bomb will explode upon the first strike, leaving no room
+for error.
+
+\subsection*{Gathering Information}
+Some disarming instructions will require specific information about the
+bomb, such as the serial number. For detailed descriptions see the next
+page "On the Subject of Edgework".
+
+\clearpage
+
+\section*{On the Subject of Edgework}\label{sec:on-the-subject-of-edgework}
+The term edgework describes all kinds of widgets that can be found on the
+side casings of a bomb. The different kinds and their meanings are
+described in the following sections. Many modules ask for specific
+information about the edgework.
+
+\begin{wraptable}[0]{r}
+  \centering
+  \begin{tabular}{| c |}
+    \hline
+    \color{white}
+    \cellcolor{red}
+    Serial \#
+    \\ \hline
+    \marginbox{0.3cm}{\huge{I6K3NP}}
+    \\ \hline
+  \end{tabular}\label{tab:serial_section}
+\end{wraptable}
+\subsection*{Serial Number}\label{subsec:serial-number1}
+The serial number is a code of six symbols and is made up
+of uppercase letters and digits. There is always at least
+one digit in the serial number. A zero has a diagonal line
+crossing through it, while the letter O does not.
+
+\begin{wraptable}[-1]{r}
+  *
+  \begin{tabular}{| p{4cm} |}
+    \hline
+    Serial \#
+    \\ \hline
+    \huge{I6K3NP}
+    \\ \hline
+  \end{tabular}\label{tab:light}
+\end{wraptable}
+\subsection*{Indicator Lights}\label{subsec:indicator-lights}
+Indicator lights can be lit or unlit and are accompanied
+by a three letter code. Common codes include:
+BOB, CAR, CLR, FRK, FRQ, IND, MSA, NSA, SIG, SND, TRN
+
+\begin{wraptable}[-1]{r}
+  *
+  \begin{tabular}{| m{2cm} | m{2cm} |}
+    \hline
+    AA & D
+    \\ \hline
+    \includegraphics[width=1.8cm]{modules/0_explanation/battery_aa} &
+    \includegraphics[width=1.8cm]{modules/0_explanation/battery_d}
+    \\ \hline
+  \end{tabular}\label{tab:batteries}
+\end{wraptable}
+\subsection*{Batteries}\label{subsec:batteries}
+There are two types of batteries that can occur on a
+bomb. They are always placed in battery holders. A
+holder contains two AA batteries or one D battery.
+For some modules the number of holders is relevant.
+
+\subsection*{Ports}\label{subsec:ports}
+There are six types of ports that can occur on a bomb. Note that the stereo
+RCA port consists of two individual sockets, one white and one red, but
+both together count as a single port only.

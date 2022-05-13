@@ -1,16 +1,21 @@
 \documentclass{ktane-man}
+\usepackage{lipsum}
 
 \setlength{\parindent}{0pt}
 
 \title{BOMB DEFUSAL MANUAL}
-\author{site-overleaf }
-\date{May 2022}
 
 \begin{document}
 
   \maketitle
 
+
   \section{Introduction}\label{sec:introduction}
+
+  \foreach \x [count=\xi] in \registernames {%
+    \thumbregister{\numexpr\xi - 1}{\x}
+  }
+  \thumbregister{0}
 
   \include{modules/0_intro/intro}
 

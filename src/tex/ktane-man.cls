@@ -23,3 +23,29 @@
 \RequirePackage[margin=2cm]{geometry}
 % Remove all page numbering
 \pagenumbering{gobble}
+
+\RequirePackage{pgf,pgffor}
+\RequirePackage[absolute]{textpos}
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1pt}
+\def\registernames{\hbox{\#}\hbox{A},\hbox{B},\hbox{C},\hbox{D}\hbox{E},\hbox{F},\hbox{G}
+  \hbox{H},\hbox{I}\hbox{J}\hbox{K},\hbox{L},\hbox{M},\hbox{N}\hbox{O},
+  \hbox{P},\hbox{Q}\hbox{R},\hbox{S},\hbox{T},\hbox{U}\hbox{V}\hbox{W},\hbox{X}\hbox{Y}\hbox{Z}
+}
+
+\newcommand{\thumbregister}[2]{
+  \newdimen\verticaldistance
+  \verticaldistance=\dimexpr \paperheight * #1
+  \divide \verticaldistance by 16
+  \begin{textblock}{1}(20,\number\strip@pt\verticaldistance)
+    \vbox{\hrule\hbox{\vrule
+    \vbox to 18.5625mm{
+      \vfill
+      \hbox to 1cm{
+        \hfill\vbox{#2}\hfill
+      }
+      \vfill}
+      \vrule}
+    \hrule}
+  \end{textblock}
+}

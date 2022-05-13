@@ -32,8 +32,8 @@
 \renewcommand{\headrulewidth}{0pt}
 \fancyhead[LO]{Keep Talking and Nobody Explodes v.1}
 \fancyhead[RO]{}
-\fancyfoot[LO]{\thumbregisterright{3}}
-\fancyfoot[RE]{\thumbregisterleft{3}}
+\fancyfoot[LO]{\thumbregisterright{\currentthumbregister}}
+\fancyfoot[RE]{\thumbregisterleft{\currentthumbregister}}
 % For doing foreach loops
 \RequirePackage{pgf,pgffor}
 % For placing the register tabs
@@ -100,4 +100,7 @@
       \vfill}}
     \ifnum#3=1\hrule\fi}
   \end{textblock}
+}
+\newcommand{\indexedby}[1]{
+  \def\currentthumbregister{#1}
 }

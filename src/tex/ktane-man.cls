@@ -17,3 +17,6 @@
 \definecolor{gray}{HTML}{B4AEA3}
 
 \LoadClass[a4paper]{article}
+
+%% Remove all page numbering
+\pagenumbering{gobble}

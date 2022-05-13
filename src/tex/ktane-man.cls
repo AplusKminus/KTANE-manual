@@ -24,10 +24,23 @@
 % Remove all page numbering
 \pagenumbering{gobble}
 
+%% Thumb Register
+% For drawing the register on every page
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[LO]{Keep Talking and Nobody Explodes v.1}
+\fancyhead[RO]{}
+\fancyfoot[LE,LO]{\thumbregister{3}}
+% For doing foreach loops
 \RequirePackage{pgf,pgffor}
+% For placing the register tabs
 \RequirePackage[absolute]{textpos}
+% The unit of the horizontal tab measurement
 \setlength{\TPHorizModule}{1cm}
+% The unit of the vertical tab measurement
 \setlength{\TPVertModule}{1pt}
+% The tabs
 \def\registernames{
   \hbox{\#}\hbox{A},
   \hbox{B},
@@ -46,6 +59,7 @@
   \hbox{U}\hbox{V}\hbox{W},
   \hbox{X}\hbox{Y}\hbox{Z}
 }
+% To draw all registers starting from numer n
 \newcommand{\thumbregister}[1]{
   \foreach \x [count=\xi] in \registernames {%
     \ifnum\xi = #1
@@ -56,6 +70,10 @@
     \fi
   }
 }
+% To draw a single register
+% First param is the vertical index (0-based)
+% Second param is the content of the tab
+% Third param is whether to draw a horizontal line after (1) or a vertical line before (0)
 \newcommand{\drawthumbregister}[3]{
   \newdimen\verticaldistance
   \verticaldistance=\dimexpr \paperheight * #1

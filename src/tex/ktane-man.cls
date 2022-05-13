@@ -28,12 +28,32 @@
 \RequirePackage[absolute]{textpos}
 \setlength{\TPHorizModule}{1cm}
 \setlength{\TPVertModule}{1pt}
-\def\registernames{\hbox{\#}\hbox{A},\hbox{B},\hbox{C},\hbox{D}\hbox{E},\hbox{F},\hbox{G}
-  \hbox{H},\hbox{I}\hbox{J}\hbox{K},\hbox{L},\hbox{M},\hbox{N}\hbox{O},
-  \hbox{P},\hbox{Q}\hbox{R},\hbox{S},\hbox{T},\hbox{U}\hbox{V}\hbox{W},\hbox{X}\hbox{Y}\hbox{Z}
+\def\registernames{
+  \hbox{\#}\hbox{A},
+  \hbox{B},
+  \hbox{C},
+  \hbox{D}\hbox{E},
+  \hbox{F},
+  \hbox{G}\hbox{H},
+  \hbox{I}\hbox{J}\hbox{K},
+  \hbox{L},
+  \hbox{M},
+  \hbox{N}\hbox{O},
+  \hbox{P},
+  \hbox{Q}\hbox{R},
+  \hbox{S},
+  \hbox{T},
+  \hbox{U}\hbox{V}\hbox{W},
+  \hbox{X}\hbox{Y}\hbox{Z}
 }
-
-\newcommand{\thumbregister}[2]{
+\newcommand{\thumbregister}[1]{
+  \foreach \x [count=\xi] in \registernames {%
+    \ifnum\xi > #1
+      \drawthumbregister{\numexpr \xi - 1}{\x}
+    \fi
+  }
+}
+\newcommand{\drawthumbregister}[2]{
   \newdimen\verticaldistance
   \verticaldistance=\dimexpr \paperheight * #1
   \divide \verticaldistance by 16

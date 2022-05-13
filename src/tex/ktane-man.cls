@@ -48,24 +48,26 @@
 }
 \newcommand{\thumbregister}[1]{
   \foreach \x [count=\xi] in \registernames {%
+    \ifnum\xi = #1
+    \drawthumbregister{\numexpr \xi - 1}{\x}{1}
+    \fi
     \ifnum\xi > #1
-      \drawthumbregister{\numexpr \xi - 1}{\x}
+    \drawthumbregister{\numexpr \xi - 1}{\x}{0}
     \fi
   }
 }
-\newcommand{\drawthumbregister}[2]{
+\newcommand{\drawthumbregister}[3]{
   \newdimen\verticaldistance
   \verticaldistance=\dimexpr \paperheight * #1
   \divide \verticaldistance by 16
   \begin{textblock}{1}(20,\number\strip@pt\verticaldistance)
-    \vbox{\hrule\hbox{\vrule
+    \vbox{\hbox{\ifodd#3\else\vrule\fi
     \vbox to 18.5625mm{
       \vfill
       \hbox to 1cm{
         \hfill\vbox{#2}\hfill
       }
-      \vfill}
-      \vrule}
-    \hrule}
+      \vfill}}
+    \ifodd#3\hrule\fi}
   \end{textblock}
 }

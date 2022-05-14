@@ -37,26 +37,26 @@
 % Remove all page numbering
 \pagenumbering{gobble}
 
-%% Thumb Register
-% For drawing the register on every page
+%% Thumb Markers
+% For drawing the markers on every page
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
 \fancyhead[LO]{Keep Talking and Nobody Explodes v.1}
 \fancyhead[RO]{}
-\fancyfoot[LO]{\thumbregisterright{\currentthumbregister}}
-\fancyfoot[RE]{\thumbregisterleft{\currentthumbregister}}
+\fancyfoot[LO]{\addthumbmarkers}
+\fancyfoot[RE]{\addthumbmarkers}
 % For doing foreach loops
 \RequirePackage{pgf,pgffor}
-% For placing the register tabs
+% For placing the thumb marker tabs
 \RequirePackage[absolute]{textpos}
 % The unit of the horizontal tab measurement
 \setlength{\TPHorizModule}{1cm}
 % The unit of the vertical tab measurement
 \setlength{\TPVertModule}{1pt}
 % The tabs
-\def\registernames{
+\def\thumbmarkernames{
   \hbox{\#}\hbox{A},
   \hbox{B},
   \hbox{C},
@@ -74,46 +74,47 @@
   \hbox{U}\hbox{V}\hbox{W},
   \hbox{X}\hbox{Y}\hbox{Z}
 }
-% To draw all registers starting from number n on the right side
-\newcommand{\thumbregisterright}[1]{
-  \foreach \x [count=\xi] in \registernames {%
-    \ifnum\xi = #1
-    \drawthumbregister{\numexpr \xi - 1}{\x}{1}{20}
-    \fi
-    \ifnum\xi > #1
-    \drawthumbregister{\numexpr \xi - 1}{\x}{0}{20}
-    \fi
-  }
-}
-% To draw all registers up to number n on the left side
-\newcommand{\thumbregisterleft}[1]{
-  \foreach \x [count=\xi] in \registernames {%
-    \ifnum\xi > #1
-    \else
-    \drawthumbregister{\numexpr \xi - 1}{\x}{2}{0}
-    \fi
-  }
-}
-% To draw a single register
-% First param is the vertical index (0-based)
-% Second param is the content of the tab
-% Third param is whether to draw a vertical line before (0), a horizontal line after (1) or no lines (2)
-% Fourth param is the horizontal position in cm
-\newcommand{\drawthumbregister}[4]{
+% To draw all markers
+\newcommand{\addthumbmarkers}{
   \newdimen\verticaldistance
-  \verticaldistance=\dimexpr \paperheight * #1
-  \divide \verticaldistance by 16
-  \begin{textblock}{1}(#4,\number\strip@pt\verticaldistance)
-    \vbox{\hbox{\ifnum#3=0\vrule\fi
-    \vbox to 18.5625mm{
-      \vfill
-      \hbox to 1cm{
-        \hfill\vbox{#2}\hfill
-      }
-      \vfill}}
-    \ifnum#3=1\hrule\fi}
-  \end{textblock}
+  % To draw a single marker
+  % First param is the vertical index (0-based)
+  % Second param is the content of the tab
+  \newcommand{\drawthumbmarker}[2]{
+    \verticaldistance=\dimexpr \paperheight * #1
+    \divide \verticaldistance by 16
+    % do not draw this marker
+    \def\makecurrentthumbmarker{n}
+    % on odd pages ...
+    \ifodd\count0
+    \ifnum#1<\currentthumbmarkerindex
+    \else
+    % draw if current marker index >= desired index
+    \def\makecurrentthumbmarker{y}
+    \fi
+    \else
+    % on even pages, draw always
+    \def\makecurrentthumbmarker{y}
+    \fi
+    % The actual drawing of a thumb-marker
+    \if y\makecurrentthumbmarker
+    \begin{textblock}{1}(\ifodd\count0 20\else 0\fi,\number\strip@pt\verticaldistance)
+      \vbox{\hbox{\ifodd\count0 \ifnum#1>\currentthumbmarkerindex\vrule\fi\fi
+      % 297 / 16 = 18.5625
+      \vbox to 18.5625mm{
+        \vfill
+        \hbox to 1cm{
+          \hfill\vbox{#2}\hfill
+        }
+        \vfill}}
+      \ifodd\count0\ifnum#1=\currentthumbmarkerindex\hrule\fi\fi}
+    \end{textblock}
+    \fi
+  }
+  \foreach \x [count=\xi] in \thumbmarkernames {%
+    \drawthumbmarker{\numexpr \xi - 1}{\x}
+  }
 }
 \newcommand{\indexedby}[1]{
-  \def\currentthumbregister{#1}
+  \def\currentthumbmarkerindex{#1}
 }

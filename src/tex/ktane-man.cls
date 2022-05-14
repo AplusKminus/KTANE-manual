@@ -38,17 +38,8 @@
 \pagenumbering{gobble}
 
 %% Thumb Markers
-% For drawing the markers on every page
-\RequirePackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
-\fancyhead[LO]{Keep Talking and Nobody Explodes v.1}
-\fancyhead[RO]{}
-\fancyfoot[LO]{\addthumbmarkers}
-\fancyfoot[RE]{\addthumbmarkers}
-% For doing foreach loops
-\RequirePackage{pgf,pgffor}
+%\RequirePackage{expl3}
+\ExplSyntaxOn
 % For placing the thumb marker tabs
 \RequirePackage[absolute]{textpos}
 % The unit of the horizontal tab measurement
@@ -56,65 +47,82 @@
 % The unit of the vertical tab measurement
 \setlength{\TPVertModule}{1pt}
 % The tabs
-\def\thumbmarkernames{
-  \hbox{\#}\hbox{A},
-  \hbox{B},
-  \hbox{C},
-  \hbox{D}\hbox{E},
-  \hbox{F},
-  \hbox{G}\hbox{H},
-  \hbox{I}\hbox{J}\hbox{K},
-  \hbox{L},
-  \hbox{M},
-  \hbox{N}\hbox{O},
-  \hbox{P},
-  \hbox{Q}\hbox{R},
-  \hbox{S},
-  \hbox{T},
-  \hbox{U}\hbox{V}\hbox{W},
-  \hbox{X}\hbox{Y}\hbox{Z}
-}
+\clist_const:Nn \thumbmarkernames
+  {
+    \hbox{\#}\hbox{A},
+    \hbox{B},
+    \hbox{C},
+    \hbox{D}\hbox{E},
+    \hbox{F},
+    \hbox{G}\hbox{H},
+    \hbox{I}\hbox{J}\hbox{K},
+    \hbox{L},
+    \hbox{M},
+    \hbox{N}\hbox{O},
+    \hbox{P},
+    \hbox{Q}\hbox{R},
+    \hbox{S},
+    \hbox{T},
+    \hbox{U}\hbox{V}\hbox{W},
+    \hbox{X}\hbox{Y}\hbox{Z}
+  }
 % To draw all markers
-\newcommand{\addthumbmarkers}{
-  \newdimen\verticaldistance
-  % To draw a single marker
-  % First param is the vertical index (0-based)
-  % Second param is the content of the tab
-  \newcommand{\drawthumbmarker}[2]{
-    \verticaldistance=\dimexpr \paperheight * #1
-    \divide \verticaldistance by 16
-    % do not draw this marker
-    \def\makecurrentthumbmarker{n}
-    % on odd pages ...
-    \ifodd\count0
-    \ifnum#1<\currentthumbmarkerindex
-    \else
-    % draw if current marker index >= desired index
-    \def\makecurrentthumbmarker{y}
-    \fi
-    \else
-    % on even pages, draw always
-    \def\makecurrentthumbmarker{y}
-    \fi
-    % The actual drawing of a thumb-marker
-    \if y\makecurrentthumbmarker
-    \begin{textblock}{1}(\ifodd\count0 20\else 0\fi,\number\strip@pt\verticaldistance)
-      \vbox{\hbox{\ifodd\count0 \ifnum#1>\currentthumbmarkerindex\vrule\fi\fi
-      % 297 / 16 = 18.5625
-      \vbox to 18.5625mm{
-        \vfill
-        \hbox to 1cm{
-          \hfill\vbox{#2}\hfill
+\int_new:N \g_ktane_thumbmarkerselectedindex_int
+\int_new:N \l_draw_bool
+\dim_new:N \l_vdistance_dim
+\int_new:N \l_ktane_thumbmarkerdrawindex_int
+\cs_new:Nn \l_ktane_addthumbmarkers:
+  {
+    \int_gset:Nn \l_ktane_thumbmarkerdrawindex_int {0}
+    \clist_map_inline:Nn \thumbmarkernames {
+      \dim_set:Nn \l_vdistance_dim {\paperheight * \l_ktane_thumbmarkerdrawindex_int / 16}
+      \int_if_even:nTF {\count0}
+        {% page no even
+          \int_set:Nn \l_draw_bool {1}
         }
-        \vfill}}
-      \ifodd\count0\ifnum#1=\currentthumbmarkerindex\hrule\fi\fi}
-    \end{textblock}
-    \fi
+        {% page no odd
+          \int_compare:nNnF{\l_ktane_thumbmarkerdrawindex_int} < {\g_ktane_thumbmarkerselectedindex_int}
+          {% current index to draw >= defined "start"-index
+            \int_set:Nn \l_draw_bool {1}
+          }
+        }
+
+      \int_compare:nNnT {\l_draw_bool} = {1}{
+        \begin{textblock}{1}(\int_if_odd:nTF {\count0}{20}{0},\dim_to_decimal:n {\l_vdistance_dim})
+          \vbox{
+            \hbox{
+              \int_if_odd:nT {\count0}
+                {\int_compare:nT{\l_ktane_thumbmarkerdrawindex_int > \g_ktane_thumbmarkerselectedindex_int}{\vrule}}
+              % 297 / 16 = 18.5625
+              \vbox to 18.5625mm{
+                \vfill
+                \hbox to 1cm{
+                  \hfill\vbox{##1}\hfill
+                }
+                \vfill
+              }
+            }
+            \int_if_odd:nT {\count0}
+              {\int_compare:nT{\l_ktane_thumbmarkerdrawindex_int = \g_ktane_thumbmarkerselectedindex_int}
+                {\hrule}
+              }
+          }
+        \end{textblock}
+      }
+      \int_gincr:N \l_ktane_thumbmarkerdrawindex_int
+    }
   }
-  \foreach \x [count=\xi] in \thumbmarkernames {%
-    \drawthumbmarker{\numexpr \xi - 1}{\x}
-  }
-}
 \newcommand{\indexedby}[1]{
-  \def\currentthumbmarkerindex{#1}
+  \int_gset:Nn \g_ktane_thumbmarkerselectedindex_int {#1}
+  \int_gdecr:N \g_ktane_thumbmarkerselectedindex_int
 }
+% For drawing the markers on every page
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[LO]{Keep Talking and Nobody Explodes v.1}
+\fancyhead[RO]{}
+\fancyfoot[LO]{\l_ktane_addthumbmarkers:}
+\fancyfoot[RE]{\l_ktane_addthumbmarkers:}
+\ExplSyntaxOff

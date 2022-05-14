@@ -154,7 +154,6 @@
 \RequirePackage{ulem}
 \renewcommand{\ULdepth}{1.8pt}
 \renewcommand{\ULthickness}{.8pt}
-\RequirePackage{soulutf8}
 \RequirePackage{titlesec}
 \titleformat{\section}
 {\Large\bfseries}

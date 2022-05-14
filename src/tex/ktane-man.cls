@@ -32,7 +32,8 @@
 \RequirePackage{wrapfig2}
 
 %% Page Setup
-\raggedright
+\RequirePackage{ragged2e}
+\RaggedRight
 \RequirePackage[margin=2cm]{geometry}
 % Remove all page numbering
 \pagenumbering{gobble}

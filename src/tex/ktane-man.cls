@@ -73,14 +73,15 @@
   }
 % The index that is currently selected to be drawn. 0 = cut entire register off, 1 = leave first tab, etc
 \int_new:N \g_ktane_thumbmarkerselectedindex_int
-% Wether to draw the tab of the given iteration (used in l_ktane_addthumbmarkers:)
+% Wether to draw the tab of the given iteration (used in g_ktane_addthumbmarkers:)
 \int_new:N \l_draw_bool
-% The vertical distance from the top of the page where to draw the tab of the given iteration (used in l_ktane_addthumbmarkers:)
+% The vertical distance from the top of the page where to draw the tab of the given iteration (used in
+% g_ktane_addthumbmarkers:)
 \dim_new:N \l_vdistance_dim
-% The index of the tab of the given iteration, zero-based (used in l_ktane_addthumbmarkers:)
+% The index of the tab of the given iteration, zero-based (used in g_ktane_addthumbmarkers:)
 \int_new:N \l_ktane_thumbmarkerdrawindex_int
 % The method to draw all thumb markers for the current page
-\cs_new:Nn \l_ktane_addthumbmarkers:
+\cs_new:Nn \g_ktane_addthumbmarkers:
   {
     % reset running index to 0
     \int_gset:Nn \l_ktane_thumbmarkerdrawindex_int {0}
@@ -141,5 +142,5 @@
 \fancyhead[LO]{Keep Talking and Nobody Explodes v.1}
 \fancyhead[RO]{}
 % draw the thumb markers on all pages
-\fancyfoot[C]{\l_ktane_addthumbmarkers:}
+\fancyfoot[C]{\g_ktane_addthumbmarkers:}
 \ExplSyntaxOff

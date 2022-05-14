@@ -6,7 +6,7 @@
 %% Font Setup
 \renewcommand{\normalsize}{\fontsize{12pt}{12pt}\selectfont}
 \RequirePackage{fontspec}
-\setmainfont{[SpecialElite-Regular.ttf]}
+\setmainfont[AutoFakeBold=1.5]{[SpecialElite-Regular.ttf]}
 
 %% Color Setup
 \RequirePackage[table]{xcolor}
@@ -139,8 +139,40 @@
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
-\fancyhead[LO]{Keep Talking and Nobody Explodes v.1}
-\fancyhead[RO]{}
+\fancyhead[LO,LE]{Keep~Talking~and~Nobody~Explodes~v.1}
 % draw the thumb markers on all pages
 \fancyfoot[C]{\g_ktane_addthumbmarkers:}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                          %%
+%% --- Defining the custom module environment ---                           %%
+%%                                                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{ulem}
+\renewcommand{\ULdepth}{1.8pt}
+\renewcommand{\ULthickness}{.8pt}
+\RequirePackage{soulutf8}
+\RequirePackage{titlesec}
+\titleformat{\section}
+{\Large\bfseries}
+{\thesection.}
+{0.33em}
+{\uline}
+\titleformat{\subsection}
+{\large\bfseries}
+{\thesubsection.}
+{0.33em}
+{\uline}
+\prop_new:N \l_ktane_moduleconfiguration_pl
+\newenvironment{module}[1]
+  {
+    \ExplSyntaxOn
+    \prop_set_from_keyval:Nn \l_ktane_moduleconfiguration_pl {#1}
+    \section*{On\ the\ Subject\ of\ \prop_item:Nn \l_ktane_moduleconfiguration_pl {moduleName}}
+    %TODO this doesn't work!
+    \rhead{\prop_item:Nn \l_ktane_moduleconfiguration_pl {moduleName}}
+    \ExplSyntaxOff
+  }
+  {
+  }
 \ExplSyntaxOff

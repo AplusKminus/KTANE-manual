@@ -15,6 +15,7 @@
 \definecolor{yellow}{HTML}{EEC584}
 \definecolor{blue}{HTML}{808A9F}
 \definecolor{gray}{HTML}{B4AEA3}
+\definecolor{lightgray}{HTML}{E6E6E6}
 
 %% Used for table alignment
 \RequirePackage{array}
@@ -27,6 +28,8 @@
 
 %% Graphic support
 \RequirePackage{graphicx}
+\RequirePackage{tikz}
+\usetikzlibrary{fit, positioning}
 
 %% Wraping figures and tables to the left or right
 \RequirePackage{wrapfig2}

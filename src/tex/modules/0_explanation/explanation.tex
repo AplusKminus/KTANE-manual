@@ -83,16 +83,24 @@ one digit in the serial number. A zero has a diagonal line
 crossing through it, while the letter O does not.
 
 \subsection*{Indicator Lights}\label{subsec:indicator-lights}
-\begin{wraptable}[2]{r}{0.22\textwidth}
+\begin{wrapfigure}[3]{r}{0.251\textwidth} %this figure will be at the right
   \vspace{-2\baselineskip}
-  \begin{tabular}{| c |}
-    \hline
-    \color{white}
-    \cellcolor{red}
-    BOB
-    \\ \hline
-  \end{tabular}\label{tab:light}
-\end{wraptable}
+  \centering
+  \begin{tikzpicture}
+    \coordinate (dm1) at (2,0.6);
+    \coordinate (dm2) at (-2,-0.6);
+    \coordinate (dm3) at (-1.5,0);
+    \coordinate (dm4) at (-1,0);
+    \coordinate (dm5) at (1.8,0.6);
+    \coordinate (dm6) at (0,0);
+    \node[rectangle,draw,fill=red] [fit = (dm1) (dm2)] (bx4) {};
+    \node[circle,draw=lightgray,line width=2.5,fill=white] [fit = (dm3) (dm4)] (circle) {};
+    \node[rectangle,draw,minimum, fill=black] [fit = (dm5) (dm6)] (bx4) [right=0.4cm of circle] {};
+    \node[align=center,font=\large,color=white] at (bx4.center) {BOB};
+%        \draw [black, fill=red, align=center] (2,1) rectangle (-1,-1) node [black] {\centering Start}; % Draws a rectangle
+  \end{tikzpicture}
+  \label{fig:lights}
+\end{wrapfigure}
 Indicator lights can be lit or unlit and are accompanied
 by a three letter code. Common codes include:
 

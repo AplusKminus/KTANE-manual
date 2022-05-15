@@ -6,7 +6,7 @@
 %% Font Setup
 \renewcommand{\normalsize}{\fontsize{12pt}{12pt}\selectfont}
 \RequirePackage{fontspec}
-\setmainfont[AutoFakeBold=1.5]{[SpecialElite-Regular.ttf]}
+\setmainfont[AutoFakeBold=1.5,AutoFakeSlant=.2]{[SpecialElite-Regular.ttf]}
 
 %% Color Setup
 \RequirePackage[table]{xcolor}
@@ -160,19 +160,43 @@
 {\thesection.}
 {0.33em}
 {\uline}
+\titlespacing*{\section}{}{}{}{}
+
 \titleformat{\subsection}
 {\large\bfseries}
 {\thesubsection.}
 {0.33em}
 {\uline}
 \prop_new:N \l_ktane_moduleconfiguration_pl
-\newenvironment{module}[1]
+%% The environment has two parameters
+% The first is a list of properies:
+% - moduleName to name the module fully (e.g. "The Button") will appear in the title and the header
+% - indexString to sort the module and define its thumb marker (e.g. "Button") will not appear anywhere
+% - imageResource to define a relative path to the module image
+% The second is the introductory text which will be set in small italics
+\newenvironment{module}[2]
   {
     \ExplSyntaxOn
     \prop_set_from_keyval:Nn \l_ktane_moduleconfiguration_pl {#1}
-    \section*{On\ the\ Subject\ of\ \prop_item:Nn \l_ktane_moduleconfiguration_pl {moduleName}}
+    \def\moduleName{\prop_item:Nn \l_ktane_moduleconfiguration_pl {moduleName}}
+
+    % The module title
+    \section*{On\ the\ Subject\ of\ \moduleName}
     %TODO this doesn't work!
-    \rhead{\prop_item:Nn \l_ktane_moduleconfiguration_pl {moduleName}}
+    \rhead{\moduleName}
+
+    % The module image
+    \begin{wrapfigure}[6]{r}{0.2\textwidth} %this figure will be at the right
+      \vspace{-1.5cm}
+      \centering
+      \includegraphics[height=3.5cm]{\CurrentFilePath/\prop_item:Nn\l_ktane_moduleconfiguration_pl{imageResource}}
+      \label{fig:\moduleName}
+    \end{wrapfigure}
+
+    % The introductory text
+    %TODO the negative hspace shouldn't be necessary
+    %TODO an empty line in the intro text fucks things up
+    \small\textit{\hspace*{-2.3pt}#2}\normalsize\par
     \ExplSyntaxOff
   }
   {

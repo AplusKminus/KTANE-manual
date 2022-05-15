@@ -167,7 +167,7 @@
 {\thesection.}
 {0.33em}
 {\uline}
-\titlespacing*{\section}{}{}{}{}
+\titlespacing*{\section}{0pt}{*4}{*1.5}
 
 \titleformat{\subsection}
 {\large\bfseries}

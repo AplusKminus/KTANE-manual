@@ -15,4 +15,133 @@
   \subsection*{Releasing a Held Button:}
   If you start holding the button down, a colored strip will light up on the right side of the module.
   Based on its color you must release the button at a specific point in time:
+
+  %% 0-1 Battery
+  %
+  %
+  \begin{NiceTabular}{|
+      >{\centering\arraybackslash}p{4cm} |
+      >{\centering\arraybackslash}p{1.75cm}
+      >{\centering\arraybackslash}p{1.75cm}
+      >{\centering\arraybackslash}p{3.5cm}
+      >{\centering\arraybackslash}p{3.5cm} |}
+    \hline
+    % Table head
+    \cellcolor{lightgray}\marginbox{0.1cm}{\large0-1 Battery} &
+    \cellcolor{blue}BLUE &
+    \cellcolor{yellow}YELLOW &
+    \cellcolor{red}RED &
+    \cellcolor{lightgray}WHITE \\
+    \hline
+    \cellcolor{lightgray}"Detonate" & & & \multirow{3}*{HOLD} \\
+    \cellcolor{lightgray}"Abort" & \multicolumn{4}{c}{} \\
+    \cellcolor{lightgray}"Press" & \multicolumn{4}{c}{} \\
+    \cellcolor{lightgray}"Hold" & \multicolumn{2}{c}{} & PRESS \& RELEASE & \\
+    \hline
+    \CodeAfter
+    \tikz \draw (last-|4) -| (5-|4) -| (5-|5) -| (last-|5) ;
+    %top seperator lines
+    \tikz \draw (1-|3) |- (2-|3) ;
+    \tikz \draw (1-|4) |- (2-|4) ;
+    \tikz \draw (1-|5) |- (2-|5) ;
+    %left seperator lines
+    \tikz \draw (3-|1) |- (3-|2) ;
+    \tikz \draw (4-|1) |- (4-|2) ;
+    \tikz \draw (5-|1) |- (5-|2) ;
+  \end{NiceTabular}
+
+  %% lit FRK and 3+ Batt
+  %
+  %
+  \begin{NiceTabular}{|
+      >{\centering\arraybackslash}p{4cm} |
+      >{\centering\arraybackslash}p{1.75cm}
+      >{\centering\arraybackslash}p{1.75cm}
+      >{\centering\arraybackslash}p{3.5cm}
+      >{\centering\arraybackslash}p{3.5cm} |}
+    \hline
+    % Table head
+    \cellcolor{lightgray}\marginbox{0.1cm}{\large lit FRK and 3+ Batt} &
+    \cellcolor{blue}BLUE &
+    \cellcolor{yellow}YELLOW &
+    \cellcolor{red}RED &
+    \cellcolor{lightgray}WHITE \\
+    \hline
+    \cellcolor{lightgray}"Detonate" &   & & \multirow{4}*{PRESS \& RELEASE} & \\
+    \cellcolor{lightgray}"Abort" & HOLD & & & \multirow{3}*{\parbox{3.5cm}{\centering lit CAR - HOLD otherwise PRESS \& RELEASE}} \\
+    \cellcolor{lightgray}"Press" &      & &                                 & \\
+    \cellcolor{lightgray}"Hold"  &      & &                                 & \\
+    \hline
+    \CodeAfter
+    %top seperator lines
+    \tikz \draw (1-|3) |- (2-|3) ;
+    \tikz \draw (1-|4) |- (2-|4) ;
+    \tikz \draw (1-|5) |- (2-|5) ;
+    %left seperator lines
+    \tikz \draw (3-|1) |- (3-|3) |- (4-|3) |- (4-|1) ;
+    \tikz \draw (5-|1) |- (5-|2) ;
+    \tikz \draw (last-|5) |- (3-|5) |- (3-|last) ;
+  \end{NiceTabular}
+
+  %% Otherwise
+  %
+  %
+  \begin{NiceTabular}{|
+      >{\centering\arraybackslash}p{4cm} |
+      >{\centering\arraybackslash}p{1.75cm}
+      >{\centering\arraybackslash}p{1.75cm}
+      >{\centering\arraybackslash}p{3.5cm}
+      >{\centering\arraybackslash}p{3.5cm} |}
+    \hline
+    % Table head
+    \cellcolor{lightgray}\marginbox{0.1cm}{\large Otherwise} &
+    \cellcolor{blue}BLUE &
+    \cellcolor{yellow}YELLOW &
+    \cellcolor{red}RED &
+    \cellcolor{lightgray}WHITE \\
+    \hline
+    \cellcolor{lightgray}"Detonate" & \multicolumn{4}{c}{PRESS \& RELEASE} \\
+    \cellcolor{lightgray}"Abort" & & & \multirow{2}*{HOLD} & \\
+    \cellcolor{lightgray}"Press" & \multicolumn{4}{c}{} \\
+    \cellcolor{lightgray}"Hold" & \multicolumn{2}{c}{} & PRESS \& RELEASE & \\
+    \hline
+    \CodeAfter
+    \tikz \draw (last-|4) -| (5-|4) -| (5-|5) -| (last-|5) ;
+    %top seperator lines
+    \tikz \draw (1-|3) |- (2-|3) ;
+    \tikz \draw (1-|4) |- (2-|4) ;
+    \tikz \draw (1-|5) |- (2-|5) ;
+    %left seperator lines
+    \tikz \draw (3-|1) |- (3-|last) ;
+    \tikz \draw (4-|1) |- (4-|2) ;
+    \tikz \draw (5-|1) |- (5-|2) ;
+  \end{NiceTabular}
+
+  \subsection*{Releasing a Held Button:}
+  If you start holding the button down, a colored strip will light up on the
+  right side of the module. Based on its color you must release the button at
+  a specific point in time:
+
+    %% Otherwise
+  %
+  %
+  \begin{NiceTabular}{|
+      >{\centering\arraybackslash}p{4cm} |
+      >{\centering\arraybackslash}p{3.5cm} |
+      >{\centering\arraybackslash}p{3.5cm} |
+      >{\centering\arraybackslash}p{3.5cm} |}
+    \hline
+    % Table head
+    \cellcolor{lightgray}\marginbox{0.1cm}{\large HOLDING} &
+    \cellcolor{blue}BLUE &
+    \cellcolor{yellow}YELLOW &
+    Otherwise \\
+    \hline
+    \cellcolor{lightgray}"Release when X in timer" &
+    \vspace{0cm}4 &
+    \vspace{0cm}5 &
+    \vspace{0cm}1 \\
+    \hline
+  \end{NiceTabular}
+
 \end{module}

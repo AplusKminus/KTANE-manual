@@ -20,6 +20,9 @@
 %% Used for table alignment
 \RequirePackage{array}
 \RequirePackage{adjustbox}
+\RequirePackage{multirow}
+\RequirePackage{booktabs}
+\RequirePackage{nicematrix}
 
 \LoadClass[a4paper, twoside]{article}
 

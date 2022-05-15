@@ -176,7 +176,6 @@
 % The second is the introductory text which will be set in small italics
 \newenvironment{module}[2]
   {
-    \ExplSyntaxOn
     \prop_set_from_keyval:Nn \l_ktane_moduleconfiguration_pl {#1}
     \def\moduleName{\prop_item:Nn \l_ktane_moduleconfiguration_pl {moduleName}}
 
@@ -193,10 +192,7 @@
     \end{wrapfigure}
 
     % The introductory text
-    %TODO the negative hspace shouldn't be necessary
-    %TODO an empty line in the intro text fucks things up
-    \small\textit{\hspace*{-2.3pt}#2}\normalsize\par
-    \ExplSyntaxOff
+    {\small\itshape#2}\par
   }
   {
   \clearpage

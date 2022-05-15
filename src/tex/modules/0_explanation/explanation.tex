@@ -95,7 +95,7 @@ crossing through it, while the letter O does not.
     \coordinate (dm6) at (0,0);
     \node[rectangle,draw,fill=red] [fit = (dm1) (dm2)] (bx4) {};
     \node[circle,draw=lightgray,line width=2.5,fill=white] [fit = (dm3) (dm4)] (circle) {};
-    \node[rectangle,draw,minimum, fill=black] [fit = (dm5) (dm6)] (bx4) [right=0.4cm of circle] {};
+    \node[rectangle,draw, fill=black] [fit = (dm5) (dm6)] (bx4) [right=0.4cm of circle] {};
     \node[align=center,font=\large,color=white] at (bx4.center) {BOB};
 %        \draw [black, fill=red, align=center] (2,1) rectangle (-1,-1) node [black] {\centering Start}; % Draws a rectangle
   \end{tikzpicture}
@@ -139,11 +139,11 @@ both together count as a single port only.
     \cellcolor{lightgray} Parallel &
     \cellcolor{lightgray} Serial \\ \hline
     \vspace{0cm}
-    \includegraphics[height=0.8cm,valign=b]{modules/0_explanation/ew_dvi-d} &
+    \includegraphics[height=0.8cm]{modules/0_explanation/ew_dvi-d} &
     \vspace{0cm}
-    \includegraphics[height=0.8cm,valign=b]{modules/0_explanation/ew_parallel} &
+    \includegraphics[height=0.8cm]{modules/0_explanation/ew_parallel} &
     \vspace{0cm}
-    \includegraphics[height=0.8cm,valign=b]{modules/0_explanation/ew_serial} \\ \hline
+    \includegraphics[height=0.8cm]{modules/0_explanation/ew_serial} \\ \hline
   \end{tabular}\label{tab:portsA}
 \end{table}
 \begin{table}[h]
@@ -163,4 +163,4 @@ both together count as a single port only.
     \vspace{0cm}
     \includegraphics[height=0.8cm]{modules/0_explanation/ew_stereo} \\ \hline
   \end{tabular}\label{tab:portsB}
-\end{table}^
+\end{table}

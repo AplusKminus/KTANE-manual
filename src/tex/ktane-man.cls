@@ -182,7 +182,6 @@
 
     % The module title
     \section*{On\ the\ Subject\ of\ \moduleName}
-    %TODO this doesn't work!
     \rhead{\moduleName}
 
     % The module image
@@ -200,5 +199,6 @@
     \ExplSyntaxOff
   }
   {
+  \clearpage
   }
 \ExplSyntaxOff

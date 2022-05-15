@@ -57,22 +57,22 @@
 % The list of tab contents
 \clist_const:Nn \thumbmarkernames
   {
-    \hbox{\#}\hbox{A},
-    \hbox{B},
-    \hbox{C},
-    \hbox{D}\hbox{E},
-    \hbox{F},
-    \hbox{G}\hbox{H},
-    \hbox{I}\hbox{J}\hbox{K},
-    \hbox{L},
-    \hbox{M},
-    \hbox{N}\hbox{O},
-    \hbox{P},
-    \hbox{Q}\hbox{R},
-    \hbox{S},
-    \hbox{T},
-    \hbox{U}\hbox{V}\hbox{W},
-    \hbox{X}\hbox{Y}\hbox{Z}
+    \#A,
+    B,
+    C,
+    DE,
+    F,
+    GH,
+    IJK,
+    L,
+    M,
+    NO,
+    P,
+    QR,
+    S,
+    T,
+    UVW,
+    XYZ
   }
 % The index that is currently selected to be drawn. 0 = cut entire register off, 1 = leave first tab, etc
 \int_new:N \g_ktane_thumbmarkerselectedindex_int
@@ -83,6 +83,8 @@
 \dim_new:N \l_vdistance_dim
 % The index of the tab of the given iteration, zero-based (used in g_ktane_addthumbmarkers:)
 \int_new:N \l_ktane_thumbmarkerdrawindex_int
+% The list of characters on the thumb marker of the given iteration
+\tl_new:N \l_ktane_thumbmarkernameparts_tl
 % The method to draw all thumb markers for the current page
 \cs_new:Nn \g_ktane_addthumbmarkers:
   {
@@ -90,6 +92,8 @@
     \int_gset:Nn \l_ktane_thumbmarkerdrawindex_int {0}
     % map over the tab names
     \clist_map_inline:Nn \thumbmarkernames {
+      % Turn name into token list
+      \tl_set:Nn \l_ktane_thumbmarkernameparts_tl {##1}
       % calculate the vertical distance
       \dim_set:Nn \l_vdistance_dim {\paperheight * \l_ktane_thumbmarkerdrawindex_int / \clist_count:N \thumbmarkernames}
       \int_if_even:nTF {\count0}
@@ -115,7 +119,10 @@
               \vbox to 18.5625mm{
                 \vfill
                 \hbox to 1cm{
-                  \hfill\vbox{##1}\hfill
+                  \hfill\vbox{
+                    % Wrap each name part in an hbox
+                    \tl_map_inline:Nn \l_ktane_thumbmarkernameparts_tl {\hbox{###1}}
+                  }\hfill
                 }
                 \vfill
               }

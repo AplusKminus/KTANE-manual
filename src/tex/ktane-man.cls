@@ -77,8 +77,9 @@
     UVW,
     XYZ
   }
-% The index that is currently selected to be drawn. 0 = cut entire register off, 1 = leave first tab, etc
+% The index that is currently selected to be drawn. -1 = cut entire register off, 0 = leave first tab, etc
 \int_new:N \g_ktane_thumbmarkerselectedindex_int
+\int_gset:Nn \g_ktane_thumbmarkerselectedindex_int {-1}
 % Wether to draw the tab of the given iteration (used in g_ktane_addthumbmarkers:)
 \int_new:N \l_draw_bool
 % The vertical distance from the top of the page where to draw the tab of the given iteration (used in
@@ -177,13 +178,14 @@
 \RequirePackage{xstring}
 % Helper variant to extract the first character of a token list
 \cs_generate_variant:Nn \tl_item:nn { f }
+% Helper variant to pass a token list as a variable
 \cs_generate_variant:Nn \str_if_in:NnT {NVT}
 % A local token list to receive the parameter
 \tl_new:N \l_ktane_indexstring_tl
 \str_new:N \l_ktane_markerstring_str
 % A method to determine the thumb marker index from a string
 \cs_new:Nn \g_ktane_setindexfromname:n {
-% set the value to 1 (default for unknown character. Actually zero, but there is a decrement at the end)
+  % set the value to 1 (default for unknown character. Actually zero, but there is a decrement at the end)
   \int_gset:Nn \g_ktane_thumbmarkerselectedindex_int {1}
   \tl_set:Nn \l_ktane_indexstring_tl {#1}
   \tl_set:Nx\l_ktane_indexstring_tl{\tl_item:fn \l_ktane_indexstring_tl {1}}
@@ -192,12 +194,10 @@
   % go through list to find corresponding marker
   \clist_map_inline:Nn \thumbmarkernames {
     \str_set:Nn \l_ktane_markerstring_str {##1}
-%    \str_use:N\l_ktane_markerstring_str--
     \str_if_in:NVT \l_ktane_markerstring_str {\l_ktane_indexstring_tl}
       {
         \int_gset:NN \g_ktane_thumbmarkerselectedindex_int \l_ktane_thumbmarkerdrawindex_int
       }
-%    \int_use:N\l_ktane_thumbmarkerdrawindex_int
     \int_incr:N\l_ktane_thumbmarkerdrawindex_int
   }
   % decrement to match behavior of \g_ktane_addthumbmarkers:

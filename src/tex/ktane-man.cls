@@ -230,7 +230,7 @@
     \end{wrapfigure}
 
     % The introductory text
-    \small\itshape#2 \par
+    \small\itshape#2  \normalfont\normalsize\par
   }
   {
   \clearpage

@@ -14,12 +14,25 @@ This project uses XeLaTeX compilation (required for fontspec support):
 # Create build directory
 mkdir -p build
 
-# Compile the main document
-cd src/tex && xelatex -output-directory=../../build main.tex
+# Compile the main document (run twice for nicematrix colors)
+cd src/tex && xelatex -output-directory=../../build main.tex && xelatex -output-directory=../../build main.tex && cd ../..
 
-# For complete build with references (run multiple times if needed)
-cd src/tex && xelatex -output-directory=../../build main.tex
+# Note: Two compilation passes are required because:
+# 1. First pass processes the document and creates .aux files
+# 2. Second pass renders colors in nicematrix tables using PGF/TikZ
 ```
+
+## Important Instructions for Claude Code
+
+**Always rebuild the PDF after making changes to LaTeX files:**
+
+After any successful modification to `.tex` files, always run the complete build process:
+
+```bash
+cd src/tex && xelatex -output-directory=../../build main.tex && xelatex -output-directory=../../build main.tex && cd ../..
+```
+
+This ensures that all changes are properly reflected in the final PDF output and allows for immediate verification of the modifications.
 
 ## Code Architecture
 

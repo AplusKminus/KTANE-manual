@@ -7,8 +7,28 @@
   These wires aren't like the others. Some have stripes! That makes them completely different. The good news is that we've found a concise set of instructions on what to do about it! Maybe too concise...
 }
 
-% Add your module content here
-% This is where you'll add tables, instructions, and other module-specific content
+% Table parameters
+\newlength{\cellwidth}
+\newlength{\cellheight}
+\newlength{\cellheightwithoutpadding}
+\setlength{\cellwidth}{1cm}
+\setlength{\cellheight}{1.13cm}
+\setlength{\cellheightwithoutpadding}{1cm}
+\newlength{\lastcellwidth}
+\setlength{\lastcellwidth}{2.1cm}
+% Calculated dimensions
+\newlength{\fivecellwidth}
+\setlength{\fivecellwidth}{5.69cm}
+\newlength{\twocellheight}
+\setlength{\twocellheight}{2\cellheight}
+% Symbol positioning offsets
+\newlength{\circleoffset}
+\setlength{\circleoffset}{0.20\cellwidth}
+\newlength{\staroffset}
+\setlength{\staroffset}{0.05\cellwidth}
+% Line thickness
+\newlength{\tablelinewidth}
+\setlength{\tablelinewidth}{1pt}
 
 \begin{itemize}
   \item[$\bullet$] Check the 4 sections one after another.
@@ -23,53 +43,129 @@ Hints:
   \item[$\bullet$] \BLUE means that the wire has no \RED in it.
 \end{itemize}
 
+\vspace{2cm}
+
 \begin{minipage}[t]{0.48\textwidth}
-% First List - Left Column, Top
+% Left Column, Top
 \textheading{Always:}
 \begin{enumerate}
   \renewcommand{\labelenumi}{\alph{enumi}.}
-  \item LED off and
-  \begin{enumerate}
-    \renewcommand{\labelenumii}{\roman{enumii}.}
-    \item Plain \WHITE (STAR / no STAR)
-    \item \RED, has STAR
-  \end{enumerate}
+  \item LED off, Plain \WHITE
+  \item LED off, \RED with STAR
 \end{enumerate}
 
-% Third List - Left Column, Bottom
+\vspace{0.5cm}
+
+% Left Column, Bottom
 \textheading{If there are 2+ Batteries:}
 \begin{enumerate}
   \renewcommand{\labelenumi}{\alph{enumi}.}
-  \item LED on and
-  \begin{enumerate}
-    \renewcommand{\labelenumii}{\roman{enumii}.}
-    \item Plain \WHITE, has STAR
-    \item \RED (STAR / no STAR)
-  \end{enumerate}
+  \item LED on, Plain \WHITE with STAR
+  \item LED on, \RED
 \end{enumerate}
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.48\textwidth}
-% Second List - Right Column, Top
-\textheading{If the Last Digit of the Serial Number is Even:}
-\begin{enumerate}
-  \renewcommand{\labelenumi}{\alph{enumi}.}
-  \setcounter{enumi}{2}
-  \item No STAR and
-  \begin{enumerate}
-    \renewcommand{\labelenumii}{\roman{enumii}.}
-    \item LED off
-    \item \PURPLE
-  \end{enumerate}
-\end{enumerate}
-
-% Fourth List - Right Column, Bottom
+% Right Column, Top
 \textheading{If there is a Parallel Port:}
 \begin{enumerate}
   \renewcommand{\labelenumi}{\alph{enumi}.}
   \item LED on, \BLUE
-  \item LED off, \PURPLE, has STAR
+  \item LED off, \PURPLE with STAR
+\end{enumerate}
+
+\vspace{0.5cm}
+
+% Right Column, Bottom
+\textheading{If the Last Digit of the Serial\# is Even:}
+\begin{enumerate}
+  \renewcommand{\labelenumi}{\alph{enumi}.}
+  \setcounter{enumi}{2}
+  \item LED off, no STAR
+  \item \PURPLE, no STAR
 \end{enumerate}
 \end{minipage}
+
+\vspace{1.5cm}
+
+\begin{center}
+\large\textheading{Compact KV-Diagram}
+\end{center}
+
+\newcommand{\rowheight}{\rule{0pt}{\cellheightwithoutpadding}} % Adjust height here
+\begin{NiceTabular}{
+    >{\centering\arraybackslash}m{\lastcellwidth}
+    >{\centering\arraybackslash}m{\cellwidth}
+    >{\centering\arraybackslash}m{\cellwidth}
+    >{\centering\arraybackslash}m{\cellwidth}
+    >{\centering\arraybackslash}m{\cellwidth}
+    >{\centering\arraybackslash}m{\cellwidth}
+    >{\centering\arraybackslash}m{\cellwidth}
+    >{\centering\arraybackslash}m{\cellwidth}
+    >{\centering\arraybackslash}m{\cellwidth}
+    >{\centering\arraybackslash}m{\lastcellwidth}
+}
+  \CodeBefore
+    % Red stripe pattern from 2-5 to 5-9 (with white background)
+    \tikz \fill[blue!70] (2-|6) rectangle ++(\fivecellwidth,-\cellheight);
+    \tikz \fill[pattern=diagonal stripes, pattern color=red!70] (2-|6) rectangle ++(\fivecellwidth,-\cellheight);
+    \tikz \fill[pattern=diagonal stripes, pattern color=red!70] (3-|6) rectangle ++(\fivecellwidth,-\twocellheight);
+    \tikz \fill[blue!70] (5-|6) rectangle ++(\fivecellwidth,-\cellheight);
+    \tikz \fill[pattern=diagonal stripes, pattern color=red!70] (5-|6) rectangle ++(\fivecellwidth,-\cellheight);
+    % Blue coloring using blocks (excluding cells with red stripes)
+    \cellcolor{blue!70}{2-3,2-5,5-3,5-5}
+    \cellcolor{red!70}{3-7,3-9,4-7,4-9}
+    % Diagonal stripe pattern for cell 2-2 (with white background)
+    \tikz \fill[pattern=diagonal stripes, pattern color=blue!70] (2-|2) rectangle ++(\fivecellwidth,-\cellheight);
+    \tikz \fill[pattern=diagonal stripes, pattern color=blue!70] (5-|2) rectangle ++(\fivecellwidth,-\cellheight);
+  \Body
+  % Row 1 -- 1 empty cell, 2 merged cells, 2 merged cells, 1 empty cell
+  \rowheight & \Block{1-4}{No RED} & & & & \Block{1-4}{Has RED} & & & & \\
+  % Row 2 -- 1 2-row cell with below, 2 merged cells, 3 individual cells
+  \rowheight\Block{2-1}{LED on} & \Block{1-4}{Parallel Port} & & & & \Block{1-2}{Don't\\ Cut} & & \Block{1-2}{Serial\#\\ even} & & Has BLUE \\
+  % Row 3 -- 1 2-row cell from above, 1 individual cell, 3 merged cells, 1 2-row cell with below
+  \rowheight & \Block{1-2}{Don't\\ Cut} & & \Block{1-6}{Two or more Batteries} & & & & & & \Block{2-1}{No BLUE} \\
+  % Row 4 -- 1 2-row cell with below, 3 merged cells, 1 2-row cell with below, 1 2-row cell with above
+  \rowheight\Block{2-1}{LED off} & \Block{1-6}{Cut} & & & & & & \Block{2-2}{Serial\#\\ even} & & \\
+  % Row 5 -- 1 2-row cell from above, 3 individual cells, 1 2-row cell with above, 1 individual cell
+  \rowheight & \Block{1-2}{Serial\#\\ even} & & \Block{1-2}{Don't\\ Cut} & & \Block{1-2}{Parallel\\ Port} & & & & Has BLUE \\
+  % Row 6 -- 2 individual cells, 2 merged cells, 2 individual cells
+  \rowheight & \Block{1-2}{No STAR} & & \Block{1-4}{STAR} & & & & \Block{1-2}{No STAR} & & \\
+  \CodeAfter
+  % Horizontal lines (inside only, accounting for merged cells)
+  \tikz \draw[line width=\tablelinewidth] (2-|1) -- (2-|last);
+  \tikz \draw[line width=\tablelinewidth] (3-|2) -- (3-|last);
+  \tikz \draw[line width=\tablelinewidth] (4-|1) -- (4-|10);
+  \tikz \draw[line width=\tablelinewidth] (5-|2) -- (5-|8);
+  \tikz \draw[line width=\tablelinewidth] (5-|10) -- (5-|last);
+  \tikz \draw[line width=\tablelinewidth] (6-|1) -- (6-|last);
+  % Vertical lines (inside only, accounting for merged cells)
+  \tikz \draw[line width=\tablelinewidth] (1-|2) -- (last-|2);
+  \tikz \draw[line width=\tablelinewidth] (3-|4) -- (4-|4);
+  \tikz \draw[line width=\tablelinewidth] (5-|4) -- (last-|4);
+  \tikz \draw[line width=\tablelinewidth] (1-|6) -- (3-|6);
+  \tikz \draw[line width=\tablelinewidth] (5-|6) -- (6-|6);
+  \tikz \draw[line width=\tablelinewidth] (2-|8) -- (3-|8);
+  \tikz \draw[line width=\tablelinewidth] (4-|8) -- (last-|8);
+  \tikz \draw[line width=\tablelinewidth] (1-|10) -- (last-|10);
+  % Small yellow circles in top left of cells row 2-3/col 2-5 (mapped to new column structure)
+  \tikz \draw[fill=yellow!30, draw=black, line width=0.5pt] (2-|2) ++(\circleoffset,-\circleoffset) circle (4pt);
+  \tikz \draw[fill=yellow!30, draw=black, line width=0.5pt] (2-|4) ++(\circleoffset,-\circleoffset) circle (4pt);
+  \tikz \draw[fill=yellow!30, draw=black, line width=0.5pt] (2-|6) ++(\circleoffset,-\circleoffset) circle (4pt);
+  \tikz \draw[fill=yellow!30, draw=black, line width=0.5pt] (2-|8) ++(\circleoffset,-\circleoffset) circle (4pt);
+  \tikz \draw[fill=yellow!30, draw=black, line width=0.5pt] (3-|2) ++(\circleoffset,-\circleoffset) circle (4pt);
+  \tikz \draw[fill=yellow!30, draw=black, line width=0.5pt] (3-|4) ++(\circleoffset,-\circleoffset) circle (4pt);
+  \tikz \draw[fill=yellow!30, draw=black, line width=0.5pt] (3-|6) ++(\circleoffset,-\circleoffset) circle (4pt);
+  \tikz \draw[fill=yellow!30, draw=black, line width=0.5pt] (3-|8) ++(\circleoffset,-\circleoffset) circle (4pt);
+  % Black 5-pointed stars in bottom right of cells row 2-5/col 3-4 (moved 2 columns right)
+  \tikz \node at (3-|6) [anchor=south east, xshift=-\staroffset, yshift=\staroffset] {\tikz \node[star, star points=5, star point ratio=2.5, inner sep=0pt, minimum size=8pt, fill=black] {};};
+  \tikz \node at (3-|8) [anchor=south east, xshift=-\staroffset, yshift=\staroffset] {\tikz \node[star, star points=5, star point ratio=2.5, inner sep=0pt, minimum size=8pt, fill=black] {};};
+  \tikz \node at (4-|6) [anchor=south east, xshift=-\staroffset, yshift=\staroffset] {\tikz \node[star, star points=5, star point ratio=2.5, inner sep=0pt, minimum size=8pt, fill=black] {};};
+  \tikz \node at (4-|8) [anchor=south east, xshift=-\staroffset, yshift=\staroffset] {\tikz \node[star, star points=5, star point ratio=2.5, inner sep=0pt, minimum size=8pt, fill=black] {};};
+  \tikz \node at (5-|6) [anchor=south east, xshift=-\staroffset, yshift=\staroffset] {\tikz \node[star, star points=5, star point ratio=2.5, inner sep=0pt, minimum size=8pt, fill=black] {};};
+  \tikz \node at (5-|8) [anchor=south east, xshift=-\staroffset, yshift=\staroffset] {\tikz \node[star, star points=5, star point ratio=2.5, inner sep=0pt, minimum size=8pt, fill=black] {};};
+  \tikz \node at (6-|6) [anchor=south east, xshift=-\staroffset, yshift=\staroffset] {\tikz \node[star, star points=5, star point ratio=2.5, inner sep=0pt, minimum size=8pt, fill=black] {};};
+  \tikz \node at (6-|8) [anchor=south east, xshift=-\staroffset, yshift=\staroffset] {\tikz \node[star, star points=5, star point ratio=2.5, inner sep=0pt, minimum size=8pt, fill=black] {};};
+\end{NiceTabular}
 
 \end{module}

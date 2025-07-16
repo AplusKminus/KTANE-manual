@@ -51,7 +51,15 @@
 %% Graphic support
 \RequirePackage{graphicx}
 \RequirePackage{tikz}
-\usetikzlibrary{fit, positioning}
+\usetikzlibrary{fit, positioning, patterns, shapes.geometric}
+\pgfdeclarepatternformonly{diagonal stripes}{\pgfqpoint{0pt}{0pt}}{\pgfqpoint{16pt}{16pt}}{\pgfqpoint{16pt}{16pt}}%
+{
+  \pgfsetlinewidth{5.66pt}
+  \pgfsetroundcap
+  \pgfpathmoveto{\pgfqpoint{-3pt}{-3pt}}
+  \pgfpathlineto{\pgfqpoint{19pt}{19pt}}
+  \pgfusepath{stroke}
+}
 
 %% Wraping figures and tables to the left or right
 \RequirePackage{wrapfig2}

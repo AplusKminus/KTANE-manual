@@ -1,0 +1,75 @@
+\begin{module}{
+  moduleName=Complicated Wires,
+  indexString=Complicated Wires,
+  imageResource=complicated_wires.png
+}
+{
+  These wires aren't like the others. Some have stripes! That makes them completely different. The good news is that we've found a concise set of instructions on what to do about it! Maybe too concise...
+}
+
+% Add your module content here
+% This is where you'll add tables, instructions, and other module-specific content
+
+\begin{itemize}
+  \item[$\bullet$] Check the 4 sections one after another.
+  \item[$\bullet$] If a section applies, cut all wires matching any of its conditions.
+\end{itemize}
+
+Hints:
+\begin{itemize}
+  \item[$\bullet$] \PURPLE means that the wire has both \RED and \BLUE in it.
+  \item[$\bullet$] Plain \WHITE means that the wire has neither \RED nor \BLUE in it.
+  \item[$\bullet$] \RED means that the wire has no \BLUE in it.
+  \item[$\bullet$] \BLUE means that the wire has no \RED in it.
+\end{itemize}
+
+\begin{minipage}[t]{0.48\textwidth}
+% First List - Left Column, Top
+\textheading{Always:}
+\begin{enumerate}
+  \renewcommand{\labelenumi}{\alph{enumi}.}
+  \item LED off and
+  \begin{enumerate}
+    \renewcommand{\labelenumii}{\roman{enumii}.}
+    \item Plain \WHITE (STAR / no STAR)
+    \item \RED, has STAR
+  \end{enumerate}
+\end{enumerate}
+
+% Third List - Left Column, Bottom
+\textheading{If there are 2+ Batteries:}
+\begin{enumerate}
+  \renewcommand{\labelenumi}{\alph{enumi}.}
+  \item LED on and
+  \begin{enumerate}
+    \renewcommand{\labelenumii}{\roman{enumii}.}
+    \item Plain \WHITE, has STAR
+    \item \RED (STAR / no STAR)
+  \end{enumerate}
+\end{enumerate}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+% Second List - Right Column, Top
+\textheading{If the Last Digit of the Serial Number is Even:}
+\begin{enumerate}
+  \renewcommand{\labelenumi}{\alph{enumi}.}
+  \setcounter{enumi}{2}
+  \item No STAR and
+  \begin{enumerate}
+    \renewcommand{\labelenumii}{\roman{enumii}.}
+    \item LED off
+    \item \PURPLE
+  \end{enumerate}
+\end{enumerate}
+
+% Fourth List - Right Column, Bottom
+\textheading{If there is a Parallel Port:}
+\begin{enumerate}
+  \renewcommand{\labelenumi}{\alph{enumi}.}
+  \item LED on, \BLUE
+  \item LED off, \PURPLE, has STAR
+\end{enumerate}
+\end{minipage}
+
+\end{module}

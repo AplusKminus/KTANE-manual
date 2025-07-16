@@ -6,7 +6,13 @@
 %% Font Setup
 \renewcommand{\normalsize}{\fontsize{12pt}{12pt}\selectfont}
 \RequirePackage{fontspec}
-\setmainfont[AutoFakeBold=1.5,AutoFakeSlant=.2,Path=./resources/]{SpecialElite-Regular.ttf}
+\setmainfont[
+  AutoFakeBold=5,
+  AutoFakeSlant=.2,
+  UprightFont=*-Regular.ttf,
+  BoldFont=*-Regular.ttf,
+  Path=./resources/
+]{SpecialElite}
 
 %% Color Setup
 \RequirePackage[table]{xcolor}
@@ -14,8 +20,21 @@
 \definecolor{green}{HTML}{A0AF84}
 \definecolor{yellow}{HTML}{EEC584}
 \definecolor{blue}{HTML}{808A9F}
+\definecolor{purple}{HTML}{B89FB0}
 \definecolor{gray}{HTML}{B4AEA3}
 \definecolor{lightgray}{HTML}{E6E6E6}
+
+% For intelligent spacing after commands
+\RequirePackage{xspace}
+
+% Color word commands
+\newcommand{\RED}{\colorbox{red}{RED}\xspace}
+\newcommand{\GREEN}{\colorbox{green}{GREEN}\xspace}
+\newcommand{\YELLOW}{\colorbox{yellow}{YELLOW}\xspace}
+\newcommand{\BLUE}{\colorbox{blue}{BLUE}\xspace}
+\newcommand{\PURPLE}{\colorbox{purple}{PURPLE}\xspace}
+\newcommand{\WHITE}{\colorbox{lightgray}{WHITE}\xspace}
+\newcommand{\GRAY}{\colorbox{gray}{GRAY}\xspace}
 
 %% Used for table alignment
 \RequirePackage{array}
@@ -173,6 +192,10 @@
 {\thesubsection.}
 {0.33em}
 {\uline}
+
+% Custom command for headings with bold and underline
+\newcommand{\textheading}[1]{{\bfseries\uline{#1}}}
+
 \prop_new:N \l_ktane_moduleconfiguration_pl
 
 \RequirePackage{xstring}

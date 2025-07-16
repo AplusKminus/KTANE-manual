@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pdflatex:*)",
+      "Bash(brew list:*)",
+      "Bash(mkdir:*)",
+      "Bash(xelatex:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)"
+    ],
+    "deny": []
+  }
+}

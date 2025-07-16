@@ -6,7 +6,7 @@
 %% Font Setup
 \renewcommand{\normalsize}{\fontsize{12pt}{12pt}\selectfont}
 \RequirePackage{fontspec}
-\setmainfont[AutoFakeBold=1.5,AutoFakeSlant=.2]{[SpecialElite-Regular.ttf]}
+\setmainfont[AutoFakeBold=1.5,AutoFakeSlant=.2,Path=./resources/]{SpecialElite-Regular.ttf}
 
 %% Color Setup
 \RequirePackage[table]{xcolor}
@@ -125,7 +125,7 @@
                 \hbox to 1cm{
                   \hfill\vbox{
                     % Wrap each name part in an hbox
-                    \tl_map_inline:Nn \l_ktane_thumbmarkernameparts_tl {\hbox{###1}}
+                    \tl_map_inline:Nn \l_ktane_thumbmarkernameparts_tl {\hbox{####1}}
                   }\hfill
                 }
                 \vfill
@@ -196,7 +196,7 @@
     \str_set:Nn \l_ktane_markerstring_str {##1}
     \str_if_in:NVT \l_ktane_markerstring_str {\l_ktane_indexstring_tl}
       {
-        \int_gset:NN \g_ktane_thumbmarkerselectedindex_int \l_ktane_thumbmarkerdrawindex_int
+        \int_gset_eq:NN \g_ktane_thumbmarkerselectedindex_int \l_ktane_thumbmarkerdrawindex_int
       }
     \int_incr:N\l_ktane_thumbmarkerdrawindex_int
   }
@@ -233,6 +233,6 @@
     \small\itshape#2  \normalfont\normalsize\par
   }
   {
-  \clearpage
+  \cleardoublepage
   }
 \ExplSyntaxOff

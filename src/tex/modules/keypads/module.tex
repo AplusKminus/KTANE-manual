@@ -1,0 +1,172 @@
+% Define symbol commands for the Keypads module using images
+\newcommand{\keypadimg}[1]{\vspace{0.3cm}\includegraphics[width=1.9cm,height=1.9cm,keepaspectratio]{modules/keypads/symbols/#1}}
+\newcommand{\balloon}{\keypadimg{balloon.png}}            % GREEK ARCHAIC KOPPA
+\newcommand{\omegasymbol}{\keypadimg{omega.png}}          % OMEGA
+\newcommand{\doublek}{\keypadimg{doublek.png}}            % CYRILLIC ZHE WITH DESCENDER
+\newcommand{\bt}{\keypadimg{bt.png}}                      % CYRILLIC YAT
+\newcommand{\six}{\keypadimg{six.png}}                    % CYRILLIC LOWER CASE BE
+\newcommand{\squigglyn}{\keypadimg{squigglyn.png}}        % unknown (N)
+\newcommand{\hollowstar}{\keypadimg{hollowstar.png}}      % WHITE STAR
+\newcommand{\aesymbol}{\keypadimg{ae.png}}                % ASH
+\newcommand{\meltedthree}{\keypadimg{meltedthree.png}}    % CYRILLIC CAPITAL LETTER KOMI DZJE
+\newcommand{\dragon}{\keypadimg{dragon.png}}              % CYRILLIC CAPITAL LETTER KSI
+\newcommand{\questionmark}{\keypadimg{questionmark.png}}  % INVERTED QUESTION MARK
+\newcommand{\at}{\keypadimg{at.png}}                      % CYRILLIC CAPITAL LETTER LITTLE YUS
+\newcommand{\upsidedowny}{\keypadimg{upsidedowny.png}}    % LATIN SMALL LETTER LAMBDA WITH STROKE
+\newcommand{\copyrightsym}{\keypadimg{copyright.png}}        % COPYRIGHT SIGN
+\newcommand{\pumpkin}{\keypadimg{pumpkin.png}}            % unknown (W)
+\newcommand{\squidkniE}{\keypadimg{squidknife.png}}       % CYRILLIC CAPITAL LETTER IOTIFIED BIG YUS
+\newcommand{\filledstar}{\keypadimg{filledstar.png}}      % BLACK STAR
+\newcommand{\tracks}{\keypadimg{tracks.png}}              % CYRILLIC THOUSANDS SIGN
+\newcommand{\smileyface}{\keypadimg{smileyface.png}}      % ARABIC LETTER TEH WITH RING
+\newcommand{\cursive}{\keypadimg{cursive.png}}            % CYRILLIC CAPITAL LETTER ABKHASIAN HA
+\newcommand{\eurosymbol}{\keypadimg{euro.png}}            % CYRILLIC CAPITAL LETTER E WITH DIAERESIS
+\newcommand{\hookn}{\keypadimg{hookn.png}}                % unknown (H)
+\newcommand{\leftc}{\keypadimg{leftc.png}}                % GREEK CAPITAL REVERSED DOTTED LUNATE SIGMA SYMBOL
+\newcommand{\rightc}{\keypadimg{rightc.png}}              % GREEK CAPITAL DOTTED LUNATE SIGMA SYMBOL
+\newcommand{\nwithhat}{\keypadimg{nwithhat.png}}          % CYRILLIC CAPITAL LETTER SHORT I WITH TAIL
+\newcommand{\paragraphsymbol}{\keypadimg{paragraph.png}}  % PILCROW SIGN
+\newcommand{\pitchforksymbol}{\keypadimg{pitchfork.png}}  % GREEK CAPITAL LETTER PSI
+
+\begin{module}{
+  moduleName=Keypads,
+  indexString=Keypads,
+  imageResource=keypads.png
+}
+{
+  I'm not sure what these symbols are, but I suspect they have something to do with occult.
+}
+
+\begin{itemize}
+  \item[$\bullet$] Only one column below has all four of the symbols from the keypad.
+  \item[$\bullet$] Press the four buttons in the order their symbols appear from top to bottom within that column.
+  \item[$\bullet$] The framed symbols on white occur only once each.
+  \item[$\bullet$] The colored symbols each occur a second time in a distant position.
+  \item[$\bullet$] The gray symbols each occur a second time in a nearby position.
+\end{itemize}
+
+\vspace{1cm}
+
+% Keypad tables with 6 symbol columns and 5 empty spacing columns (0.5cm each)
+\renewcommand{\arraystretch}{2.2}
+\begin{NiceTabular}[cell-space-top-limit=0pt, cell-space-bottom-limit=0pt]{
+    >{\centering\arraybackslash}m{1.9cm}m{0.1cm}
+    >{\centering\arraybackslash}m{1.9cm}m{0.1cm}
+    >{\centering\arraybackslash}m{1.9cm}m{0.1cm}
+    >{\centering\arraybackslash}m{1.9cm}m{0.1cm}
+    >{\centering\arraybackslash}m{1.9cm}m{0.1cm}
+    >{\centering\arraybackslash}m{1.9cm}
+}
+  \CodeBefore
+    % Cell coloring
+    \cellcolor{yellow}{1-3,2-11}              % eurosymbol
+    \cellcolor{purple}{1-7,5-11}              % pitchforksymbol
+    \cellcolor{lightred}{2-7,7-9}             % smileyface
+    \cellcolor{red}{3-1,6-5}                  % upsidedowny
+    \cellcolor{lightpurple}{3-3,7-1}          % leftc
+    \cellcolor{green}{4-5,5-9}                % doublek
+    \cellcolor{blue}{4-9,5-1}                 % squidknife
+    \cellcolor{lightblue}{5-3,7-5}            % hollowstar
+    \cellcolor{lightgreen}{5-7,2-9}           % paragraphsymbol
+    \cellcolor{lightyellow}{6-9,7-3}          % questionmark
+    \cellcolor{lightgray}{1-1,2-3,1-9,1-11,3-9,3-5,3-7,4-3,6-1,6-3}  % symbols that appear twice
+  \Body
+    \balloon &  & \eurosymbol &  & \copyrightsym &  & \pitchforksymbol &  & \six &  & \six \\
+    \at &  & \balloon &  & \pumpkin &  & \smileyface &  & \paragraphsymbol &  & \eurosymbol \\
+    \upsidedowny &  & \leftc &  & \cursive &  & \bt &  & \bt &  & \tracks \\
+    \squigglyn &  & \cursive &  & \doublek &  & \rightc &  & \squidkniE &  & \aesymbol \\
+    \squidkniE &  & \hollowstar &  & \meltedthree &  & \paragraphsymbol &  & \doublek &  & \pitchforksymbol \\
+    \hookn &  & \hookn &  & \upsidedowny &  & \dragon &  & \questionmark &  & \nwithhat \\
+    \leftc &  & \questionmark &  & \hollowstar &  & \filledstar &  & \smileyface &  & \omegasymbol \\
+  \CodeAfter
+    % Horizontal lines
+    \tikz \draw[line width=1pt] (1-|1) -- (1-|2);
+    \tikz \draw[line width=3pt, line cap=rect] (2-|1) -- (2-|2); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (3-|1) -- (3-|2); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (4-|1) -- (4-|2); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (5-|1) -- (5-|2); % thicker
+    \tikz \draw[line width=1pt] (6-|1) -- (6-|2);
+    \tikz \draw[line width=1pt] (7-|1) -- (7-|2);
+    \tikz \draw[line width=1pt] (8-|1) -- (8-|2);
+    \tikz \draw[line width=1pt] (1-|3) -- (1-|4);
+    \tikz \draw[line width=1pt] (2-|3) -- (2-|4);
+    \tikz \draw[line width=1pt] (3-|3) -- (3-|4);
+    \tikz \draw[line width=1pt] (4-|3) -- (4-|4);
+    \tikz \draw[line width=1pt] (5-|3) -- (5-|4);
+    \tikz \draw[line width=1pt] (6-|3) -- (6-|4);
+    \tikz \draw[line width=1pt] (7-|3) -- (7-|4);
+    \tikz \draw[line width=1pt] (8-|3) -- (8-|4);
+    \tikz \draw[line width=3pt, line cap=rect] (1-|5) -- (1-|6); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (2-|5) -- (2-|6); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (3-|5) -- (3-|6); % thicker
+    \tikz \draw[line width=1pt] (4-|5) -- (4-|6);
+    \tikz \draw[line width=3pt, line cap=rect] (5-|5) -- (5-|6); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (6-|5) -- (6-|6); % thicker
+    \tikz \draw[line width=1pt] (7-|5) -- (7-|6);
+    \tikz \draw[line width=1pt] (8-|5) -- (8-|6);
+    \tikz \draw[line width=1pt] (1-|7) -- (1-|8);
+    \tikz \draw[line width=1pt] (2-|7) -- (2-|8);
+    \tikz \draw[line width=1pt] (3-|7) -- (3-|8);
+    \tikz \draw[line width=3pt, line cap=rect] (4-|7) -- (4-|8); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (5-|7) -- (5-|8); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (6-|7) -- (6-|8); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (7-|7) -- (7-|8); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (8-|7) -- (8-|8); % thicker
+    \tikz \draw[line width=1pt] (1-|9) -- (1-|10);
+    \tikz \draw[line width=1pt] (2-|9) -- (2-|10);
+    \tikz \draw[line width=1pt] (3-|9) -- (3-|10);
+    \tikz \draw[line width=1pt] (4-|9) -- (4-|10);
+    \tikz \draw[line width=1pt] (5-|9) -- (5-|10);
+    \tikz \draw[line width=1pt] (6-|9) -- (6-|10);
+    \tikz \draw[line width=1pt] (7-|9) -- (7-|10);
+    \tikz \draw[line width=1pt] (8-|9) -- (8-|10);
+    \tikz \draw[line width=1pt] (1-|11) -- (1-|last);
+    \tikz \draw[line width=1pt] (2-|11) -- (2-|last);
+    \tikz \draw[line width=3pt, line cap=rect] (3-|11) -- (3-|last); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (4-|11) -- (4-|last); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (5-|11) -- (5-|last); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (6-|11) -- (6-|last); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (7-|11) -- (7-|last); % thicker
+    \tikz \draw[line width=3pt, line cap=rect] (8-|11) -- (8-|last); % thicker
+    % All vertical lines (12 lines total for 11 columns)
+    \tikz \draw[line width=1pt] (1-|1) -- (last-|1);
+    \tikz \draw[line width=1pt] (1-|2) -- (last-|2);
+    \tikz \draw[line width=1pt] (1-|3) -- (last-|3);
+    \tikz \draw[line width=1pt] (1-|4) -- (last-|4);
+    \tikz \draw[line width=1pt] (1-|5) -- (last-|5);
+    \tikz \draw[line width=1pt] (1-|6) -- (last-|6);
+    \tikz \draw[line width=1pt] (1-|7) -- (last-|7);
+    \tikz \draw[line width=1pt] (1-|8) -- (last-|8);
+    \tikz \draw[line width=1pt] (1-|9) -- (last-|9);
+    \tikz \draw[line width=1pt] (1-|10) -- (last-|10);
+    \tikz \draw[line width=1pt] (1-|11) -- (last-|11);
+    \tikz \draw[line width=1pt] (1-|12) -- (last-|12);
+    % Thick vertical lines for cells with symbols appearing exactly once
+    \tikz \draw[line width=3pt, line cap=rect] (2-|1) -- (3-|1);   % at (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (2-|2) -- (3-|2);   % at (right border)
+    \tikz \draw[line width=3pt, line cap=rect] (1-|5) -- (2-|5);   % copyrightsym (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (1-|6) -- (2-|6);   % copyrightsym (right border)
+    \tikz \draw[line width=3pt, line cap=rect] (2-|5) -- (3-|5);   % pumpkin (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (2-|6) -- (3-|6);   % pumpkin (right border)
+    \tikz \draw[line width=3pt, line cap=rect] (4-|1) -- (5-|1);   % squigglyn (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (4-|2) -- (5-|2);   % squigglyn (right border)
+    \tikz \draw[line width=3pt, line cap=rect] (4-|7) -- (5-|7);   % rightc (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (4-|8) -- (5-|8);   % rightc (right border)
+    \tikz \draw[line width=3pt, line cap=rect] (5-|5) -- (6-|5);   % meltedthree (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (5-|6) -- (6-|6);   % meltedthree (right border)
+    \tikz \draw[line width=3pt, line cap=rect] (3-|11) -- (4-|11); % tracks (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (3-|12) -- (4-|12); % tracks (right border)
+    \tikz \draw[line width=3pt, line cap=rect] (4-|11) -- (5-|11); % aesymbol (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (4-|12) -- (5-|12); % aesymbol (right border)
+    \tikz \draw[line width=3pt, line cap=rect] (6-|7) -- (7-|7);   % dragon (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (6-|8) -- (7-|8);   % dragon (right border)
+    \tikz \draw[line width=3pt, line cap=rect] (6-|11) -- (7-|11); % nwithhat (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (6-|12) -- (7-|12); % nwithhat (right border)
+    \tikz \draw[line width=3pt, line cap=rect] (7-|7) -- (8-|7);   % filledstar (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (7-|8) -- (8-|8);   % filledstar (right border)
+    \tikz \draw[line width=3pt, line cap=rect] (7-|11) -- (8-|11); % omegasymbol (left border)
+    \tikz \draw[line width=3pt, line cap=rect] (7-|12) -- (8-|12); % omegasymbol (right border)
+\end{NiceTabular}
+\renewcommand{\arraystretch}{1.0}
+
+\end{module}

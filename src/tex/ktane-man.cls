@@ -22,6 +22,11 @@
 \definecolor{blue}{HTML}{808A9F}
 \definecolor{purple}{HTML}{B89FB0}
 \definecolor{gray}{HTML}{B4AEA3}
+\definecolor{lightred}{HTML}{F0C4B9}
+\definecolor{lightgreen}{HTML}{CAD6A9}
+\definecolor{lightyellow}{HTML}{E8CF9B}
+\definecolor{lightblue}{HTML}{9FAECF}
+\definecolor{lightpurple}{HTML}{DBC3D2}
 \definecolor{lightgray}{HTML}{E6E6E6}
 
 % For intelligent spacing after commands

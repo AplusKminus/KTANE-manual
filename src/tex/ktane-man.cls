@@ -19,13 +19,13 @@
 \definecolor{red}{HTML}{DE8A74}
 \definecolor{green}{HTML}{A0AF84}
 \definecolor{yellow}{HTML}{EEC584}
-\definecolor{blue}{HTML}{808A9F}
-\definecolor{purple}{HTML}{B89FB0}
+\definecolor{blue}{HTML}{7080A5}
+\definecolor{purple}{HTML}{C090B8}
 \definecolor{gray}{HTML}{B4AEA3}
 \definecolor{lightred}{HTML}{F0C4B9}
 \definecolor{lightgreen}{HTML}{CAD6A9}
-\definecolor{lightyellow}{HTML}{E8CF9B}
-\definecolor{lightblue}{HTML}{9FAECF}
+\definecolor{lightyellow}{HTML}{F0DBA5}
+\definecolor{lightblue}{HTML}{B5C4DF}
 \definecolor{lightpurple}{HTML}{DBC3D2}
 \definecolor{lightgray}{HTML}{E6E6E6}
 

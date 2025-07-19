@@ -1,0 +1,59 @@
+\documentclass{../../ktane-mod}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+\begin{document}
+
+% Custom title page - clear header but keep thumb markers
+\thispagestyle{fancy}
+\fancyhead{}
+\vspace*{2cm}
+
+% Logo centered and spanning text width
+\begin{center}
+  \includegraphics[width=\textwidth]{../../../../resources/logo}
+
+  \vspace{1cm}
+
+  % Title text with calculated font sizes for equal visual width
+  % Target: Each word individually spans 80% of textwidth
+  % Font size calculations based on character counts for equal visual width:
+  % BOMB (4 chars) needs largest font, DEFUSAL (7 chars) smallest, MANUAL (6 chars) medium
+  % Scaling: BOMB=1.75x base, DEFUSAL=1.0x base, MANUAL=1.17x base
+  
+  \fontsize{140pt}{120pt}\selectfont BOMB \\[-5pt]
+  \fontsize{80pt}{70pt}\selectfont DEFUSAL \\[-5pt] 
+  \fontsize{93pt}{80pt}\selectfont MANUAL
+
+  \vspace{2cm}
+
+  % Version and verification code
+  \fontsize{30pt}{30pt}\selectfont {\bfseries Version 1} \\[10pt]
+  \fontsize{18pt}{18pt}\selectfont Verification Code: 241
+\end{center}
+
+\vfill
+
+% Attribution at bottom of page
+\begin{center}
+  \normalsize Unofficial enhanced revision by AplusKminus, doofmars and d-bischoff
+\end{center}
+
+% Welcome content from intro.tex
+\clearpage
+\vspace*{\fill}
+\begin{minipage}[c]{0.9\textwidth}
+  \begin{center}
+    \setlength{\parskip}{10pt}
+    \textit{Welcome to the dangerous and challenging world of bomb defusing.}
+
+    \textit{Study this manual carefully; \uline{you are the expert.}}
+    \textit{In these pages you will find everything you need to know to defuse even the most insidious of bombs.}
+
+    \textit{If you don't — Best of luck to you!}
+  \end{center}
+\end{minipage}
+\vfill % equivalent to \vspace{\fill}
+\clearpage
+
+\end{document}

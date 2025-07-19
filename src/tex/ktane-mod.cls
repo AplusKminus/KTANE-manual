@@ -77,7 +77,7 @@
 %% Page Setup
 \RequirePackage{ragged2e}
 \RaggedRight
-\RequirePackage[margin=2cm]{geometry}
+\RequirePackage[margin=2cm,bottom=1cm]{geometry}
 % Remove all page numbering
 \pagenumbering{gobble}
 

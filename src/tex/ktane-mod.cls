@@ -1,7 +1,7 @@
 %%Identification
 %%The class identifies itself and the LaTeX version needed
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ktane-man}[2022/05/13 KTANE Manual]
+\ProvidesClass{ktane-mod}[2022/05/13 KTANE Module]
 
 %% Font Setup
 \renewcommand{\normalsize}{\fontsize{12pt}{12pt}\selectfont}
@@ -11,7 +11,7 @@
   AutoFakeSlant=.2,
   UprightFont=*-Regular.ttf,
   BoldFont=*-Regular.ttf,
-  Path=./resources/
+  Path=../../../../resources/
 ]{SpecialElite}
 
 %% Color Setup
@@ -57,10 +57,15 @@
 \RequirePackage{graphicx}
 \RequirePackage{tikz}
 \usetikzlibrary{fit, positioning, patterns, shapes.geometric}
-\pgfdeclarepatternformonly{diagonal stripes}{\pgfqpoint{0pt}{0pt}}{\pgfqpoint{16pt}{16pt}}{\pgfqpoint{16pt}{16pt}}%
-{
-  \pgfsetlinewidth{5.66pt}
-  \pgfsetroundcap
+\pgfdeclarepatternformonly{diagonal stripes}{%
+  \pgfqpoint{-5pt}{-5pt}%   % Lower-left corner of the pattern tile's drawing bounding box (allows proper painting in ghostscript)
+}{%
+  \pgfqpoint{21pt}{21pt}%   % Upper-right corner of the pattern tile's drawing bounding box (allows proper painting in ghostscript)
+}{%
+  \pgfqpoint{16pt}{16pt}%   % XY-step for tiling (the actual repeat distance)
+}{
+  \pgfsetlinewidth{5.66pt} % Set the line width
+  \pgfsetrectcap
   \pgfpathmoveto{\pgfqpoint{-3pt}{-3pt}}
   \pgfpathlineto{\pgfqpoint{19pt}{19pt}}
   \pgfusepath{stroke}
@@ -258,10 +263,10 @@
     \rhead{\moduleName}
 
     % The module image
-    \begin{wrapfigure}[6]{r}{0.2\textwidth} %this figure will be at the right
+    \begin{wrapfigure}[6]{r}{3.7cm} %this figure will be at the right
       \vspace{-1.5cm}
       \centering
-      \includegraphics[height=3.5cm]{\CurrentFilePath/\prop_item:Nn\l_ktane_moduleconfiguration_pl{imageResource}}
+      \includegraphics[height=3.5cm]{\prop_item:Nn\l_ktane_moduleconfiguration_pl{imageResource}}
       \label{fig:\moduleName}
     \end{wrapfigure}
 

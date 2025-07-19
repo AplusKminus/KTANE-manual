@@ -1,6 +1,68 @@
-%! Author = Jan
-%! Date = 13.05.2022
+\documentclass{../../ktane-mod}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
 
+\begin{document}
+
+% Content from defusing.tex
+\section*{Defusing Bombs}
+\rhead{Defusing Bombs}
+A bomb will explode when its countdown timer reaches 0:00 or when too
+many strikes have been recorded. The only way to defuse a bomb is to disarm
+all of its modules before its countdown timer expires.
+
+\begin{figure}[h]
+  \centering
+  \caption*{Example Bomb}
+  \begin{minipage}{.4\textwidth}
+    \centering
+    \includegraphics[height=4.5cm]{images/bomb_front}
+    \caption*{Front}
+    \label{fig:sub1}
+  \end{minipage}%
+  \begin{minipage}{.3\textwidth}
+    \centering
+    \includegraphics[height=4.5cm]{images/bomb_side}
+    \caption*{Side}
+    \label{fig:sub2}
+  \end{minipage}
+  \label{fig:example_bomb}
+\end{figure}
+
+\subsection*{Modules}
+Each bomb will include one or several modules that must be disarmed. Each
+module is discrete, but some modules require to be solved before others.
+
+
+Instructions for disarming modules can be found in Section 1.
+"Needy" modules present a special case and are described in Section 2.
+
+\subsection*{Strikes}
+\begin{wrapfigure}[7]{r}{0.2\textwidth} %this figure will be at the right
+  \vspace{-2\baselineskip}
+  Strike Indicator
+  \centering
+  \includegraphics[height=3.5cm]{images/strike}
+  \label{fig:Strikes}
+\end{wrapfigure}
+When the Defuser makes a mistake the bomb will record a strike
+which will be displayed on the indicator above the countdown
+timer. Bombs with a strike indicator will explode upon the
+third strike. The timer will begin to count down faster after
+a strike has been recorded.
+
+If no strike indicator is present above the countdown timer,
+the bomb will explode upon the first strike, leaving no room
+for error.
+
+\subsection*{Gathering Information}
+Some disarming instructions will require specific information about the
+bomb, such as the serial number. For detailed descriptions see the next
+page "On the Subject of Edgework".
+
+\clearpage
+
+% Content from edgework.tex
 \section*{On the Subject of Edgework}\label{sec:on-the-subject-of-edgework}
 \rhead{Edgework}
 The term edgework describes all kinds of widgets that can be found on the
@@ -59,8 +121,8 @@ BOB, CAR, CLR, FRK, FRQ, IND, MSA, NSA, SIG, SND, TRN
     \cellcolor{lightgray} AA &
     \cellcolor{lightgray} D
     \\ \hline
-    \includegraphics[width=1.8cm]{modules/0_explanation/battery_aa} &
-    \marginbox{0.1cm}{\includegraphics[width=1.8cm]{modules/0_explanation/battery_d}}
+    \includegraphics[width=1.8cm]{images/battery_aa} &
+    \marginbox{0.1cm}{\includegraphics[width=1.8cm]{images/battery_d}}
     \\ \hline
   \end{tabular}\label{tab:batteries}
 \end{wraptable}
@@ -84,11 +146,11 @@ both together count as a single port only.
     \cellcolor{lightgray} Parallel &
     \cellcolor{lightgray} Serial \\ \hline
     \vspace{0cm}
-    \includegraphics[height=0.8cm]{modules/0_explanation/ew_dvi-d} &
+    \includegraphics[height=0.8cm]{images/ew_dvi-d} &
     \vspace{0cm}
-    \includegraphics[height=0.8cm]{modules/0_explanation/ew_parallel} &
+    \includegraphics[height=0.8cm]{images/ew_parallel} &
     \vspace{0cm}
-    \includegraphics[height=0.8cm]{modules/0_explanation/ew_serial} \\ \hline
+    \includegraphics[height=0.8cm]{images/ew_serial} \\ \hline
   \end{tabular}\label{tab:portsA}
 \end{table}
 \begin{table}[h]
@@ -102,12 +164,14 @@ both together count as a single port only.
     \cellcolor{lightgray} RJ-45 &
     \cellcolor{lightgray} Stereo RCA \\ \hline
     \vspace{0cm}
-    \includegraphics[height=0.8cm]{modules/0_explanation/ew_ps2} &
+    \includegraphics[height=0.8cm]{images/ew_ps2} &
     \vspace{0cm}
-    \includegraphics[height=0.8cm]{modules/0_explanation/ew_rj-45} &
+    \includegraphics[height=0.8cm]{images/ew_rj-45} &
     \vspace{0cm}
-    \includegraphics[height=0.8cm]{modules/0_explanation/ew_stereo} \\ \hline
+    \includegraphics[height=0.8cm]{images/ew_stereo} \\ \hline
   \end{tabular}\label{tab:portsB}
 \end{table}
 
 \clearpage
+
+\end{document}

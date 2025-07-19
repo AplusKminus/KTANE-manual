@@ -11,26 +11,21 @@ This is a LaTeX-based manual for "Keep Talking and Nobody Explodes" bomb defusal
 This project uses XeLaTeX compilation (required for fontspec support):
 
 ```bash
-# Create build directory
-mkdir -p build
+# Render any individual module:
+./src/tex/modules/<module_name>/build.sh
 
-# Compile the main document (run twice for nicematrix colors)
-cd src/tex && xelatex -output-directory=../../build main.tex && xelatex -output-directory=../../build main.tex && cd ../..
+# Render all individual modules at once:
+./build.sh
 
-# Note: Two compilation passes are required because:
-# 1. First pass processes the document and creates .aux files
-# 2. Second pass renders colors in nicematrix tables using PGF/TikZ
+# Combine all rendered modules alphabetically into a single document (KTANE_manual.pdf)
+./combine_modules.sh
 ```
 
 ## Important Instructions for Claude Code
 
 **Always rebuild the PDF after making changes to LaTeX files:**
 
-After any successful modification to `.tex` files, always run the complete build process:
-
-```bash
-cd src/tex && xelatex -output-directory=../../build main.tex && xelatex -output-directory=../../build main.tex && cd ../..
-```
+After any successful modification to `.tex` files, always run the corresponding build.sh of the edited module.
 
 This ensures that all changes are properly reflected in the final PDF output and allows for immediate verification of the modifications.
 
@@ -38,17 +33,16 @@ This ensures that all changes are properly reflected in the final PDF output and
 
 ### Directory Structure
 - `src/tex/` - Main LaTeX source directory
-  - `main.tex` - Main document that includes all modules
-  - `ktane-man.cls` - Custom LaTeX class defining the manual's styling and layout
+  - `ktane-mod.cls` - Custom LaTeX class defining the manual's styling and layout
   - `modules/` - Individual module definitions
     - `0_intro/` - Introduction content
-    - `0_explanation/` - General bomb defusal instructions and edgework
-    - `the_button/` - Example module implementation
-  - `resources/` - Assets (fonts, images)
+    - `00_explanation/` - General bomb defusal instructions and edgework
+    - `button/` - Example module implementation
+- `resources/` - Assets (fonts, images)
 
 ### Key Components
 
-**Custom LaTeX Class (`ktane-man.cls`)**:
+**Custom LaTeX Class (`ktane-mod.cls`)**:
 - Defines custom document class with specialized styling
 - Implements thumb marker/tab system for quick navigation
 - Uses LaTeX3 syntax for advanced functionality
@@ -56,10 +50,10 @@ This ensures that all changes are properly reflected in the final PDF output and
 - Handles typography with SpecialElite font and custom colors
 
 **Module System**:
-- Each module is implemented as a `.tex` file in the `modules/` directory
+- Each module is implemented as a `module.tex` file in a `modules/` subdirectory
 - Uses custom `module` environment with parameters:
   - `moduleName`: Full display name (e.g., "The Button")
-  - `indexString`: Used for thumb marker sorting (e.g., "Button")
+  - `indexString`: Used for thumb marker sorting (e.g., "Button") -- this should also be the module path in lowercase to ensure correct alphabetical sorting!
   - `imageResource`: Path to module image
 - Modules automatically get:
   - Proper section headers
@@ -79,7 +73,7 @@ When adding new modules:
 1. Create new directory in `src/tex/modules/`
 2. Add `module.tex` file using the `module` environment
 3. Include module images in the same directory
-4. Add `\include{modules/your_module/module}` to `main.tex`
+4. Copy the `build.sh` of any existing module to your module directory
 
 The module environment expects:
 - Configuration parameters in the first argument
@@ -88,11 +82,8 @@ The module environment expects:
 
 ### Styling and Layout
 
-- Uses A4 paper with 2cm margins
-- No page numbering (gobble mode)
 - Ragged right text alignment
 - Custom color scheme for tables and highlights
-- Wrapfig2 package for figure placement
 - NiceTabular for complex table layouts with custom drawing
 
 ## Working with LaTeX

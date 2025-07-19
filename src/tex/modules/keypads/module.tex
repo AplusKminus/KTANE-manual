@@ -1,5 +1,11 @@
+\documentclass{../../ktane-mod}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+\begin{document}
+
 % Define symbol commands for the Keypads module using images
-\newcommand{\keypadimg}[1]{\vspace{0.3cm}\includegraphics[width=1.9cm,height=1.9cm,keepaspectratio]{modules/keypads/symbols/#1}}
+\newcommand{\keypadimg}[1]{\vspace{0.3cm}\includegraphics[width=1.9cm,height=1.9cm,keepaspectratio]{symbols/#1}}
 \newcommand{\balloon}{\keypadimg{balloon.png}}            % GREEK ARCHAIC KOPPA
 \newcommand{\omegasymbol}{\keypadimg{omega.png}}          % OMEGA
 \newcommand{\doublek}{\keypadimg{doublek.png}}            % CYRILLIC ZHE WITH DESCENDER
@@ -170,3 +176,5 @@
 \renewcommand{\arraystretch}{1.0}
 
 \end{module}
+
+\end{document}

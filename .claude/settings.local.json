@@ -11,7 +11,11 @@
       "Bash(true)",
       "Bash(git add:*)",
       "WebFetch(domain:ktane.fandom.com)",
-      "WebFetch(domain:ktane.timwi.de)"
+      "WebFetch(domain:ktane.timwi.de)",
+      "Bash(mv:*)",
+      "Bash(./combine_modules.sh:*)",
+      "Bash(./build.sh)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }

@@ -247,35 +247,51 @@
   \int_gdecr:N \g_ktane_thumbmarkerselectedindex_int
 }
 
-%% The environment has two parameters
-% The first is a list of properies:
-% - moduleName to name the module fully (e.g. "The Button") will appear in the title and the header
-% - indexString to sort the module and define its thumb marker (e.g. "Button") will not appear anywhere
-% - imageResource to define a relative path to the module image
-% The second is the introductory text which will be set in small italics
+% Common module setup command - extracts common functionality
+\cs_new:Nn \g_ktane_setup_module_common:nn {
+  \prop_set_from_keyval:Nn \l_ktane_moduleconfiguration_pl {#1}
+  \def\moduleName{\prop_item:Nn \l_ktane_moduleconfiguration_pl {moduleName}}
+  
+  % The module title
+  \section*{On\ the\ Subject\ of\ \moduleName}
+  \rhead{\moduleName}
+
+  % The module image
+  \begin{wrapfigure}[5]{r}{3.7cm} %this figure will be at the right
+    \vspace{-1.5cm}
+    \centering
+    \includegraphics[height=3.5cm]{\prop_item:Nn\l_ktane_moduleconfiguration_pl{imageResource}}
+    \label{fig:\moduleName}
+  \end{wrapfigure}
+
+  % The introductory text
+  \small\itshape#2  \normalfont\normalsize\par
+}
+
+%% Regular module environment with thumb markers and page breaks
+% Parameters:
+% - moduleName: Full display name (e.g. "The Button") 
+% - indexString: For thumb marker sorting (e.g. "Button")
+% - imageResource: Path to module image
+% Second parameter: introductory text in small italics
 \newenvironment{module}[2]
   {
-    \prop_set_from_keyval:Nn \l_ktane_moduleconfiguration_pl {#1}
-    \def\moduleName{\prop_item:Nn \l_ktane_moduleconfiguration_pl {moduleName}}
-
+    \g_ktane_setup_module_common:nn {#1} {#2}
     \g_ktane_setindexfromname:n {\prop_item:Nn \l_ktane_moduleconfiguration_pl {indexString}}
-
-    % The module title
-    \section*{On\ the\ Subject\ of\ \moduleName}
-    \rhead{\moduleName}
-
-    % The module image
-    \begin{wrapfigure}[6]{r}{3.7cm} %this figure will be at the right
-      \vspace{-1.5cm}
-      \centering
-      \includegraphics[height=3.5cm]{\prop_item:Nn\l_ktane_moduleconfiguration_pl{imageResource}}
-      \label{fig:\moduleName}
-    \end{wrapfigure}
-
-    % The introductory text
-    \small\itshape#2  \normalfont\normalsize\par
   }
   {
-  \cleardoublepage
+    \cleardoublepage
+  }
+
+%% Needy module environment without thumb markers or page breaks
+% Parameters same as module but no indexString needed
+% Used for needy modules, which are part of the preamble
+\newenvironment{needymodule}[2]
+  {
+    \g_ktane_setup_module_common:nn {#1} {#2}
+    % No thumb marker setup for needy modules
+  }
+  {
+    % No page break for needy modules
   }
 \ExplSyntaxOff

@@ -1,0 +1,34 @@
+\begin{needymodule}{
+  moduleName=Knobs,
+  imageResource=modules/knobs.png
+}
+{
+  Needlessly complicated and endlessly needy.
+  Imagine if such expertise were used to make something other than diabolical puzzles.
+}
+  \begin{bulletlist}
+    \bulletitem{The knob can be turned to one of four different positions.}
+    \bulletitem{The knob must be in the correct position when this module's timer hits zero.}
+    \bulletitem{The correct position can be determined by looking at the left half of the LEDs on the module.
+      The six LEDs on the right are not relevant for solving this module.}
+    \bulletitem{Knob positions are relative to the "UP" label, which may be rotated differently every time the module activates.}
+  \end{bulletlist}
+
+\textheading{The left six LEDs:}
+  \begin{enumerate}[label=\alph{enumi}.]
+    \item 0 or 1 LEDs lit -- Left
+    \item 3 LEDs lit -- Down
+    \item 4 LEDs lit -- Up
+    \item 5 LEDs lit in "U"-Shape -- Right\\
+    \vspace{0.2cm}
+    \begin{tabular}{|c|c|c|}
+    \hline
+    X & & X \\
+    \hline
+    X & X & X \\
+    \hline
+    \end{tabular} \quad X marks a lit LED\@.
+    \item Otherwise -- Down
+  \end{enumerate}
+
+\end{needymodule}

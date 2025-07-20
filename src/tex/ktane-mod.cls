@@ -73,7 +73,8 @@
   \pgfusepath{stroke}
 }
 
-%% Wraping figures and tables to the left or right
+%% Wrapping figures and tables to the left or right
+\input{insbox}
 \RequirePackage{wrapfig2}
 
 %% Page Setup
@@ -216,6 +217,26 @@
 % Custom command for headings with bold and underline
 \newcommand{\textheading}[1]{{\bfseries\uline{#1}}}
 
+% Custom bulletlist environment that mimics itemize behavior
+\newenvironment{bulletlist}{%
+  % Add vertical space like itemize
+  \par\addvspace{\topsep}%
+  % Define \bulletitem only within this environment
+  \newcommand{\bulletitem}[1]{%
+    \par
+    \begingroup
+    \advance\leftskip by 2.5em
+    \parindent=0em
+    \noindent
+    \llap{\hspace{2.5em}$\bullet$\hspace{0.5em}}##1\par
+    \endgroup
+  }%
+}{%
+  % Add vertical space at end like itemize
+  \par\addvspace{\topsep}%
+  % \bulletitem is automatically undefined when environment ends
+}
+
 \prop_new:N \l_ktane_moduleconfiguration_pl
 
 \RequirePackage{xstring}
@@ -256,13 +277,12 @@
   \section*{On\ the\ Subject\ of\ \moduleName}
   \rhead{\moduleName}
 
-  % The module image
-  \begin{wrapfigure}[5]{r}{3.7cm} %this figure will be at the right
-    \vspace{-1.5cm}
-    \centering
+  % The module image using insbox with proper vertical positioning
+  \vspace{-0.8cm}
+  \InsertBoxR{0}{
     \includegraphics[height=3.5cm]{\prop_item:Nn\l_ktane_moduleconfiguration_pl{imageResource}}
-    \label{fig:\moduleName}
-  \end{wrapfigure}
+  }
+  \vspace{1.1cm}
 
   % The introductory text
   \small\itshape#2  \normalfont\normalsize\par
@@ -292,6 +312,8 @@
     % No thumb marker setup for needy modules
   }
   {
+    % Add minimum spacing after needy module to prevent image overlap
+    \par\vspace{0.5cm}
     % No page break for needy modules
   }
 \ExplSyntaxOff

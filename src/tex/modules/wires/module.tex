@@ -1,0 +1,105 @@
+\documentclass{../../ktane-mod}
+\RequirePackage{enumitem}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+\begin{document}
+
+\begin{module}{
+  moduleName=Wires,
+  indexString=Wires,
+  imageResource=wires.png
+}
+{
+  Wires are the lifebloo of electronics!
+  Wait, no, electricity is the lifeblood.
+  Wires are more like arteries.
+  The veins?
+  No matter...
+}
+  \begin{itemize}
+    \item[$\bullet$] Have the defuser count the wires.
+    \item[$\bullet$] Select the correct instruction set from the table below.
+    \item[$\bullet$] Follow the instructions from top to bottom and cut the corresponding wire of the first condition that applies.
+  \end{itemize}
+  \renewcommand{\arraystretch}{2.2}
+  \begin{NiceTabular}{
+    >{\centering\arraybackslash}m{0.5cm}
+    >{\centering\arraybackslash}p{7.5cm}
+    >{\centering\arraybackslash}p{7.5cm}
+  }[hvlines]
+    % First line -- 3 wires
+    \rotatebox{90}{3 wires} & \Block{1-2}{
+                                \begin{minipage}{2\linewidth}
+                                  \vspace*{0.1cm}
+                                  \begin{enumerate}[label=\alph*.,itemsep=0pt]
+                                    \item \BLUE, \BLUE, \RED\\ - Cut 2nd wire
+                                    \item \RED[No RED] wires\\ - Cut 2nd wire
+                                    \item Otherwise\\ - Cut last wire
+                                  \end{enumerate}
+                                \end{minipage}
+      \vspace*{0.2cm}
+    } & \\
+    % Second line -- Last digit of serial number
+    \Block{2-1}{} & \Block[c]{1-2}{\textbf{\uline{Last digit of the serial\# is}}} & \\
+    % Third line -- even/odd
+    & \textbf{EVEN} & \textbf{ODD} \\
+    % Fourth line -- 4 wires
+    \rotatebox{90}{4 wires} & \begin{minipage}[c][5.1cm][t]{\linewidth}
+                                \vspace*{0.1cm}
+                                \begin{enumerate}[label=\alph*.,itemsep=0pt]
+                                  \item Last is \YELLOW and \RED[no RED] wires\\ - Cut 1st wire
+                                  \item \BLUE[1 BLUE] wire\\ - Cut 1st wire
+                                  \item \YELLOW[1+ YELLOW] wires\\ - Cut last wire
+                                  \item Otherwise\\ - Cut 2nd wire
+                                \end{enumerate}
+    \end{minipage} & \begin{minipage}[c][5.1cm][t]{\linewidth}
+                                                     \vspace*{0.1cm}
+                       \begin{enumerate}[label=\alph*.,itemsep=0pt]
+                         \item \RED[2+ RED] wires\\ - Cut last \RED wire
+                         \item Last is \YELLOW and \RED[no RED] wires\\ - Cut 1st wire
+                         \item \BLUE[1 BLUE] wire\\ - Cut 1st wire
+                         \item \YELLOW[1+ YELLOW] wires\\ - Cut last wire
+                         \item Otherwise\\ - Cut 2nd wire
+                       \end{enumerate}
+    \end{minipage} \\
+    % Fifth line -- 5 wires
+    \rotatebox{90}{5 wires} & \begin{minipage}[c][4cm][t]{\linewidth}
+                                \vspace*{0.1cm}
+                                \begin{enumerate}[label=\alph*.,itemsep=0pt]
+                                  \item \RED[1 RED] wire and \YELLOW[2+ YELLOW] wires\\ - Cut 4th wire
+                                  \item \BLACK[No BLACK] wires\\ - Cut 2nd wire
+                                  \item Otherwise\\ - Cut 1st wire
+                                \end{enumerate}
+    \end{minipage} & \begin{minipage}[c][4cm][t]{\linewidth}
+                                                     \vspace*{0.1cm}
+                       \begin{enumerate}[label=\alph*.,itemsep=0pt]
+                         \item Last wire is \BLACK\\ - Cut 4th wire
+                         \item \RED[1 RED] wire and \YELLOW[2+ YELLOW] wires\\ - Cut 4th wire
+                         \item \BLACK[No BLACK] wires\\ - Cut 2nd wire
+                         \item Otherwise\\ - Cut 1st wire
+                       \end{enumerate}
+    \end{minipage} \\
+    % Fifth line -- 6 wires
+    \rotatebox{90}{6 wires} & \begin{minipage}[c][4cm][t]{\linewidth}
+                                \vspace*{0.1cm}
+                                \begin{enumerate}[label=\alph*.,itemsep=0pt]
+                                  \item \YELLOW[1 YELLOW] wire and \WHITE[2+ WHITE] wires\\ - Cut 4th wire
+                                  \item \RED[No RED] wires\\ - Cut last wire
+                                  \item Otherwise\\ - Cut 4th wire
+                                \end{enumerate}
+    \end{minipage} & \begin{minipage}[c][4cm][t]{\linewidth}
+                                                     \vspace*{0.1cm}
+                       \begin{enumerate}[label=\alph*.,itemsep=0pt]
+                         \item \YELLOW[No YELLOW] wires\\ - Cut 3rd wire
+                         \item \YELLOW[1 YELLOW] wire and \WHITE[2+ WHITE] wires\\ - Cut 4th wire
+                         \item \RED[No RED] wires\\ - Cut last wire
+                         \item Otherwise\\ - Cut 4th wire
+                       \end{enumerate}
+    \end{minipage} \\
+  \end{NiceTabular}
+  \renewcommand{\arraystretch}{1.0}
+\end{module}
+
+\end{document}

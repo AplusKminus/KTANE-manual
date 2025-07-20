@@ -28,18 +28,20 @@
 \definecolor{lightblue}{HTML}{B5C4DF}
 \definecolor{lightpurple}{HTML}{DBC3D2}
 \definecolor{lightgray}{HTML}{E6E6E6}
+\definecolor{black}{HTML}{2E2B27}
 
 % For intelligent spacing after commands
 \RequirePackage{xspace}
 
 % Color word commands
-\newcommand{\RED}{\colorbox{red}{RED}\xspace}
-\newcommand{\GREEN}{\colorbox{green}{GREEN}\xspace}
-\newcommand{\YELLOW}{\colorbox{yellow}{YELLOW}\xspace}
-\newcommand{\BLUE}{\colorbox{blue}{BLUE}\xspace}
-\newcommand{\PURPLE}{\colorbox{purple}{PURPLE}\xspace}
-\newcommand{\WHITE}{\colorbox{lightgray}{WHITE}\xspace}
-\newcommand{\GRAY}{\colorbox{gray}{GRAY}\xspace}
+\newcommand{\RED}[1][RED]{\colorbox{red}{#1}\xspace}
+\newcommand{\GREEN}[1][GREEN]{\colorbox{green}{#1}\xspace}
+\newcommand{\YELLOW}[1][YELLOW]{\colorbox{yellow}{#1}\xspace}
+\newcommand{\BLUE}[1][BLUE]{\colorbox{blue}{#1}\xspace}
+\newcommand{\PURPLE}[1][PURPLE]{\colorbox{purple}{#1}\xspace}
+\newcommand{\WHITE}[1][WHITE]{\colorbox{lightgray}{#1}\xspace}
+\newcommand{\GRAY}[1][GRAY]{\colorbox{gray}{#1}\xspace}
+\newcommand{\BLACK}[1][BLACK]{\colorbox{black}{\textcolor{white}{#1}}\xspace}
 
 %% Used for table alignment
 \RequirePackage{array}

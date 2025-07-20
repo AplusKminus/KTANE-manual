@@ -202,15 +202,22 @@
 \renewcommand{\ULthickness}{.8pt}
 \RequirePackage{titlesec}
 \titleformat{\section}
-{\Large\bfseries}
+{\LARGE\bfseries\centering}
 {\thesection.}
 {0.33em}
-{\uline}
+{}
 \titlespacing*{\section}{0pt}{*4}{*1.5}
 
 \titleformat{\subsection}
-{\large\bfseries}
+{\Large\bfseries}
 {\thesubsection.}
+{0.33em}
+{\uline}
+\titlespacing*{\subsection}{0pt}{*4}{*1.5}
+
+\titleformat{\subsubsection}
+{\large\bfseries}
+{\thesubsubsection.}
 {0.33em}
 {\uline}
 
@@ -269,13 +276,13 @@
 }
 
 % Common module setup command - extracts common functionality
-\cs_new:Nn \g_ktane_setup_module_common:nn {
-  \prop_set_from_keyval:Nn \l_ktane_moduleconfiguration_pl {#1}
+% Third parameter: what to set rhead to
+\cs_new:Nn \g_ktane_setup_module_common:nnn {
   \def\moduleName{\prop_item:Nn \l_ktane_moduleconfiguration_pl {moduleName}}
   
   % The module title
-  \section*{On\ the\ Subject\ of\ \moduleName}
-  \rhead{\moduleName}
+  \subsection*{On\ the\ Subject\ of\ \moduleName}
+  \rhead{#3}
 
   % The module image using insbox with proper vertical positioning
   \vspace{-0.8cm}
@@ -296,7 +303,8 @@
 % Second parameter: introductory text in small italics
 \newenvironment{module}[2]
   {
-    \g_ktane_setup_module_common:nn {#1} {#2}
+    \prop_set_from_keyval:Nn \l_ktane_moduleconfiguration_pl {#1}
+    \g_ktane_setup_module_common:nnn {#1} {#2} {\prop_item:Nn \l_ktane_moduleconfiguration_pl {moduleName}}
     \g_ktane_setindexfromname:n {\prop_item:Nn \l_ktane_moduleconfiguration_pl {indexString}}
   }
   {
@@ -308,7 +316,8 @@
 % Used for needy modules, which are part of the preamble
 \newenvironment{needymodule}[2]
   {
-    \g_ktane_setup_module_common:nn {#1} {#2}
+    \prop_set_from_keyval:Nn \l_ktane_moduleconfiguration_pl {#1}
+    \g_ktane_setup_module_common:nnn {#1} {#2} {Needy~Modules}
     % No thumb marker setup for needy modules
   }
   {

@@ -1,0 +1,341 @@
+\documentclass{../../ktane-mod}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+% Define boolean operators as commands
+\newcommand{\AND}{\ensuremath{\wedge}}
+\newcommand{\OR}{\ensuremath{\vee}}
+\newcommand{\XOR}{\ensuremath{\underline{\vee}}}
+\newcommand{\IMPLIES}{\ensuremath{\rightarrow}}
+\newcommand{\NAND}{\ensuremath{|}}
+\newcommand{\NOR}{\ensuremath{\downarrow}}
+\newcommand{\XNOR}{\ensuremath{\leftrightarrow}}
+\newcommand{\IMPLIEDBY}{\ensuremath{\leftarrow}}
+
+% Base Venn diagram structure
+\newcommand{\drawVennBase}[8]{
+  \begin{tikzpicture}[scale=0.15]
+    % Define circle centers for equilateral triangle
+    % Distance between centers = 3, radius = 2.5 (5/6 * 3)
+    \coordinate (A) at (0, 1.732);     % Top circle (A)
+    \coordinate (B) at (-1.5, -0.866);   % Bottom left circle (B)  
+    \coordinate (C) at (1.5, -0.866);    % Bottom right circle (C)
+    
+    % Draw background first (30% larger total: 4*1.3=5.2, 3*1.3=3.9, 4*1.3=5.2)
+    \ifnum#1=1\relax
+      \fill[lightgreen] (-5.2,-3.9) rectangle (5.2,5.2);
+    \else
+      \fill[red] (-5.2,-3.9) rectangle (5.2,5.2);
+    \fi
+    
+    % Draw the regions by overlaying filled circles
+    % Circle A (will contain regions 100, 101, 110, 111)
+    \ifnum#5=1\relax
+      \fill[lightgreen] (A) circle (2.5);
+    \else
+      \fill[red] (A) circle (2.5);
+    \fi
+    
+    % Circle B (will contain regions 010, 011, 110, 111)
+    \ifnum#3=1\relax
+      \fill[lightgreen] (B) circle (2.5);
+    \else
+      \fill[red] (B) circle (2.5);
+    \fi
+    
+    % Circle C (will contain regions 001, 011, 101, 111)
+    \ifnum#2=1\relax
+      \fill[lightgreen] (C) circle (2.5);
+    \else
+      \fill[red] (C) circle (2.5);
+    \fi
+    
+    % Handle A ∩ B region (110, 111)
+    \begin{scope}
+      \clip (A) circle (2.5);
+      \ifnum#7=1\relax
+        \fill[lightgreen] (B) circle (2.5);
+      \else
+        \fill[red] (B) circle (2.5);
+      \fi
+    \end{scope}
+    
+    % Handle A ∩ C region (101, 111)
+    \begin{scope}
+      \clip (A) circle (2.5);
+      \ifnum#6=1\relax
+        \fill[lightgreen] (C) circle (2.5);
+      \else
+        \fill[red] (C) circle (2.5);
+      \fi
+    \end{scope}
+    
+    % Handle B ∩ C region (011, 111)
+    \begin{scope}
+      \clip (B) circle (2.5);
+      \ifnum#4=1\relax
+        \fill[lightgreen] (C) circle (2.5);
+      \else
+        \fill[red] (C) circle (2.5);
+      \fi
+    \end{scope}
+    
+    % Handle A ∩ B ∩ C region (111) - drawn last to override
+    \begin{scope}
+      \clip (A) circle (2.5);
+      \clip (B) circle (2.5);
+      \ifnum#8=1\relax
+        \fill[lightgreen] (C) circle (2.5);
+      \else
+        \fill[red] (C) circle (2.5);
+      \fi
+    \end{scope}
+    
+    % Draw circle outlines
+    \draw[thick] (A) circle (2.5);
+    \draw[thick] (B) circle (2.5);
+    \draw[thick] (C) circle (2.5);
+  \end{tikzpicture}
+}
+
+% Format: drawVennBase{000}{001}{010}{011}{100}{101}{110}{111}
+
+% TABLE 1: (A op1 B) op2 C - SYSTEMATICALLY VERIFIED
+% Row 1: AND as first operator
+\newcommand{\vennANDANDab}{\drawVennBase{0}{0}{0}{0}{0}{0}{0}{1}}    % (A∧B)∧C
+\newcommand{\vennANDORab}{\drawVennBase{0}{1}{0}{1}{0}{1}{1}{1}}     % (A∧B)∨C
+\newcommand{\vennANDXORab}{\drawVennBase{0}{1}{0}{1}{0}{1}{1}{0}}    % (A∧B)⊕C
+\newcommand{\vennANDIMPLIESab}{\drawVennBase{1}{1}{1}{1}{1}{1}{0}{1}} % (A∧B)→C
+\newcommand{\vennANDNANDab}{\drawVennBase{1}{1}{1}{1}{1}{1}{1}{0}}   % (A∧B)|C
+\newcommand{\vennANDNORab}{\drawVennBase{1}{0}{1}{0}{1}{0}{0}{0}}    % (A∧B)↓C - CORRECTED
+\newcommand{\vennANDXNORab}{\drawVennBase{1}{0}{1}{0}{1}{0}{0}{1}}   % (A∧B)↔C
+\newcommand{\vennANDIMPLIEDBYab}{\drawVennBase{1}{0}{1}{0}{1}{0}{1}{1}} % (A∧B)←C
+
+% Row 2: OR as first operator
+\newcommand{\vennORANDab}{\drawVennBase{0}{0}{0}{1}{0}{1}{0}{1}}     % (A∨B)∧C
+\newcommand{\vennORORab}{\drawVennBase{0}{1}{1}{1}{1}{1}{1}{1}}      % (A∨B)∨C
+\newcommand{\vennORXORab}{\drawVennBase{0}{1}{1}{0}{1}{0}{1}{0}}     % (A∨B)⊕C
+\newcommand{\vennORIMPLIESab}{\drawVennBase{1}{1}{0}{1}{0}{1}{0}{1}} % (A∨B)→C
+\newcommand{\vennORNANDab}{\drawVennBase{1}{1}{1}{0}{1}{0}{1}{0}}    % (A∨B)|C
+\newcommand{\vennORNORab}{\drawVennBase{1}{0}{0}{0}{0}{0}{0}{0}}     % (A∨B)↓C
+\newcommand{\vennORXNORab}{\drawVennBase{1}{0}{0}{1}{0}{1}{0}{1}}    % (A∨B)↔C
+\newcommand{\vennORIMPLIEDBYab}{\drawVennBase{1}{0}{1}{1}{1}{1}{1}{1}} % (A∨B)←C
+
+% Row 3: XOR as first operator
+\newcommand{\vennXORANDab}{\drawVennBase{0}{0}{0}{1}{0}{1}{0}{0}}    % (A⊕B)∧C
+\newcommand{\vennXORORab}{\drawVennBase{0}{1}{1}{1}{1}{1}{0}{1}}     % (A⊕B)∨C
+\newcommand{\vennXORXORab}{\drawVennBase{0}{1}{1}{0}{1}{0}{0}{1}}    % (A⊕B)⊕C
+\newcommand{\vennXORIMPLIESab}{\drawVennBase{1}{1}{0}{1}{0}{1}{1}{1}} % (A⊕B)→C
+\newcommand{\vennXORNANDab}{\drawVennBase{1}{1}{1}{0}{1}{0}{1}{1}}   % (A⊕B)|C
+\newcommand{\vennXORNORab}{\drawVennBase{1}{0}{0}{0}{0}{0}{1}{0}}    % (A⊕B)↓C
+\newcommand{\vennXORXNORab}{\drawVennBase{1}{0}{0}{1}{0}{1}{1}{0}}   % (A⊕B)↔C
+\newcommand{\vennXORIMPLIEDBYab}{\drawVennBase{1}{0}{1}{1}{1}{1}{1}{0}} % (A⊕B)←C
+
+% Row 4: IMPLIES as first operator
+\newcommand{\vennIMPLIESANDab}{\drawVennBase{0}{1}{0}{1}{0}{0}{0}{1}} % (A→B)∧C
+\newcommand{\vennIMPLIESORab}{\drawVennBase{1}{1}{1}{1}{0}{1}{1}{1}}  % (A→B)∨C
+\newcommand{\vennIMPLIESXORab}{\drawVennBase{1}{0}{1}{0}{0}{1}{1}{0}} % (A→B)⊕C
+\newcommand{\vennIMPLIESIMPLIESab}{\drawVennBase{0}{1}{0}{1}{1}{1}{0}{1}} % (A→B)→C
+\newcommand{\vennIMPLIESNANDab}{\drawVennBase{1}{0}{1}{0}{1}{1}{1}{0}} % (A→B)|C
+\newcommand{\vennIMPLIESNORab}{\drawVennBase{0}{0}{0}{0}{1}{0}{0}{0}}  % (A→B)↓C
+\newcommand{\vennIMPLIESXNORab}{\drawVennBase{0}{1}{0}{1}{1}{0}{0}{1}} % (A→B)↔C
+\newcommand{\vennIMPLIESIMPLIEDBYab}{\drawVennBase{1}{1}{1}{1}{1}{0}{1}{1}} % (A→B)←C
+
+% Row 5: NAND as first operator
+\newcommand{\vennNANDANDab}{\drawVennBase{0}{1}{0}{1}{0}{1}{0}{0}}   % (A|B)∧C
+\newcommand{\vennNANDORab}{\drawVennBase{1}{1}{1}{1}{1}{1}{0}{1}}    % (A|B)∨C
+\newcommand{\vennNANDXORab}{\drawVennBase{1}{0}{1}{0}{1}{0}{0}{1}}   % (A|B)⊕C
+\newcommand{\vennNANDIMPLIESab}{\drawVennBase{0}{1}{0}{1}{0}{1}{1}{1}} % (A|B)→C
+\newcommand{\vennNANDNANDab}{\drawVennBase{1}{0}{1}{0}{1}{0}{1}{1}}  % (A|B)|C
+\newcommand{\vennNANDNORab}{\drawVennBase{0}{0}{0}{0}{0}{0}{1}{0}}   % (A|B)↓C
+\newcommand{\vennNANDXNORab}{\drawVennBase{0}{1}{0}{1}{0}{1}{1}{0}}  % (A|B)↔C
+\newcommand{\vennNANDIMPLIEDBYab}{\drawVennBase{1}{1}{1}{1}{1}{1}{1}{0}} % (A|B)←C
+
+% Row 6: NOR as first operator
+\newcommand{\vennNORANDab}{\drawVennBase{0}{1}{0}{0}{0}{0}{0}{0}}    % (A↓B)∧C
+\newcommand{\vennNORORab}{\drawVennBase{1}{1}{0}{1}{0}{1}{0}{1}}     % (A↓B)∨C
+\newcommand{\vennNORXORab}{\drawVennBase{1}{0}{0}{1}{0}{1}{0}{1}}    % (A↓B)⊕C
+\newcommand{\vennNORIMPLIESab}{\drawVennBase{0}{1}{1}{1}{1}{1}{1}{1}} % (A↓B)→C
+\newcommand{\vennNORNANDab}{\drawVennBase{1}{0}{1}{1}{1}{1}{1}{1}}   % (A↓B)|C
+\newcommand{\vennNORNORab}{\drawVennBase{0}{0}{1}{0}{1}{0}{1}{0}}    % (A↓B)↓C
+\newcommand{\vennNORXNORab}{\drawVennBase{0}{1}{1}{0}{1}{0}{1}{0}}   % (A↓B)↔C
+\newcommand{\vennNORIMPLIEDBYab}{\drawVennBase{1}{1}{1}{0}{1}{0}{1}{0}} % (A↓B)←C
+
+% Row 7: XNOR as first operator
+\newcommand{\vennXNORANDab}{\drawVennBase{0}{1}{0}{0}{0}{0}{0}{1}}   % (A↔B)∧C
+\newcommand{\vennXNORORab}{\drawVennBase{1}{1}{0}{1}{0}{1}{1}{1}}    % (A↔B)∨C
+\newcommand{\vennXNORXORab}{\drawVennBase{1}{0}{0}{1}{0}{1}{1}{0}}   % (A↔B)⊕C
+\newcommand{\vennXNORIMPLIESab}{\drawVennBase{0}{1}{1}{1}{1}{1}{0}{1}} % (A↔B)→C
+\newcommand{\vennXNORNANDab}{\drawVennBase{1}{0}{1}{1}{1}{1}{1}{0}}  % (A↔B)|C
+\newcommand{\vennXNORNORab}{\drawVennBase{0}{0}{1}{0}{1}{0}{0}{0}}   % (A↔B)↓C
+\newcommand{\vennXNORXNORab}{\drawVennBase{0}{1}{1}{0}{1}{0}{0}{1}}  % (A↔B)↔C
+\newcommand{\vennXNORIMPLIEDBYab}{\drawVennBase{1}{1}{1}{0}{1}{0}{1}{1}} % (A↔B)←C
+
+% Row 8: IMPLIED_BY as first operator
+\newcommand{\vennIMPLIEDBYANDab}{\drawVennBase{0}{1}{0}{0}{0}{1}{0}{1}} % (A←B)∧C
+\newcommand{\vennIMPLIEDBYORab}{\drawVennBase{1}{1}{0}{1}{1}{1}{1}{1}}  % (A←B)∨C
+\newcommand{\vennIMPLIEDBYXORab}{\drawVennBase{1}{0}{0}{1}{1}{0}{1}{0}} % (A←B)⊕C
+\newcommand{\vennIMPLIEDBYIMPLIESab}{\drawVennBase{0}{1}{1}{1}{0}{1}{0}{1}} % (A←B)→C
+\newcommand{\vennIMPLIEDBYNANDab}{\drawVennBase{1}{0}{1}{1}{1}{0}{1}{0}} % (A←B)|C
+\newcommand{\vennIMPLIEDBYNORab}{\drawVennBase{0}{0}{1}{0}{0}{0}{0}{0}}  % (A←B)↓C
+\newcommand{\vennIMPLIEDBYXNORab}{\drawVennBase{0}{1}{1}{0}{0}{1}{0}{1}} % (A←B)↔C
+\newcommand{\vennIMPLIEDBYIMPLIEDBYab}{\drawVennBase{1}{1}{1}{0}{1}{1}{1}{1}} % (A←B)←C
+
+% TABLE 2: A op1 (B op2 C) - SYSTEMATICALLY VERIFIED
+% Row 1: AND as first operator for (B op2 C)
+\newcommand{\vennANDANDbc}{\drawVennBase{0}{0}{0}{0}{0}{0}{0}{1}}    % A∧(B∧C)
+\newcommand{\vennANDORbc}{\drawVennBase{0}{0}{0}{0}{0}{1}{1}{1}}     % A∧(B∨C)
+\newcommand{\vennANDXORbc}{\drawVennBase{0}{0}{0}{0}{0}{1}{1}{0}}    % A∧(B⊕C)
+\newcommand{\vennANDIMPLIESbc}{\drawVennBase{0}{0}{0}{0}{1}{1}{0}{1}} % A∧(B→C)
+\newcommand{\vennANDNANDbc}{\drawVennBase{0}{0}{0}{0}{1}{1}{1}{0}}   % A∧(B|C)
+\newcommand{\vennANDNORbc}{\drawVennBase{0}{0}{0}{0}{1}{0}{0}{0}}    % A∧(B↓C)
+\newcommand{\vennANDXNORbc}{\drawVennBase{0}{0}{0}{0}{1}{0}{0}{1}}   % A∧(B↔C)
+\newcommand{\vennANDIMPLIEDBYbc}{\drawVennBase{0}{0}{0}{0}{1}{0}{1}{1}} % A∧(B←C)
+
+% Row 2: OR as first operator for (B op2 C)
+\newcommand{\vennORANDbc}{\drawVennBase{0}{0}{0}{1}{1}{1}{1}{1}}     % A∨(B∧C)
+\newcommand{\vennORORbc}{\drawVennBase{0}{1}{1}{1}{1}{1}{1}{1}}      % A∨(B∨C)
+\newcommand{\vennORXORbc}{\drawVennBase{0}{1}{1}{0}{1}{1}{1}{1}}     % A∨(B⊕C)
+\newcommand{\vennORIMPLIESbc}{\drawVennBase{1}{1}{0}{1}{1}{1}{1}{1}} % A∨(B→C)
+\newcommand{\vennORNANDbc}{\drawVennBase{1}{1}{1}{0}{1}{1}{1}{1}}    % A∨(B|C)
+\newcommand{\vennORNORbc}{\drawVennBase{1}{0}{0}{0}{1}{1}{1}{1}}     % A∨(B↓C)
+\newcommand{\vennORXNORbc}{\drawVennBase{1}{0}{0}{1}{1}{1}{1}{1}}    % A∨(B↔C)
+\newcommand{\vennORIMPLIEDBYbc}{\drawVennBase{1}{0}{1}{1}{1}{1}{1}{1}} % A∨(B←C)
+
+% Row 3: XOR as first operator for (B op2 C)
+\newcommand{\vennXORANDbc}{\drawVennBase{0}{0}{0}{1}{1}{1}{1}{0}}    % A⊕(B∧C)
+\newcommand{\vennXORORbc}{\drawVennBase{0}{1}{1}{1}{1}{0}{0}{0}}     % A⊕(B∨C)
+\newcommand{\vennXORXORbc}{\drawVennBase{0}{1}{1}{0}{1}{0}{0}{1}}    % A⊕(B⊕C)
+\newcommand{\vennXORIMPLIESbc}{\drawVennBase{1}{1}{0}{1}{0}{0}{1}{0}} % A⊕(B→C)
+\newcommand{\vennXORNANDbc}{\drawVennBase{1}{1}{1}{0}{0}{0}{0}{1}}   % A⊕(B|C)
+\newcommand{\vennXORNORbc}{\drawVennBase{1}{0}{0}{0}{0}{1}{1}{1}}    % A⊕(B↓C)
+\newcommand{\vennXORXNORbc}{\drawVennBase{1}{0}{0}{1}{0}{1}{1}{0}}   % A⊕(B↔C)
+\newcommand{\vennXORIMPLIEDBYbc}{\drawVennBase{1}{0}{1}{1}{0}{1}{0}{0}} % A⊕(B←C)
+
+% Row 4: IMPLIES as first operator for (B op2 C)
+\newcommand{\vennIMPLIESANDbc}{\drawVennBase{1}{1}{1}{1}{0}{0}{0}{1}} % A→(B∧C)
+\newcommand{\vennIMPLIESORbc}{\drawVennBase{1}{1}{1}{1}{0}{1}{1}{1}}  % A→(B∨C)
+\newcommand{\vennIMPLIESXORbc}{\drawVennBase{1}{1}{1}{1}{0}{1}{1}{0}} % A→(B⊕C)
+\newcommand{\vennIMPLIESIMPLIESbc}{\drawVennBase{1}{1}{1}{1}{1}{1}{0}{1}} % A→(B→C)
+\newcommand{\vennIMPLIESNANDbc}{\drawVennBase{1}{1}{1}{1}{1}{1}{1}{0}} % A→(B|C)
+\newcommand{\vennIMPLIESNORbc}{\drawVennBase{1}{1}{1}{1}{1}{0}{0}{0}}  % A→(B↓C)
+\newcommand{\vennIMPLIESXNORbc}{\drawVennBase{1}{1}{1}{1}{1}{0}{0}{1}} % A→(B↔C)
+\newcommand{\vennIMPLIESIMPLIEDBYbc}{\drawVennBase{1}{1}{1}{1}{1}{0}{1}{1}} % A→(B←C)
+
+% Row 5: NAND as first operator for (B op2 C)
+\newcommand{\vennNANDANDbc}{\drawVennBase{1}{1}{1}{1}{1}{1}{1}{0}}   % A|(B∧C)
+\newcommand{\vennNANDORbc}{\drawVennBase{1}{1}{1}{1}{1}{0}{0}{0}}    % A|(B∨C)
+\newcommand{\vennNANDXORbc}{\drawVennBase{1}{1}{1}{1}{1}{0}{0}{1}}   % A|(B⊕C)
+\newcommand{\vennNANDIMPLIESbc}{\drawVennBase{1}{1}{1}{1}{0}{0}{1}{0}} % A|(B→C)
+\newcommand{\vennNANDNANDbc}{\drawVennBase{1}{1}{1}{1}{0}{0}{0}{1}}  % A|(B|C)
+\newcommand{\vennNANDNORbc}{\drawVennBase{1}{1}{1}{1}{0}{1}{1}{1}}   % A|(B↓C)
+\newcommand{\vennNANDXNORbc}{\drawVennBase{1}{1}{1}{1}{0}{1}{1}{0}}  % A|(B↔C)
+\newcommand{\vennNANDIMPLIEDBYbc}{\drawVennBase{1}{1}{1}{1}{0}{1}{0}{0}} % A|(B←C)
+
+% Row 6: NOR as first operator for (B op2 C)
+\newcommand{\vennNORANDbc}{\drawVennBase{1}{1}{1}{0}{0}{0}{0}{0}}    % A↓(B∧C)
+\newcommand{\vennNORORbc}{\drawVennBase{1}{0}{0}{0}{0}{0}{0}{0}}     % A↓(B∨C)
+\newcommand{\vennNORXORbc}{\drawVennBase{1}{0}{0}{1}{0}{0}{0}{0}}    % A↓(B⊕C)
+\newcommand{\vennNORIMPLIESbc}{\drawVennBase{0}{0}{1}{0}{0}{0}{0}{0}} % A↓(B→C)
+\newcommand{\vennNORNANDbc}{\drawVennBase{0}{0}{0}{1}{0}{0}{0}{0}}   % A↓(B|C)
+\newcommand{\vennNORNORbc}{\drawVennBase{0}{1}{1}{1}{0}{0}{0}{0}}    % A↓(B↓C)
+\newcommand{\vennNORXNORbc}{\drawVennBase{0}{1}{1}{0}{0}{0}{0}{0}}   % A↓(B↔C)
+\newcommand{\vennNORIMPLIEDBYbc}{\drawVennBase{0}{1}{0}{0}{0}{0}{0}{0}} % A↓(B←C)
+
+% Row 7: XNOR as first operator for (B op2 C)
+\newcommand{\vennXNORANDbc}{\drawVennBase{1}{1}{1}{0}{0}{0}{0}{1}}   % A↔(B∧C)
+\newcommand{\vennXNORORbc}{\drawVennBase{1}{0}{0}{0}{0}{1}{1}{1}}    % A↔(B∨C)
+\newcommand{\vennXNORXORbc}{\drawVennBase{1}{0}{0}{1}{0}{1}{1}{0}}   % A↔(B⊕C)
+\newcommand{\vennXNORIMPLIESbc}{\drawVennBase{0}{0}{1}{0}{1}{1}{0}{1}} % A↔(B→C)
+\newcommand{\vennXNORNANDbc}{\drawVennBase{0}{0}{0}{1}{1}{1}{1}{0}}  % A↔(B|C)
+\newcommand{\vennXNORNORbc}{\drawVennBase{0}{1}{1}{1}{1}{0}{0}{0}}   % A↔(B↓C)
+\newcommand{\vennXNORXNORbc}{\drawVennBase{0}{1}{1}{0}{1}{0}{0}{1}}  % A↔(B↔C)
+\newcommand{\vennXNORIMPLIEDBYbc}{\drawVennBase{0}{1}{0}{0}{1}{0}{1}{1}} % A↔(B←C)
+
+% Row 8: IMPLIED_BY as first operator for (B op2 C)
+\newcommand{\vennIMPLIEDBYANDbc}{\drawVennBase{1}{1}{1}{0}{1}{1}{1}{1}} % A←(B∧C)
+\newcommand{\vennIMPLIEDBYORbc}{\drawVennBase{1}{0}{0}{0}{1}{1}{1}{1}}  % A←(B∨C)
+\newcommand{\vennIMPLIEDBYXORbc}{\drawVennBase{1}{0}{0}{1}{1}{1}{1}{1}} % A←(B⊕C)
+\newcommand{\vennIMPLIEDBYIMPLIESbc}{\drawVennBase{0}{0}{1}{0}{1}{1}{1}{1}} % A←(B→C)
+\newcommand{\vennIMPLIEDBYNANDbc}{\drawVennBase{0}{0}{0}{1}{1}{1}{1}{1}} % A←(B|C)
+\newcommand{\vennIMPLIEDBYNORbc}{\drawVennBase{0}{1}{1}{1}{1}{1}{1}{1}}  % A←(B↓C)
+\newcommand{\vennIMPLIEDBYXNORbc}{\drawVennBase{0}{1}{1}{0}{1}{1}{1}{1}} % A←(B↔C)
+\newcommand{\vennIMPLIEDBYIMPLIEDBYbc}{\drawVennBase{0}{1}{0}{0}{1}{1}{1}{1}} % A←(B←C)
+
+\begin{document}
+
+\begin{module}{
+  moduleName=Boolean Venn Diagrams,
+  indexString=Boolean,
+  imageResource=boolean_venn_diagrams.pdf
+}
+{
+  Why is there a big Venn diagram? Why are there some weird symbols? Oh no...
+}
+
+  \begin{bulletlist}
+    \bulletitem{This module has eight buttons, one for each enclosed section of the Venn diagram and one representing the area not enclosed in any section of the diagram.}
+    \bulletitem{The three circles are referred to as "A" (top), "B" (bottom left), and "C" (bottom right).}
+    \bulletitem{Above the circles a boolean logic expression is displayed. The operators used in the expression are:\\ AND (\AND), OR (\OR), XOR (\XOR), IMPLIES (\IMPLIES), NAND (\NAND), NOR (\NOR), XNOR (\XNOR) and IMPLIED BY (\IMPLIEDBY).}
+    \bulletitem{Use the boolean logic expression to determine the correct solution given in the table below or in the one on the next page.}
+    \bulletitem{Press all buttons that are marked green in the solution. If the background is green, then the small circular button in the top right on the module must be pressed.}
+    \bulletitem{If an incorrect button is pressed, a strike will be recorded and the section will turn red.}
+  \end{bulletlist}
+
+\subsubsection*{Table 1: (A * B) * C formulas}
+
+\renewcommand{\arraystretch}{5}
+\scriptsize
+\begin{NiceTabular}{
+  >{\centering\arraybackslash}m{0.8cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+}
+\rule{0pt}{.6cm} & (A\,\AND\,B)        & (A\,\OR\,B)        & (A\,\XOR\,B)        & (A\,\IMPLIES\,B)        & (A\,\NAND\,B)        & (A\,\NOR\,B)        & (A\,\XNOR\,B)        & (A\,\IMPLIEDBY\,B) \\
+\AND\,C          & \vennANDANDab       & \vennORANDab       & \vennXORANDab       & \vennIMPLIESANDab       & \vennNANDANDab       & \vennNORANDab       & \vennXNORANDab       & \vennIMPLIEDBYANDab \\
+\OR\,C           & \vennANDORab        & \vennORORab        & \vennXORORab        & \vennIMPLIESORab        & \vennNANDORab        & \vennNORORab        & \vennXNORORab        & \vennIMPLIEDBYORab \\
+\XOR\,C          & \vennANDXORab       & \vennORXORab       & \vennXORXORab       & \vennIMPLIESXORab       & \vennNANDXORab       & \vennNORXORab       & \vennXNORXORab       & \vennIMPLIEDBYXORab \\
+\IMPLIES\,C      & \vennANDIMPLIESab   & \vennORIMPLIESab   & \vennXORIMPLIESab   & \vennIMPLIESIMPLIESab   & \vennNANDIMPLIESab   & \vennNORIMPLIESab   & \vennXNORIMPLIESab   & \vennIMPLIEDBYIMPLIESab \\
+\NAND\,C         & \vennANDNANDab      & \vennORNANDab      & \vennXORNANDab      & \vennIMPLIESNANDab      & \vennNANDNANDab      & \vennNORNANDab      & \vennXNORNANDab      & \vennIMPLIEDBYNANDab \\
+\NOR\,C          & \vennANDNORab       & \vennORNORab       & \vennXORNORab       & \vennIMPLIESNORab       & \vennNANDNORab       & \vennNORNORab       & \vennXNORNORab       & \vennIMPLIEDBYNORab \\
+\XNOR\,C         & \vennANDXNORab      & \vennORXNORab      & \vennXORXNORab      & \vennIMPLIESXNORab      & \vennNANDXNORab      & \vennNORXNORab      & \vennXNORXNORab      & \vennIMPLIEDBYXNORab \\
+\IMPLIEDBY\,C    & \vennANDIMPLIEDBYab & \vennORIMPLIEDBYab & \vennXORIMPLIEDBYab & \vennIMPLIESIMPLIEDBYab & \vennNANDIMPLIEDBYab & \vennNORIMPLIEDBYab & \vennXNORIMPLIEDBYab & \vennIMPLIEDBYIMPLIEDBYab \\
+\end{NiceTabular}
+
+\newpage
+
+\subsubsection*{Table 2: A * (B * C) formulas}
+
+\scriptsize
+\begin{NiceTabular}{
+  >{\centering\arraybackslash}m{0.8cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+  >{\centering\arraybackslash}m{1.55cm}
+}
+\rule{0pt}{.6cm}   & A\,\AND             & A\,\OR             & A\,\XOR             & A\,\IMPLIES             & A\,\NAND             & A\,\NOR             & A\,\XNOR             & A\,\IMPLIEDBY \\
+(B\,\AND\,C)       & \vennANDANDbc       & \vennORANDbc       & \vennXORANDbc       & \vennIMPLIESANDbc       & \vennNANDANDbc       & \vennNORANDbc       & \vennXNORANDbc       & \vennIMPLIEDBYANDbc \\
+(B\,\OR\,C)        & \vennANDORbc        & \vennORORbc        & \vennXORORbc        & \vennIMPLIESORbc        & \vennNANDORbc        & \vennNORORbc        & \vennXNORORbc        & \vennIMPLIEDBYORbc \\
+(B\,\XOR\,C)       & \vennANDXORbc       & \vennORXORbc       & \vennXORXORbc       & \vennIMPLIESXORbc       & \vennNANDXORbc       & \vennNORXORbc       & \vennXNORXORbc       & \vennIMPLIEDBYXORbc \\
+(B\,\IMPLIES\,C)   & \vennANDIMPLIESbc   & \vennORIMPLIESbc   & \vennXORIMPLIESbc   & \vennIMPLIESIMPLIESbc   & \vennNANDIMPLIESbc   & \vennNORIMPLIESbc   & \vennXNORIMPLIESbc   & \vennIMPLIEDBYIMPLIESbc \\
+(B\,\NAND\,C)      & \vennANDNANDbc      & \vennORNANDbc      & \vennXORNANDbc      & \vennIMPLIESNANDbc      & \vennNANDNANDbc      & \vennNORNANDbc      & \vennXNORNANDbc      & \vennIMPLIEDBYNANDbc \\
+(B\,\NOR\,C)       & \vennANDNORbc       & \vennORNORbc       & \vennXORNORbc       & \vennIMPLIESNORbc       & \vennNANDNORbc       & \vennNORNORbc       & \vennXNORNORbc       & \vennIMPLIEDBYNORbc \\
+(B\,\XNOR\,C)      & \vennANDXNORbc      & \vennORXNORbc      & \vennXNORXORbc      & \vennXNORIMPLIESbc      & \vennXNORNANDbc      & \vennNORXNORbc      & \vennXNORXNORbc      & \vennXNORIMPLIEDBYbc \\
+(B\,\IMPLIEDBY\,C) & \vennANDIMPLIEDBYbc & \vennORIMPLIEDBYbc & \vennXORIMPLIEDBYbc & \vennIMPLIESIMPLIEDBYbc & \vennNANDIMPLIEDBYbc & \vennNORIMPLIEDBYbc & \vennXNORIMPLIEDBYbc & \vennIMPLIEDBYIMPLIEDBYbc \\
+\end{NiceTabular}
+
+\end{module}
+
+\end{document}

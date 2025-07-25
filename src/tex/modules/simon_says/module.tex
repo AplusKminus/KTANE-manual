@@ -1,0 +1,128 @@
+\documentclass{../../ktane-mod}
+\RequirePackage{xcolor}
+\usetikzlibrary{calc}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+\begin{document}
+
+\begin{module}{
+  moduleName=Simon Says,
+  indexString=Simon Says,
+  imageResource=simon_says.pdf,
+  interactions=\keysymbol
+}
+{
+  This is like one of those toys you played with as a kid where you have to match the pattern that appears, except this one is a knockoff that was probably purchased at a dollar store.
+}
+
+\begin{bulletlist}
+  \bulletitem{One of the four colored buttons on the module will flash.}
+  \bulletitem{Using the correct scheme from below, transform the color to the corresponding button.}
+  \bulletitem{After pressing that button, the flashing pattern will increase in length and start from the beginning.}
+  \bulletitem{Enter the transformed color sequences of increasing length until the module is disarmed.}
+\end{bulletlist}
+
+% Define dimensions
+\newlength{\cellsize}
+\setlength{\cellsize}{2.6cm}
+\newlength{\halfcell}
+\setlength{\halfcell}{1.3cm}
+
+% Command to draw a diamond pattern with arrows
+\newcommand{\simonpattern}[1]{%
+  \begin{tikzpicture}[scale=1, baseline=(current bounding box.center)]
+    % Define the diamond square size (each small square)
+    \def\squaresize{1.3cm}
+    \def\halfdiag{0.919cm} % squaresize/sqrt(2) for tight spacing
+    
+    % Draw the four colored squares tilted 45 degrees in diamond formation with no gaps
+    % Top square (blue) - tilted 45 degrees
+    \begin{scope}[shift={(0,\halfdiag)}, rotate=45]
+      \fill[blue] (-\squaresize/2, -\squaresize/2) rectangle (\squaresize/2, \squaresize/2);
+      \draw[thick] (-\squaresize/2, -\squaresize/2) rectangle (\squaresize/2, \squaresize/2);
+    \end{scope}
+    
+    % Left square (red) - tilted 45 degrees
+    \begin{scope}[shift={(-\halfdiag,0)}, rotate=45]
+      \fill[red] (-\squaresize/2, -\squaresize/2) rectangle (\squaresize/2, \squaresize/2);
+      \draw[thick] (-\squaresize/2, -\squaresize/2) rectangle (\squaresize/2, \squaresize/2);
+    \end{scope}
+    
+    % Right square (yellow) - tilted 45 degrees
+    \begin{scope}[shift={(\halfdiag,0)}, rotate=45]
+      \fill[yellow] (-\squaresize/2, -\squaresize/2) rectangle (\squaresize/2, \squaresize/2);
+      \draw[thick] (-\squaresize/2, -\squaresize/2) rectangle (\squaresize/2, \squaresize/2);
+    \end{scope}
+    
+    % Bottom square (green) - tilted 45 degrees
+    \begin{scope}[shift={(0,-\halfdiag)}, rotate=45]
+      \fill[green] (-\squaresize/2, -\squaresize/2) rectangle (\squaresize/2, \squaresize/2);
+      \draw[thick] (-\squaresize/2, -\squaresize/2) rectangle (\squaresize/2, \squaresize/2);
+    \end{scope}
+    
+    % Define center points for arrows
+    \coordinate (topcenter) at (0, \halfdiag);
+    \coordinate (leftcenter) at (-\halfdiag, 0);
+    \coordinate (rightcenter) at (\halfdiag, 0);
+    \coordinate (bottomcenter) at (0, -\halfdiag);
+    
+    % Draw arrows based on pattern
+    \if\relax\detokenize{#1}\relax
+    \else
+      \def\temp{#1}
+      \def\rbgy{rb_gy}
+      \def\rbycycle{rby_cycle}
+      \def\bgry{bg_ry}
+      \def\gy{gy}
+      \def\gybrcycle{gybr_cycle}
+      \def\bgryb{bg_ry2}
+      
+      \ifx\temp\rbgy
+        % r/b & g/y - bidirectional arrows (both ends have arrowheads, no shortening)
+        \draw[<->, line width=3pt, black] (leftcenter) -- (topcenter);
+        \draw[<->, line width=3pt, black] (bottomcenter) -- (rightcenter);
+      \else\ifx\temp\rbycycle
+        % r>b>y cyclic - single arrows (shortened tails)
+        \draw[->, line width=3pt, black] ($(leftcenter)!0.35!(topcenter)$) -- (topcenter);
+        \draw[->, line width=3pt, black] ($(topcenter)!0.2!(rightcenter)$) -- (rightcenter);
+        \draw[->, line width=3pt, black] ($(rightcenter)!0.25!(leftcenter)$) -- (leftcenter);
+      \else\ifx\temp\bgry
+        % b/g & r/y - bidirectional arrows (both ends have arrowheads, no shortening)
+        \draw[<->, line width=3pt, black] (topcenter) -- (bottomcenter);
+        \draw[<->, line width=3pt, black] (leftcenter) -- (rightcenter);
+      \else\ifx\temp\gy
+        % g/y - bidirectional arrow (both ends have arrowheads, no shortening)
+        \draw[<->, line width=3pt, black] (bottomcenter) -- (rightcenter);
+      \else\ifx\temp\gybrcycle
+        % g>y>b>r cyclic - single arrows (shortened tails by 20%)
+        \draw[->, line width=3pt, black] ($(bottomcenter)!0.20!(rightcenter)$) -- (rightcenter);
+        \draw[->, line width=3pt, black] ($(rightcenter)!0.20!(topcenter)$) -- (topcenter);
+        \draw[->, line width=3pt, black] ($(topcenter)!0.20!(leftcenter)$) -- (leftcenter);
+        \draw[->, line width=3pt, black] ($(leftcenter)!0.20!(bottomcenter)$) -- (bottomcenter);
+      \else\ifx\temp\bgryb
+        % b/g & r/y - bidirectional arrows (both ends have arrowheads, no shortening)
+        \draw[<->, line width=3pt, black] (topcenter) -- (bottomcenter);
+        \draw[<->, line width=3pt, black] (leftcenter) -- (rightcenter);
+      \fi\fi\fi\fi\fi\fi
+    \fi
+  \end{tikzpicture}%
+}
+
+\renewcommand{\arraystretch}{2.0}
+\begin{NiceTabular}{
+  >{\centering\arraybackslash}m{2cm}
+  >{\centering\arraybackslash}m{6.5cm}
+  >{\centering\arraybackslash}m{6.5cm}
+}[hvlines, cell-space-top-limit=15pt, cell-space-bottom-limit=15pt]
+  \textbf{Strikes} & \textbf{Vowel in serial number\newline (A, E, I, O, U, Y)} & \textbf{No vowel in serial number} \\
+  \textbf{\large 0} & \simonpattern{rb_gy} & \simonpattern{rby_cycle} \\
+  \textbf{\large 1} & \simonpattern{bg_ry} & \simonpattern{gy} \\
+  \textbf{\large 2} & \simonpattern{gybr_cycle} & \simonpattern{bg_ry2} \\
+\end{NiceTabular}
+\renewcommand{\arraystretch}{1.0}
+
+\end{module}
+
+\end{document}

@@ -1,0 +1,73 @@
+\documentclass{../../ktane-mod}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+\begin{document}
+
+\begin{module}{
+  moduleName=Turn The Keys,
+  indexString=Turn The Keys,
+  imageResource=turn_the_keys.pdf
+}
+{
+  Order is everything.
+}
+  This module has two keys and a display.
+  The display indicates the module's priority (higher is more important).
+  Any other module affected by this module is marked with a key symbol (\keysymbol).
+
+  If the defuser is handling multiple bombs, the below rules apply to all bombs collectively, not individually.
+
+  \textheading{WARNING:}\medskip\\
+  \YELLOW[Do not disarm any of the following modules before disarming all Turn The Keys modules:]
+  \begin{multicols}{2}
+  \begin{bulletlist}
+    \bulletitem{Complicated Wires}
+    \bulletitem{Cryptography}
+    \bulletitem{Maze}
+    \bulletitem{Memory}
+    \bulletitem{Wire Sequence}
+  \end{bulletlist}
+  \end{multicols}
+
+  \subsubsection*{1. Step}
+  Disarm all the following modules:
+  \begin{multicols}{2}
+    \begin{bulletlist}
+      \bulletitem{The Button}
+      \bulletitem{Color Flash}
+      \bulletitem{Morse Code}
+      \bulletitem{Round Keypad (Not "Keypad")}
+      \bulletitem{Two Bits}
+      \bulletitem{Wires (Not "Complicated Wires" nor "Wire Sequence")}
+    \end{bulletlist}
+  \end{multicols}
+
+  \subsubsection*{2. Step}
+  Turn all right keys in order of their priority (highest to lowest).
+
+  \subsubsection*{3. Step}
+  Disarm all the following modules:
+  \begin{multicols}{2}
+    \begin{bulletlist}
+      \bulletitem{Astrology}
+      \bulletitem{Combination Lock}
+      \bulletitem{Crazy Talk}
+      \bulletitem{Keypad (Not "Round Keypad")}
+      \bulletitem{Listening}
+      \bulletitem{Orientation}
+      \bulletitem{Password}
+      \bulletitem{Plumbing}
+      \bulletitem{Semaphore}
+      \bulletitem{Simon Says}
+      \bulletitem{Switches}
+      \bulletitem{Who's On First}
+    \end{bulletlist}
+  \end{multicols}
+
+  \subsubsection*{4. Step}
+  Turn all left keys in \YELLOW[reverse] order of their priority (lowest to highest).
+\end{module}
+\end{document}

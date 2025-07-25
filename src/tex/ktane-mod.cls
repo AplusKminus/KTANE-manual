@@ -49,6 +49,22 @@
 % For intelligent spacing after commands
 \RequirePackage{xspace}
 
+% Symbol package for interaction markers
+\RequirePackage{fontawesome5}
+
+%% Module Interaction Symbol System
+% Available interaction symbols
+\newcommand{\keysymbol}{\faKey\xspace}  % Key dependency symbol
+
+% Function to display interaction symbols in module title
+\ExplSyntaxOn
+\cs_new:Nn \g_ktane_display_interactions:n {
+  \tl_if_empty:nF {#1} {
+    \hspace{0.3em}#1
+  }
+}
+\ExplSyntaxOff
+
 % Color word commands
 \newcommand{\RED}[1][RED]{\colorbox{red}{#1}\xspace}
 \newcommand{\GREEN}[1][GREEN]{\colorbox{green}{#1}\xspace}
@@ -225,7 +241,7 @@
 {\Large\bfseries}
 {\thesubsection.}
 {0.33em}
-{\uline}
+{}
 \titlespacing*{\subsection}{0pt}{*4}{*1.5}
 
 \titleformat{\subsubsection}
@@ -293,8 +309,8 @@
 \cs_new:Nn \g_ktane_setup_module_common:nnn {
   \def\moduleName{\prop_item:Nn \l_ktane_moduleconfiguration_pl {moduleName}}
   
-  % The module title
-  \subsection*{On\ the\ Subject\ of\ \moduleName}
+  % The module title with interaction symbols
+  \subsection*{\uline{On\ the\ Subject\ of\ \moduleName}\g_ktane_display_interactions:n{\prop_item:Nn\l_ktane_moduleconfiguration_pl{interactions}}}
   \rhead{#3}
 
   % The module image using insbox with proper vertical positioning
@@ -313,6 +329,7 @@
 % - moduleName: Full display name (e.g. "The Button") 
 % - indexString: For thumb marker sorting (e.g. "Button")
 % - imageResource: Path to module image
+% - interactions: Optional interaction symbols (e.g. "\keysymbol")
 % Second parameter: introductory text in small italics
 \newenvironment{module}[2]
   {
@@ -325,7 +342,7 @@
   }
 
 %% Needy module environment without thumb markers or page breaks
-% Parameters same as module but no indexString needed
+% Parameters same as module but no indexString needed (interactions parameter still supported)
 % Used for needy modules, which are part of the preamble
 \newenvironment{needymodule}[2]
   {

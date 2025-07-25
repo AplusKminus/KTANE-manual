@@ -1,0 +1,124 @@
+\documentclass{../../ktane-mod}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+\begin{document}
+
+\begin{module}{
+  moduleName=Passwords,
+  indexString=Passwords,
+  imageResource=passwords.pdf,
+  interactions=\keysymbol
+}
+{
+  Fortunately this password doesn't seem to meet standard government security requirements: 22 characters, mixed case, numbers in random order without any palindromes above length 3.
+}
+  \begin{bulletlist}
+    \bulletitem{The buttons above and below each letter will cycle through the possibilities for that position.}
+    \bulletitem{Only one combination of the available letters will match a password from the list.}
+    \bulletitem{Press the submit button once the correct word has been set.}
+  \end{bulletlist}
+
+  \begin{wraptable}{r}{6cm}
+    \renewcommand{\arraystretch}{1.25}
+    \begin{NiceTabular}{
+    >{\centering\arraybackslash}m{0.4cm}
+    >{\centering\arraybackslash}m{0.4cm}
+    >{\centering\arraybackslash}m{0.4cm}
+    >{\centering\arraybackslash}m{2cm}
+    }[hvlines]
+      \textbf{1.}    & \textbf{4.}    & \textbf{2.}    & \textbf{Password}\\
+      \Block{3-1}{A} & E              & F              & after\\
+                     & I              & G              & again\\
+                     & U              & B              & about\\
+      B              & O              & E              & below\\
+      C              & L              & O              & could\\
+      E              & R              & V              & every\\
+      \Block{2-1}{F} & N              & O              & found\\
+                     & S              & I              & first\\
+      G              & A              & R              & great\\
+      H              & S              & O              & house\\
+      \Block{2-1}{L} & G              & A              & large\\
+                     & R              & E              & learn\\
+      N              & E              & E              & never\\
+      O              & E              & T              & other\\
+      \Block{3-1}{P} & C              & \Block{2-1}{L} & place\\
+                     & \Block{2-1}{N} &                & plant\\
+                     &                & O              & point\\
+      R              & H              & I              & right\\
+      \Block{5-1}{S} & D              & T              & study\\
+                     & \Block{3-1}{L} & M              & small\\
+                     &                & P              & spell\\
+                     &                & T              & still\\
+                     & N              & O              & sound\\
+      \Block{6-1}{T} & E              & \Block{6-1}{H} & three\\
+                     & I              &                & their\\
+                     & \Block{2-1}{N} &                & thing\\
+                     &                &                & think\\
+                     & R              &                & there\\
+                     & S              &                & these\\
+      \Block{6-1}{W} & C              & H              & which\\
+                     & E              & A              & water\\
+                     & \Block{2-1}{L} & \Block{2-1}{O} & world\\
+                     &                &                & would\\
+                     & R              & H              & where\\
+                     & T              & R              & write\\
+    \CodeAfter
+      % Bold outer border (2pt lines around entire table)
+      \tikz \draw[line width=2pt, line cap=rect] (1-|1) -- (1-|last);   % Top
+      \tikz \draw[line width=2pt, line cap=rect] (last-|1) -- (last-|last); % Bottom
+      \tikz \draw[line width=2pt, line cap=rect] (1-|1) -- (last-|1);   % Left
+      \tikz \draw[line width=2pt, line cap=rect] (1-|last) -- (last-|last); % Right
+      
+      % Bold lines before each new letter in first column (2pt)
+      \tikz \draw[line width=2pt, line cap=rect] (2-|1) -- (2-|last);   % Before A
+      \tikz \draw[line width=2pt, line cap=rect] (5-|1) -- (5-|last);   % Before B
+      \tikz \draw[line width=2pt, line cap=rect] (6-|1) -- (6-|last);   % Before C
+      \tikz \draw[line width=2pt, line cap=rect] (7-|1) -- (7-|last);   % Before E
+      \tikz \draw[line width=2pt, line cap=rect] (8-|1) -- (8-|last);   % Before F
+      \tikz \draw[line width=2pt, line cap=rect] (10-|1) -- (10-|last); % Before G
+      \tikz \draw[line width=2pt, line cap=rect] (11-|1) -- (11-|last); % Before H
+      \tikz \draw[line width=2pt, line cap=rect] (12-|1) -- (12-|last); % Before L
+      \tikz \draw[line width=2pt, line cap=rect] (14-|1) -- (14-|last); % Before N
+      \tikz \draw[line width=2pt, line cap=rect] (15-|1) -- (15-|last); % Before O
+      \tikz \draw[line width=2pt, line cap=rect] (16-|1) -- (16-|last); % Before P
+      \tikz \draw[line width=2pt, line cap=rect] (19-|1) -- (19-|last); % Before R
+      \tikz \draw[line width=2pt, line cap=rect] (20-|1) -- (20-|last); % Before S
+      \tikz \draw[line width=2pt, line cap=rect] (25-|1) -- (25-|last); % Before T
+      \tikz \draw[line width=2pt, line cap=rect] (31-|1) -- (31-|last); % Before W
+    \end{NiceTabular}
+  \end{wraptable}
+\textheading{Step 1}\medskip\\
+  Ask the defuser to spell out the letters of the \YELLOW[first] and \YELLOW[fourth] position.
+  Write them down as in the example below:
+
+  \quad\begin{tabular}{ll}
+    \textbf{1.} & \textbf{4.}\\
+    \hline
+    B  & E \\
+    X  & S \\
+    A  & Z \\
+    L  & Q \\
+    U  & V \\
+    W  & L \\
+  \end{tabular}
+
+  \textheading{Step 2}\medskip\\
+  Look for potential matches in the table on the right.
+
+  \textit{For the above examples:}
+
+  \quad AE --- after\\
+  \quad WE --- water\\
+  \quad WL --- world\\
+  \quad WL --- would
+
+  \textheading{Step 3}\medskip\\
+  If too many matches are found and the defuser does not have enough time to test them, ask them to spell out the second position as well.
+
+  There are only four words that need even further differentiation: thing, think, world and would.\bigskip\\
+
+  \textbf{Hint:} It is helpful if the defuser does not report the letters J, K, Q, X, Y or Z to the expert, as they do not appear in the positions 1, 4 or 2 of any password.
+\end{module}
+\end{document}

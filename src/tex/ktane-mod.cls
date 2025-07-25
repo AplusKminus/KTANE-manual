@@ -14,6 +14,22 @@
   Path=../../../../resources/
 ]{SpecialElite}
 
+\RequirePackage{ulem}
+\RequirePackage{contour}
+
+% --- Custom Underline Settings ---
+\renewcommand{\ULdepth}{2.5pt} % Depth of the underline below the baseline.
+\renewcommand{\ULthickness}{0.8pt}
+\contourlength{0.8pt}          % Width of the white contour around letters.
+
+% --- The actual command for the skipping underline ---
+\let\ulemUline\uline
+\renewcommand{\uline}[1]{%
+  \ulemUline{\phantom{#1}}%       % Draw a phantom underline
+  \llap{\contour{white}{#1}}% % Overlay text with white contour
+}
+% --- End Custom Underline ---
+
 %% Color Setup
 \RequirePackage[table]{xcolor}
 \definecolor{red}{HTML}{DE8A74}
@@ -197,9 +213,6 @@
 %% --- Defining the custom module environment ---                           %%
 %%                                                                          %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\RequirePackage{ulem}
-\renewcommand{\ULdepth}{1.8pt}
-\renewcommand{\ULthickness}{.8pt}
 \RequirePackage{titlesec}
 \titleformat{\section}
 {\LARGE\bfseries\centering}

@@ -1,0 +1,101 @@
+\documentclass{../../ktane-mod}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+\begin{document}
+
+\begin{module}{
+  moduleName=Wire Sequences,
+  indexString=Wire Sequences,
+  imageResource=wire_sequence.pdf,
+  interactions=\keysymbol
+}
+{
+  It's hard to say how this mechanism works. The engineering is pretty impressive, but there must have been an easier way to manage nine wires.
+}
+  \begin{bulletlist}
+    \bulletitem{Within this module there are several panels with wires on them, but only one panel is visible at a time. Switch to the next panel by usihng the down button and the previous panel by using the up button.}
+    \bulletitem{Do not switch to the next panel until you are sure that you have cut all necessary wires on the current panel.}
+    \bulletitem{Cut the wires as directed by the following tables. Wire occurrences are cumulative over all panels within the module.}
+    \bulletitem{Wire occurrences are counted per color, so the first red wire you encounter is the first red wire occurrence, even if there was a blue wire before it.}
+    \bulletitem{The wires should be assessed from top to bottom when looking at the numbers on the left, regardless of whether the wire itself goes up or down.}
+    \bulletitem{Hint: Walk through the module together with the defuser while keeping the position for each color with one finger in each table.}
+  \end{bulletlist}
+
+\renewcommand{\arraystretch}{2.5}
+
+\begin{minipage}[t]{5.3cm}
+\centering
+\begin{NiceTabular}{
+  >{\centering\arraybackslash}m{2.2cm}
+  >{\centering\arraybackslash}m{2.2cm}
+}[hvlines]
+\CodeBefore
+  \cellcolor{red}{1-1,1-2}
+\Body
+\Block{1-2}{\textbf{RED Wire Occurrences}} & \\
+\textbf{Wire Occurrence} & \textbf{Cut if connected to:} \\
+1st & C \\
+2nd & B \\
+3rd & A \\
+4th & A or C \\
+5th & B \\
+6th & A or C \\
+7th & A, B or C \\
+8th & A or B \\
+9th & B \\
+\end{NiceTabular}
+\end{minipage}%
+\hfill%
+\begin{minipage}[t]{5.3cm}
+\centering
+\begin{NiceTabular}{
+  >{\centering\arraybackslash}m{2.2cm}
+  >{\centering\arraybackslash}m{2.2cm}
+}[hvlines]
+\CodeBefore
+  \cellcolor{blue}{1-1,1-2}
+\Body
+\Block{1-2}{\textbf{BLUE Wire Occurrences}} & \\
+\textbf{Wire Occurrence} & \textbf{Cut if connected to:} \\
+1st & B \\
+2nd & A or C \\
+3rd & B \\
+4th & A \\
+5th & B \\
+6th & B or C \\
+7th & C \\
+8th & A or C \\
+9th & A \\
+\end{NiceTabular}
+\end{minipage}%
+\hfill%
+\begin{minipage}[t]{5.3cm}
+\centering
+\begin{NiceTabular}{
+  >{\centering\arraybackslash}m{2.2cm}
+  >{\centering\arraybackslash}m{2.2cm}
+}[hvlines]
+\CodeBefore
+  \cellcolor{black}{1-1,1-2}
+\Body
+\Block{1-2}{\textbf{\textcolor{white}{BLACK Wire Occurrences}}} & \\
+\textbf{Wire Occurrence} & \textbf{Cut if connected to:} \\
+1st & A, B or C \\
+2nd & A or C \\
+3rd & B \\
+4th & A or C \\
+5th & B \\
+6th & B or C \\
+7th & A or B \\
+8th & C \\
+9th & C \\
+\end{NiceTabular}
+\end{minipage}
+
+\renewcommand{\arraystretch}{1.0}
+
+\end{module}
+
+\end{document}

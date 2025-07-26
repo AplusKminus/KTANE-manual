@@ -1,0 +1,143 @@
+\documentclass{../../ktane-mod}
+\RequirePackage{nicematrix}
+\RequirePackage{tikz}
+\RequirePackage{enumitem}
+\RequirePackage{xstring}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+\begin{document}
+
+\begin{module}{
+  moduleName=Who's On First,
+  indexString=Whos on first,
+  imageResource=whos_on_first_img.pdf,
+  interactions=\keysymbol
+}
+{
+  This contraption is like something out of a sketch comedy routine, which might be funny if it wasn't connected to a bomb. I'll keep this brief, as words only complicate matters.
+}
+
+\begin{bulletlist}
+  \bulletitem{Read the display content and use step 1 to determine which button label to read.}
+  \bulletitem{Using this button label, use step 2 to determine which button to push.}
+  \bulletitem{Repeat until the module has been disarmed.}
+\end{bulletlist}
+
+The following pages provide detailed information for the two steps.
+
+\clearpage
+
+\subsubsection*{Step 1:}
+\begin{bulletlist}
+\bulletitem{Based on the display content, read the label of the correct button and proceed to step 2.}
+\bulletitem{The eye symbol (\faEye) indicates which button label to read.}
+\bulletitem{The colors below do not appear on the module. They group words and expressions that could easily be confused with each other, in order to draw the expert's attention to potential misunderstandings.}
+\bulletitem{The colors in step 2 have no correlation to the colors in step 1 as new words and expressions appear.}
+\end{bulletlist}
+
+% Define a command for creating small tables with eye symbols and colored backgrounds
+\newcommand{\smalltable}[3]{%
+  \vspace{0.03cm}
+  \begin{minipage}{2.52cm}
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.4}
+    \begin{NiceTabular}{
+      >{\centering\arraybackslash}m{.7cm}
+      >{\centering\arraybackslash}m{.7cm}
+    }[hvlines]
+      \CodeBefore
+        \cellcolor{#1}{1-1,1-2}
+      \Body
+      \Block{1-2}{\textbf{\IfStrEq{#1}{black}{\color{white}#2}{#2}}} & \\
+      \ifnum#3=1\faEye\else\phantom{\faEye}\fi & \ifnum#3=4\faEye\else\phantom{\faEye}\fi \\
+      \ifnum#3=2\faEye\else\phantom{\faEye}\fi & \ifnum#3=5\faEye\else\phantom{\faEye}\fi \\
+      \ifnum#3=3\faEye\else\phantom{\faEye}\fi & \ifnum#3=6\faEye\else\phantom{\faEye}\fi \\
+    \end{NiceTabular}
+  \end{minipage}
+  \vspace{0.03cm}
+}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{center}
+\begin{tabular}{c@{\hspace{0.02cm}}c@{\hspace{0.02cm}}c@{\hspace{0.02cm}}c@{\hspace{0.02cm}}c@{\hspace{0.02cm}}c}
+% Row 1: Empty table(3), BLANK(5), C(4), CEE(6), DISPLAY(6), FIRST(4)
+\smalltable{gray}{}{3} & \smalltable{gray}{BLANK}{5} & \smalltable{green}{C}{4} & \smalltable{green}{CEE}{6} & \smalltable{black}{DISPLAY}{6} & \smalltable{black}{FIRST}{4} \\[0.25cm]
+
+% Row 2: HOLD ON(6), LED(2), LEAD(6), LEED(3), NO(6), NOTHING(2)
+\smalltable{black}{HOLD ON}{6} & \smalltable{blue}{LED}{2} & \smalltable{blue}{LEAD}{6} & \smalltable{blue}{LEED}{3} & \smalltable{black}{NO}{6} & \smalltable{gray}{NOTHING}{2} \\[0.25cm]
+
+% Row 3: OKAY(4), READ(5), RED(5), REED(3), SAYS(6), SEE(6)  
+\smalltable{black}{OKAY}{4} & \smalltable{red}{READ}{5} & \smalltable{red}{RED}{5} & \smalltable{red}{REED}{3} & \smalltable{black}{SAYS}{6} & \smalltable{green}{SEE}{6} \\[0.25cm]
+
+% Row 4: THEIR(5), THERE(6), THEY ARE(2), THEY'RE(3), UR(1), YES(2)
+\smalltable{purple}{THEIR}{5} & \smalltable{purple}{THERE}{6} & \smalltable{purple}{THEY ARE}{2} & \smalltable{purple}{THEY'RE}{3} & \smalltable{yellow}{UR}{1} & \smalltable{black}{YES}{2} \\[0.25cm]
+
+% Row 5: YOU(5), YOU ARE(6), YOU'RE(5), YOUR(5) - only 4 tables in this row for 28 total
+& \smalltable{black}{YOU}{5} & \smalltable{yellow}{YOU ARE}{6} & \smalltable{yellow}{YOU'RE}{5} & \smalltable{yellow}{YOUR}{5} & \\
+\end{tabular}
+\end{center}
+\renewcommand{\arraystretch}{1.0}
+
+\clearpage
+\subsubsection*{Step 2:}
+  \begin{bulletlist}
+    \bulletitem{Find the button label from step 1 in the first column of the table below.}
+    \bulletitem{Read the words in the second column from left to right and press the first button that matches a word from this list.}
+    \bulletitem{The match must be exact. Pay special attention to the question mark after "WHAT?", which may not be present.}
+    \bulletitem{The colors are used to group words and expressions that could easily be confused with each other, in order to draw the expert's attention to potential misunderstandings.}
+  \end{bulletlist}
+
+\renewcommand{\arraystretch}{1.2}
+\begin{NiceTabular}{
+  >{\raggedright\arraybackslash}p{1.6cm}
+  >{\raggedright\arraybackslash}m{14.3cm}
+}[hvlines]
+  \CodeBefore
+    % Purple for BLANK and NOTHING
+    \cellcolor{purple}{1-1,10-1}
+    % Green for U and YOU
+    \cellcolor{green}{16-1,25-1}
+    % Yellow for UH words (UH HUH, UH UH, UHHH)
+    \cellcolor{yellow}{17-1,18-1,19-1}
+    % Blue for WHAT and WHAT?
+    \cellcolor{blue}{22-1,23-1}
+    % Red for UR, YOU ARE, YOU'RE, YOUR
+    \cellcolor{red}{20-1,26-1,27-1,28-1}
+  \Body
+  BLANK & WAIT, RIGHT, OKAY, MIDDLE, BLANK \\
+  DONE & SURE, UH HUH, NEXT, WHAT?, YOUR, UR, YOU'RE, HOLD, LIKE, YOU, U, YOU ARE, UH UH, DONE \\
+  FIRST & LEFT, OKAY, YES, MIDDLE, NO, RIGHT, NOTHING, UHHH, WAIT, READY, BLANK, WHAT, PRESS, FIRST \\
+  HOLD & YOU ARE, U, DONE, UH UH, YOU, UR, SURE, WHAT?, YOU'RE, NEXT, HOLD \\
+  LEFT & RIGHT, LEFT \\
+  LIKE & YOU'RE, NEXT, U, UR, HOLD, DONE, UH UH, WHAT?, UH HUH, YOU, LIKE \\
+  MIDDLE & BLANK, READY, OKAY, WHAT, NOTHING, PRESS, NO, WAIT, LEFT, MIDDLE \\
+  NEXT & WHAT?, UH HUH, UH UH, YOUR, HOLD, SURE, NEXT \\
+  NO & BLANK, UHHH, WAIT, FIRST, WHAT, READY, RIGHT, YES, NOTHING, LEFT, PRESS, OKAY, NO \\
+  NOTHING & UHHH, RIGHT, OKAY, MIDDLE, YES, BLANK, NO, PRESS, LEFT, WHAT, WAIT, FIRST, NOTHING \\
+  OKAY & MIDDLE, NO, FIRST, YES, UHHH, NOTHING, WAIT, OKAY \\
+  PRESS & RIGHT, MIDDLE, YES, READY, PRESS \\
+  READY & YES, OKAY, WHAT, MIDDLE, LEFT, PRESS, RIGHT, BLANK \\
+  RIGHT & YES, NOTHING, READY, PRESS, NO, WAIT, WHAT, RIGHT \\
+  SURE & YOU ARE, DONE, LIKE, YOU'RE, YOU, HOLD, UH HUH, UR, SURE \\
+  U & UH HUH, SURE, NEXT, WHAT?, YOU'RE, UR, UH UH, DONE, U \\
+  UH HUH & UH HUH \\
+  UH UH & UR, U, YOU ARE, YOU'RE, NEXT, UH UH \\
+  UHHH & READY, NOTHING, LEFT, WHAT, OKAY, YES, RIGHT, NO, PRESS, BLANK, UHHH \\
+  UR & DONE, U, UR \\
+  WAIT & UHHH, NO, BLANK, OKAY, YES, LEFT, FIRST, PRESS, WHAT, WAIT \\
+  WHAT & UHHH, WHAT \\
+  WHAT? & YOU, HOLD, YOU'RE, YOUR, U, DONE, UH UH, LIKE, YOU ARE, UH HUH, UR, NEXT, WHAT? \\
+  YES & OKAY, RIGHT, UHHH, MIDDLE, FIRST, WHAT, PRESS, READY, NOTHING, YES \\
+  YOU & SURE, YOU ARE, YOUR, YOU'RE, NEXT, UH HUH, UR, HOLD, WHAT?, YOU \\
+  YOU ARE & YOUR, NEXT, LIKE, UH HUH, WHAT?, DONE, UH UH, HOLD, YOU, U, YOU'RE, SURE, UR, YOU ARE \\
+  YOU'RE & YOU, YOU'RE \\
+  YOUR & UH UH, YOU ARE, UH HUH, YOUR \\
+\end{NiceTabular}
+\renewcommand{\arraystretch}{1.0}
+
+\end{module}
+
+\end{document}

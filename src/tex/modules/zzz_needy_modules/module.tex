@@ -1,0 +1,56 @@
+\documentclass{../../ktane-mod}
+\RequirePackage{enumitem}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
+
+\begin{document}
+
+\ExplSyntaxOn
+  % Override thumb marker function to do nothing for needy modules
+  \cs_set:Nn \g_ktane_addthumbmarkers: {}
+\ExplSyntaxOff
+\rhead{Needy Modules}
+
+\clearpage
+% Start content at 1/3 from top of page
+\vspace*{0.33\textheight}
+
+% Center the content horizontally
+\begin{center}
+  \begin{minipage}{\textwidth}
+    % Two-column layout with image on right, text on left
+    \begin{minipage}[t]{0.65\textwidth}
+      \setlength{\parskip}{10pt}
+      \begin{center}
+        \section*{Section 2: Needy Modules}
+        
+        Needy modules cannot be disarmed, but pose a recurrent hazard.
+
+        Needy modules can be identified as a module with a small 2-digit timer in the top center.
+        Interacting with the bomb may cause them to become activated.
+        Once activated, these needy modules must be tended to regularly before their timer expires in order to prevent a strike.
+
+        Stay observant: needy modules may reactivate at any time.
+      \end{center}
+    \end{minipage}%
+    \hfill%
+    \begin{minipage}[t]{0.3\textwidth}
+      \centering
+      \raisebox{\dimexpr\ht\strutbox+\dp\strutbox-\height}{%
+        \includegraphics[height=3.5cm]{needy}%
+      }
+    \end{minipage}
+  \end{minipage}
+\end{center}
+
+\clearpage
+
+\input{modules/capacitor_discharge}
+
+\input{modules/knobs}
+
+\input{modules/venting_gas}
+
+\cleardoublepage
+\end{document}

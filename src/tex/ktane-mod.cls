@@ -120,6 +120,9 @@
 \RequirePackage[margin=2cm,bottom=1cm]{geometry}
 % Remove all page numbering
 \pagenumbering{gobble}
+% Set paragraph spacing for all modules
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                          %%

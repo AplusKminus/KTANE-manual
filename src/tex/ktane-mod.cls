@@ -180,45 +180,63 @@
       \tl_set:Nn \l_ktane_thumbmarkernameparts_tl {##1}
       % calculate the vertical distance
       \dim_set:Nn \l_vdistance_dim {\paperheight * \l_ktane_thumbmarkerdrawindex_int / \clist_count:N \thumbmarkernames}
+      % reset draw flag for each marker
+      \int_set:Nn \l_draw_bool {0}
       \int_if_even:nTF {\count0}
-        {% page# even (left) -- always draw tab
-          \int_set:Nn \l_draw_bool {1}
+        {% page# even (left) -- show all markers up to and including current (if current has marker)
+          \int_compare:nNnTF{\g_ktane_thumbmarkerselectedindex_int} > {-1}
+          {% current section has a marker, show up to and including current
+            \int_compare:nNnF{\l_ktane_thumbmarkerdrawindex_int} > {\g_ktane_thumbmarkerselectedindex_int}
+            {% current index to draw <= defined "current"-index
+              \int_set:Nn \l_draw_bool {1}
+            }
+          }
+          {% current section has no marker, show none
+          }
         }
-        {% page# odd (right) -- only draw current and following tabs
-          \int_compare:nNnF{\l_ktane_thumbmarkerdrawindex_int} < {\g_ktane_thumbmarkerselectedindex_int}
-          {% current index to draw >= defined "start"-index
+        {% page# odd (right) -- show only the current marker (if it exists)
+          \int_compare:nNnT{\l_ktane_thumbmarkerdrawindex_int} = {\g_ktane_thumbmarkerselectedindex_int}
+          {% show only if this is exactly the current marker
             \int_set:Nn \l_draw_bool {1}
           }
         }
-      % whether to draw
-      \int_compare:nNnT {\l_draw_bool} = {1}{
-        % plaxing the tab in absolute coordinates
-        \begin{textblock}{1}(\int_if_odd:nTF {\count0}{20}{0},\dim_to_decimal:n {\l_vdistance_dim})
-          \vbox{
-            \hbox{
-              % add a leading vertical line (cutting line) to tabs on odd pages following the current tab
-              \int_if_odd:nT {\count0}
-                {\int_compare:nT{\l_ktane_thumbmarkerdrawindex_int > \g_ktane_thumbmarkerselectedindex_int}{\vrule}}
-              % 297 / 16 = 18.5625
-              \vbox to 18.5625mm{
-                \vfill
-                \hbox to 1cm{
-                  \hfill\vbox{
+      % always draw the textblock for cutting lines, but conditionally draw marker content
+      \begin{textblock}{1}(\int_if_odd:nTF {\count0}{20}{0},\dim_to_decimal:n {\l_vdistance_dim})
+        \vbox{
+          \hbox{
+            % add a leading vertical line (cutting line) to tabs on odd pages following the current tab
+            \int_if_odd:nT {\count0}
+              {\int_compare:nT{\l_ktane_thumbmarkerdrawindex_int > \g_ktane_thumbmarkerselectedindex_int}{\vrule}}
+            % 297 / 16 = 18.5625
+            \vbox to 18.5625mm{
+              \vfill
+              \hbox to 1cm{
+                \hfill\vbox{
+                  % only draw marker content if l_draw_bool is 1
+                  \int_compare:nNnTF {\l_draw_bool} = {1}{
                     % Wrap each name part in an hbox
                     \tl_map_inline:Nn \l_ktane_thumbmarkernameparts_tl {\hbox{####1}}
-                  }\hfill
-                }
-                \vfill
+                  }{
+                    % if this is the last marker and it's not shown, display "Cut me off"
+                    \int_compare:nNnT{\l_ktane_thumbmarkerdrawindex_int} = {\int_eval:n{\clist_count:N \thumbmarkernames - 1}}
+                    {
+                      \hbox{Cut}
+                      \hbox{me}
+                      \hbox{off}
+                    }
+                  }
+                }\hfill
               }
+              \vfill
             }
-            % add a trailing horizontal line (cutting line) to the current tab on odd pages
-            \int_if_odd:nT {\count0}
-              {\int_compare:nT{\l_ktane_thumbmarkerdrawindex_int = \g_ktane_thumbmarkerselectedindex_int}
-                {\hrule}
-              }
           }
-        \end{textblock}
-      }
+          % add a trailing horizontal line (cutting line) to the current tab on odd pages
+          \int_if_odd:nT {\count0}
+            {\int_compare:nT{\l_ktane_thumbmarkerdrawindex_int = \g_ktane_thumbmarkerselectedindex_int}
+              {\hrule}
+            }
+        }
+      \end{textblock}
       % increase the index of the iteration
       \int_gincr:N \l_ktane_thumbmarkerdrawindex_int
     }

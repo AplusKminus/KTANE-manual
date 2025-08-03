@@ -74,6 +74,11 @@
 \newcommand{\WHITE}[1][WHITE]{\colorbox{lightgray}{#1}\xspace}
 \newcommand{\GRAY}[1][GRAY]{\colorbox{gray}{#1}\xspace}
 \newcommand{\BLACK}[1][BLACK]{\colorbox{black}{\textcolor{white}{#1}}\xspace}
+\newcommand{\LIGHTRED}[1][LIGHTRED]{\colorbox{lightred}{#1}\xspace}
+\newcommand{\LIGHTGREEN}[1][LIGHTGREEN]{\colorbox{lightgreen}{#1}\xspace}
+\newcommand{\LIGHTYELLOW}[1][LIGHTYELLOW]{\colorbox{lightyellow}{#1}\xspace}
+\newcommand{\LIGHTBLUE}[1][LIGHTBLUE]{\colorbox{lightblue}{#1}\xspace}
+\newcommand{\LIGHTPURPLE}[1][LIGHTPURPLE]{\colorbox{lightpurple}{#1}\xspace}
 
 %% Used for table alignment
 \RequirePackage{array}

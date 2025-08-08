@@ -1,0 +1,136 @@
+\documentclass{../../ktane-mod}
+
+% Define bitmap symbol commands
+\newcommand{\baselinebox}[1]{%
+  \tikz[baseline]{\draw[fill=#1,draw=black] (0,0) rectangle (0.72em,0.72em);}%
+}
+\newcommand{\pixelbox}[1]{%
+  \raisebox{0.24em}{\tikz[baseline]{\draw[fill=#1,draw=black] (0,0) rectangle (0.24em,0.24em);}}%
+}
+\newcommand{\whiteSquare}{\baselinebox{white}\ }
+\newcommand{\blackSquare}{\baselinebox{black}\ }
+\newcommand{\whitePixel}{\pixelbox{white}\ }
+\newcommand{\blackPixel}{\pixelbox{black}\ }
+\newcommand{\mostlyWhiteSquare}{\makebox[0.72em][c]{\baselinebox{white}\hspace{-0.51em}\raisebox{0.24em}{\tikz[baseline]{\draw[fill=black,draw=black] (0,0) rectangle (0.24em,0.24em);}}}\hspace{0.24em}\ }
+\newcommand{\mostlyBlackSquare}{\makebox[0.72em][c]{\baselinebox{black}\hspace{-0.51em}\raisebox{0.24em}{\tikz[baseline]{\draw[fill=white,draw=black] (0,0) rectangle (0.24em,0.24em);}}}\hspace{0.24em}\ }
+\newcommand{\leftBoldThenCentered}[2]{\makebox[0pt][l]{\textbf{#1}}\hfill #2\hfill\mbox{}}
+\newlength{\arrowRowHeight}
+\setlength{\arrowRowHeight}{0.8cm}
+% Black triangle arrows
+\newcommand{\triangleUp}{\tikz[baseline=-0.3ex]{\fill[black] (0,0.8em) -- (0.4em,0) -- (-0.4em,0) -- cycle;}}
+\newcommand{\triangleDown}{\tikz[baseline=-0.3ex]{\fill[black] (0,0) -- (0.4em,0.8em) -- (-0.4em,0.8em) -- cycle;}}
+\newcommand{\triangleLeft}{\tikz[baseline=-0.3ex]{\fill[black] (0,0.4em) -- (0.8em,0.8em) -- (0.8em,0) -- cycle;}}
+\newcommand{\triangleRight}{\tikz[baseline=-0.3ex]{\fill[black] (0.8em,0.4em) -- (0,0.8em) -- (0,0) -- cycle;}}
+\begin{document}
+
+\begin{module}{
+  moduleName=Bitmaps,
+  indexString=Bitmaps,
+  imageResource=bitmaps_img.pdf
+}
+{
+  Over 18 quintillion combinations, only some of them actually matter.
+}
+\begin{bulletlist}
+  \bulletitem{Have the defuser count the number of light pixels (called "white") and dark pixels (called "black") per quadrant.}
+  \bulletitem{There are 16 pixels per quadrant and 64 pixels in total.}
+  \bulletitem{Start at the box numbered with the last digit in the serial number (top left). Search clockwise for the first box whose condition (middle) applies, then read its answer (bottom).}
+  \bulletitem{Finally, with the answer from the previous step, use the instructions in the center between the boxes to determine which button to press.}
+\end{bulletlist}
+
+\makebox[\textwidth]{%
+\renewcommand{\arraystretch}{1.5}%
+  \begin{NiceTabular}{
+    >{\centering\arraybackslash}m{4.6cm}
+    >{\centering\arraybackslash}m{0.5cm}
+    >{\centering\arraybackslash}m{4.6cm}
+    >{\centering\arraybackslash}m{0.5cm}
+    >{\centering\arraybackslash}m{4.6cm}
+  }
+    \CodeBefore[create-cell-nodes]
+      % Color coding for the 10 condition boxes - rearranged clockwise
+      \cellcolor{lightgray}{1-1}   % #0
+      \cellcolor{lightgray}{1-3}   % #1
+      \cellcolor{lightgray}{1-5}   % #2
+      \cellcolor{lightgray}{5-1}   % #9
+      \cellcolor{lightgray}{5-5}   % #3
+      \cellcolor{lightgray}{9-1}   % #8
+      \cellcolor{lightgray}{9-5}   % #4
+      \cellcolor{lightgray}{13-1}  % #7
+      \cellcolor{lightgray}{13-3}  % #6
+      \cellcolor{lightgray}{13-5}  % #5
+    \Body
+
+    % Row 1: Top row with conditions #0, #1, #2
+    \leftBoldThenCentered{\#0}{1x \whitePixel < 6}                                            & \Block{3-1}{\triangleRight} & \leftBoldThenCentered{\#1}{\mostlyWhiteSquare = lit [???]}                    & \Block{3-1}{\triangleRight} & \leftBoldThenCentered{\#2}{--- or |} \\
+    Exactly one quadrant has less than 6 white pixels.                                        &                             & There are exactly as many mostly-white quadrants as there are lit indicators. &                             & Exactly one row or column (8 pixels length) is completely white or completely black. \\
+    The total number of white pixels in the other three quadrants                             &                             & The number of batteries (not holders).                                        &                             & Its x-/y-coordinate, starting from 1 in the top left. \\
+    
+    % Row 2: Gap with arrows
+    \triangleUp                                                                               &                             & \rule{0pt}{\arrowRowHeight}                                                   &                             & \triangleDown \\
+    
+    % Row 3: #9 and #3
+    \leftBoldThenCentered{\#9}{\mostlyWhiteSquare = \mostlyBlackSquare}                       &                             & \Block[l]{7-1}{\textheading{Choosing the Button:}\medskip\\
+    Repeatedly add or subtract 4 from the answer until the result is between 1 and 4. Have the defuser press the corresponding button to disarm the module.}                                                &                             & \leftBoldThenCentered{\#3}{\mostlyWhiteSquare < \mostlyBlackSquare} \\
+    There are exactly as many mostly-white quadrants as mostly-black quadrants.               &                             &                                                                               &                             & There are fewer mostly-white quadrants than mostly-black quadrants. \\
+    The first numeric digit of the serial number.                                             &                             &                                                                               &                             & The number of mostly-black quadrants. \\
+    
+    % Row 4: Gap with arrows
+    \triangleUp                                                                               &                             & \rule{0pt}{\arrowRowHeight}                                                   &                             & \triangleDown \\
+    
+    % Row 5: #8 and #4
+    \leftBoldThenCentered{\#8}{\blackSquare or \whiteSquare}                                  &                             &                                                                               &                             & \leftBoldThenCentered{\#4}{\whitePixel > 35} \\
+    There is a 3x3 square that is completely white or completely black.                       &                             &                                                                               &                             & The entire bitmap has more than 35 white pixels. \\
+    The x-coordinate (starting at 1) of the center of the first such square in reading order. &                             &                                                                               &                             & The total number of white pixels. \\
+    
+    % Row 6: Gap with arrows
+    \triangleUp                                                                               &                             & \rule{0pt}{\arrowRowHeight}                                                   &                             & \triangleDown \\
+    
+    % Row 7: Bottom row with #7, #6, #5
+    \leftBoldThenCentered{\#7}{\mostlyBlackSquare = unlit [???]}                              & \Block{3-1}{\triangleLeft}  & \leftBoldThenCentered{\#6}{1x \blackPixel < 6}                                & \Block{3-1}{\triangleLeft}  & \leftBoldThenCentered{\#5}{\mostlyWhiteSquare > \mostlyBlackSquare} \\
+    There are exactly as many mostly-black quadrants as there are unlit indicators.           &                             & Exactly one quadrant has less than 6 black pixels.                            &                             & There are more mostly-white quadrants than mostly black quadrants. \\
+    The number of ports.                                                                      &                             & The total number of black pisels in the other 3 quadrants.                    &                             & The smallest number of black pixels in any quadrant. \\
+  \CodeAfter
+    \NewDocumentCommand{\MyFrame}{}{
+     \tikz \draw[line width=1pt] (1-|1) -- (1-|2);
+     \tikz \draw[line width=1pt] (2-|1) -- (2-|2);
+     \tikz \draw[line width=1pt] (3-|1) -- (3-|2);
+     \tikz \draw[line width=1pt] (4-|1) -- (4-|2);
+     \tikz \draw[line width=1pt] (1-|1) -- (4-|1);
+     \tikz \draw[line width=1pt] (1-|2) -- (4-|2);
+    }
+    % Border around condition #0
+    \SubMatrix.{1-1}{3-1}.[code = \MyFrame]
+
+    % Border around condition #1
+    \SubMatrix.{1-3}{3-3}.[code = \MyFrame]
+
+    % Border around condition #2
+    \SubMatrix.{1-5}{3-5}.[code = \MyFrame]
+
+    % Border around condition #9
+    \SubMatrix.{5-1}{7-1}.[code = \MyFrame]
+
+    % Border around condition #3
+    \SubMatrix.{5-5}{7-5}.[code = \MyFrame]
+
+    % Border around condition #8
+    \SubMatrix.{9-1}{11-1}.[code = \MyFrame]
+
+    % Border around condition #4
+    \SubMatrix.{9-5}{11-5}.[code = \MyFrame]
+
+    % Border around condition #7
+    \SubMatrix.{13-1}{15-1}.[code = \MyFrame]
+
+    % Border around condition #6
+    \SubMatrix.{13-3}{15-3}.[code = \MyFrame]
+
+    % Border around condition #5
+    \SubMatrix.{13-5}{15-5}.[code = \MyFrame]
+  \end{NiceTabular}
+}
+
+\end{module}
+
+\end{document}

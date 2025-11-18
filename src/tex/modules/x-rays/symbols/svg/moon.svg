@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 92.816956 96.00071"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="moon.svg"
+   inkscape:export-filename="../moon.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   width="92.816956"
+   height="96.00071"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.55333333"
+     inkscape:cx="525"
+     inkscape:cy="-10.843374"
+     inkscape:window-width="1760"
+     inkscape:window-height="883"
+     inkscape:window-x="50"
+     inkscape:window-y="752"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" />
+  <path
+     d="M 48.116953,1.35911e-5 C 9.5109629,-0.02798641 -13.329187,43.213514 8.4543929,75.084714 c 10.0486401,14.7021 27.4104501,22.6329 45.1021101,20.602 17.69168,-2.031 32.80503,-13.6899 39.26045,-30.2867 -7.93728,14.3764 -24.59791,21.5593 -40.4988,17.4608 -15.90077,-4.0985 -27.01017,-18.4391 -27.01017,-34.8608 0,-16.4217 11.1094,-30.7623 27.01017,-34.8608 15.90089,-4.0985004 32.56152,3.0844 40.4988,17.4608 -7.17096,-18.4365 -24.91802,-30.58550041 -44.7,-30.6000004089 z"
+     id="path181"
+     style="opacity:1;fill:#000000;fill-opacity:1"
+     inkscape:label="moon"
+     inkscape:export-filename="../git/AplusKminus/KTANE-manual/src/tex/modules/x-rays/symbols/moon.pdf"
+     inkscape:export-xdpi="96.189323"
+     inkscape:export-ydpi="96.189323" />
+</svg>

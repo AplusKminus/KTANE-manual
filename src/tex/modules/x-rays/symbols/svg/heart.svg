@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 86.323524 95.620094"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="heart.svg"
+   inkscape:export-filename="../heart.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   width="86.323524"
+   height="95.620094"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.55333333"
+     inkscape:cx="644.27711"
+     inkscape:cy="-131.92771"
+     inkscape:window-width="1760"
+     inkscape:window-height="883"
+     inkscape:window-x="50"
+     inkscape:window-y="752"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" />
+  <path
+     d="m 22.117403,0.02009072 c -6.3,0 -11.5,1.99999998 -15.7999997,6.19999998 -4.255166,4.2110103 -6.54178998,10.0183103 -6.29999998,16.0000003 0,4.4 0.99999998,8.8 2.99999998,13.3 1.9,4.4 5.5,9.9 10.6999997,16.5 6.05833,7.41817 11.796898,15.09184 17.2,23 3,4.6 6,10.2 8.8,16.8 1,2.5 2,3.8 3,3.8 h 0.8 c 1,0 2,-1.3 3,-3.8 2.515717,-5.9101 5.526431,-11.597 9,-17 3,-4.7 8.7,-12.3 17,-22.8 5.3,-6.6 8.9,-12.1 10.8,-16.5 2,-4.5 3,-9 3,-13.4 0.29114,-12.3635703 -9.83787,-22.44696028 -22.2,-22.10000028 -4.417276,-0.20324 -8.767113,1.14060998 -12.3,3.79999998 -3.732025,3.22979 -6.732119,7.2185503 -8.8,11.7000003 -2.7,-5.2 -5.6,-9.1000003 -8.8,-11.7000003 -3.505998,-2.63717 -7.816581,-3.97980998 -12.2,-3.79999998 z"
+     id="path121"
+     style="opacity:1;fill:#000000;fill-opacity:1"
+     inkscape:label="heart"
+     inkscape:export-filename="../git/AplusKminus/KTANE-manual/src/tex/modules/x-rays/git/AplusKminus/KTANE-manual/src/tex/modules/x-rays/symbols/heart.pdf"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+</svg>

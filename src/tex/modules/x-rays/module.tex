@@ -1,0 +1,34 @@
+\documentclass{../../ktane-mod}
+
+\newcommand{\xraysymbol}[1]{\includegraphics[width=0.5cm,height=0.5cm,keepaspectratio]{symbols/#1}}
+\begin{document}
+
+\begin{module}{
+  moduleName=X-Rays,
+  indexString=XRays,
+  imageResource=x-rays_img.pdf,
+}
+{
+  I can see right through you.
+}
+  \begin{bulletlist}
+    \bulletitem{A set of three symbols is revealed in the horizontal window by an x-ray scanner. The scanner only shows a thin section of each symbol at a time.}
+    \bulletitem{The scan progresses through all three symbols consecutively in one of three ways: top to bottom, bottom to top or alternating back and forth.}
+  \InsertBoxL{0}{
+    \begin{NiceTabular}{
+     >{\centering\arraybackslash}m{0.5cm}
+     >{\centering\arraybackslash}m{0.5cm}
+     >{\centering\arraybackslash}m{0.5cm}
+    }[hvlines]
+      \xraysymbol{zhe}              & \xraysymbol{moon}    & \xraysymbol{circle}\\
+      \xraysymbol{ring}             & \xraysymbol{x_cross} & \xraysymbol{box}\\
+      \xraysymbol{arrow_left_right} & \xraysymbol{rhombus} & \xraysymbol{six_star}
+    \end{NiceTabular}
+  }
+    \bulletitem{Two of the three symbols identify a row and a column in the big table below. Find the intersection of the relevant row and column}
+    \bulletitem{Stay there or move to an adjacent cell as indicated by the third symbol's location in the small table above. The center of the table corresponds to your current location. Push the button with the number you moved to.}
+  \end{bulletlist}
+
+\end{module}
+
+\end{document}

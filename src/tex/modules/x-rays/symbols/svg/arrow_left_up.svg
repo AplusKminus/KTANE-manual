@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 96 96"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="arrow_left_up.svg"
+   inkscape:export-filename="../arrow_left_up.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   width="96"
+   height="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.55333333"
+     inkscape:cx="409.33735"
+     inkscape:cy="587.3494"
+     inkscape:window-width="1760"
+     inkscape:window-height="883"
+     inkscape:window-x="50"
+     inkscape:window-y="752"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" />
+  <path
+     d="M 0,0 V 72 L 24,48 72,96 96,72 48,24 72,0 Z"
+     id="path6"
+     style="opacity:1;fill:#000000;fill-opacity:1"
+     inkscape:label="arrow_left_up"
+     inkscape:export-filename="../git/AplusKminus/KTANE-manual/src/tex/modules/x-rays/symbols/arrow_left_up.pdf"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+</svg>

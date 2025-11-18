@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 96 96"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="peace.svg"
+   inkscape:export-filename="../peace.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   width="96"
+   height="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.55333333"
+     inkscape:cx="-190.66265"
+     inkscape:cy="68.674699"
+     inkscape:window-width="1760"
+     inkscape:window-height="883"
+     inkscape:window-x="50"
+     inkscape:window-y="752"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" />
+  <path
+     id="path91"
+     style="opacity:1;fill:#000000;fill-opacity:1"
+     d="M 48,0 C 21.49031,0 0,21.49033 0,48 0,74.50967 21.49031,96 48,96 74.50969,96 96,74.50967 96,48 96,21.49033 74.50969,0 48,0 Z m -6,12.5 v 33 L 18.69922,68.80078 C 3.10584,47.20957 15.70913,16.75723 42,12.5 Z m 12,0 c 26.12187,4.46981 38.62436,34.67859 23.30078,56.30078 L 54,45.5 Z m -12,50 v 21 c -5.5,-1 -10.50078,-2.99922 -14.80078,-6.19922 z m 12,0 14.80078,14.80078 C 64.50078,80.40078 59.5,82.6 54,83.5 Z"
+     inkscape:label="peace"
+     inkscape:export-filename="../git/AplusKminus/KTANE-manual/src/tex/modules/x-rays/git/AplusKminus/KTANE-manual/src/tex/modules/x-rays/symbols/peace.pdf"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+</svg>
